@@ -1,14 +1,13 @@
 import 'dart:async';
 
+import 'package:airkiss/airkiss.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:connectivity/connectivity.dart';
-import 'package:permission_handler/permission_handler.dart';
-
-import 'package:flutter_oneshot/flutter_oneshot.dart';
 import 'package:flutter_easylink/flutter_easylink.dart';
+import 'package:flutter_oneshot/flutter_oneshot.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
-import 'package:airkiss/airkiss.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SmartConfigTool extends StatefulWidget {
   SmartConfigTool({Key key, this.title, this.needCallBack}) : super(key: key);

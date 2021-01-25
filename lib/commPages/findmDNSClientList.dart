@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mdns_plugin/mdns_plugin.dart' as mdns_plugin;
+import 'package:multicast_dns/multicast_dns.dart';
 import 'package:openiothub_constants/constants/Config.dart';
 import 'package:openiothub_constants/constants/Constants.dart';
-import 'package:openiothub_models/models/portService.dart';
+import 'package:openiothub_grpc_api/pb/service.pb.dart';
+import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
-
-import 'package:multicast_dns/multicast_dns.dart';
-import 'package:mdns_plugin/mdns_plugin.dart' as mdns_plugin;
 
 class FindmDNSClientListPage extends StatefulWidget {
   FindmDNSClientListPage({Key key}) : super(key: key);
@@ -18,7 +18,6 @@ class FindmDNSClientListPage extends StatefulWidget {
 
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
     implements mdns_plugin.MDNSPluginDelegate {
-
   Map<String, PortService> _ServiceMap = {};
   final MDnsClient _mdns = MDnsClient();
   mdns_plugin.MDNSPlugin _mdnsPlg;
@@ -26,9 +25,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
   @override
   void initState() {
     super.initState();
-    if(!Platform.isIOS){
+    if (!Platform.isIOS) {
       _mdns.start();
-    }else{
+    } else {
       _mdnsPlg = mdns_plugin.MDNSPlugin(this);
     }
     _findClientListBymDNS();
@@ -37,9 +36,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
   @override
   void dispose() {
     super.dispose();
-    if(!Platform.isIOS) {
+    if (!Platform.isIOS) {
       _mdns.stop();
-    }else{
+    } else {
       _mdnsPlg.stopDiscovery();
     }
   }
@@ -105,26 +104,26 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
       _ServiceMap.clear();
       // try {
       await for (PtrResourceRecord ptr in _mdns.lookup<PtrResourceRecord>(
-          ResourceRecordQuery.serverPointer(Config.mdnsGatewayService + ".local"))) {
+          ResourceRecordQuery.serverPointer(
+              Config.mdnsGatewayService + ".local"))) {
         await for (SrvResourceRecord srv in _mdns.lookup<SrvResourceRecord>(
             ResourceRecordQuery.service(ptr.domainName))) {
           print(srv);
-          PortService _portService = PortService(
-              isLocal: true,
-              info: {
-                "name": "网关",
-                "model": Gateway.modelName,
-                "mac": "mac",
-                "id": "id",
-                "author": "Farry",
-                "email": "newfarry@126.com",
-                "home-page": "https://github.com/OpenIoTHub",
-                "firmware-respository":
-                    "https://github.com/OpenIoTHub/gateway-go",
-                "firmware-version": "version",
-              },
-              ip: "127.0.0.1",
-              port: 80);
+          PortService _portService = PortService.create();
+          _portService.isLocal = true;
+          _portService.ip = "127.0.0.1";
+          _portService.port = 80;
+          _portService.info.addAll({
+            "name": "网关",
+            "model": Gateway.modelName,
+            "mac": "mac",
+            "id": "id",
+            "author": "Farry",
+            "email": "newfarry@126.com",
+            "home-page": "https://github.com/OpenIoTHub",
+            "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
+            "firmware-version": "version",
+          });
           await _mdns
               .lookup<TxtResourceRecord>(
                   ResourceRecordQuery.text(ptr.domainName))
@@ -199,21 +198,21 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
     print("Resolved: $service");
     try {
       print("service.serviceType:${service.serviceType}");
-      PortService portService = PortService(
-          isLocal: true,
-          info: {
-            "name": "网关",
-            "model": Gateway.modelName,
-            "mac": "mac",
-            "id": "id",
-            "author": "Farry",
-            "email": "newfarry@126.com",
-            "home-page": "https://github.com/OpenIoTHub",
-            "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
-            "firmware-version": "version",
-          },
-          ip: "127.0.0.1",
-          port: 80);
+      PortService portService = PortService.create();
+      portService.isLocal = true;
+      portService.ip = "127.0.0.1";
+      portService.port = 80;
+      portService.info.addAll({
+        "name": "网关",
+        "model": Gateway.modelName,
+        "mac": "mac",
+        "id": "id",
+        "author": "Farry",
+        "email": "newfarry@126.com",
+        "home-page": "https://github.com/OpenIoTHub",
+        "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
+        "firmware-version": "version",
+      });
       if (service.addresses != null && service.addresses.length > 0) {
         portService.ip = service.addresses[0].contains(":")
             ? "[${service.addresses[0]}]"
