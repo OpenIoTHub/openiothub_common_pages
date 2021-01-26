@@ -29,10 +29,10 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
   @override
   void initState() {
     super.initState();
-    if (!Platform.isIOS) {
-      _mdns.start();
-    } else {
+    if (Platform.isIOS || Platform.isAndroid) {
       _mdnsPlg = mdns_plugin.MDNSPlugin(this);
+    } else {
+      _mdns.start();
     }
     _findClientListBymDNS();
   }
@@ -40,10 +40,10 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
   @override
   void dispose() {
     super.dispose();
-    if (!Platform.isIOS) {
-      _mdns.stop();
-    } else {
+    if (Platform.isIOS || Platform.isAndroid) {
       _mdnsPlg.stopDiscovery();
+    } else {
+      _mdns.stop();
     }
   }
 
@@ -104,7 +104,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
 
   void _findClientListBymDNS() async {
     print("====_findClientListBymDNS");
-    if (!Platform.isIOS) {
+    if (Platform.isIOS || Platform.isAndroid){
+      _mdnsPlg.startDiscovery(Config.mdnsGatewayService, enableUpdating: true);
+    }else{
       _ServiceMap.clear();
       // try {
       await for (PtrResourceRecord ptr in _mdns.lookup<PtrResourceRecord>(
@@ -163,8 +165,6 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
           }
         }
       }
-    } else {
-      _mdnsPlg.startDiscovery(Config.mdnsGatewayService, enableUpdating: true);
     }
     // } catch (e) {
     //   showDialog(
