@@ -19,7 +19,11 @@ class FindmDNSClientListPage extends StatefulWidget {
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
     implements mdns_plugin.MDNSPluginDelegate {
   Map<String, PortService> _ServiceMap = {};
-  final MDnsClient _mdns = MDnsClient();
+  final MDnsClient _mdns = MDnsClient(rawDatagramSocketFactory:
+      (dynamic host, int port, {bool reuseAddress, bool reusePort, int ttl}) {
+    return RawDatagramSocket.bind(host, port,
+        reuseAddress: true, reusePort: false, ttl: ttl);
+  });
   mdns_plugin.MDNSPlugin _mdnsPlg;
 
   @override
