@@ -7,7 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easylink/flutter_easylink.dart';
 import 'package:flutter_oneshot/flutter_oneshot.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class SmartConfigTool extends StatefulWidget {
   SmartConfigTool({Key key, this.title, this.needCallBack}) : super(key: key);
@@ -208,21 +210,21 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
         String wifiName, wifiBSSID, wifiIP;
 
         try {
-          wifiName = await _connectivity.getWifiName();
+          wifiName = await WifiInfo().getWifiName();
         } on PlatformException catch (e) {
           print(e.toString());
           wifiName = "Failed to get Wifi Name";
         }
 
         try {
-          wifiBSSID = await _connectivity.getWifiBSSID();
+          wifiBSSID = await WifiInfo().getWifiBSSID();
         } on PlatformException catch (e) {
           print(e.toString());
           wifiBSSID = "Failed to get Wifi BSSID";
         }
 
         try {
-          wifiIP = await _connectivity.getWifiIP();
+          wifiIP = await WifiInfo().getWifiIP();
         } on PlatformException catch (e) {
           print(e.toString());
           wifiIP = "Failed to get Wifi IP";
@@ -237,6 +239,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
         break;
       case ConnectivityResult.mobile:
       case ConnectivityResult.none:
+        Fluttertoast.showToast(msg: "请将手机连接到智能设备需要连接的wifi路由器上");
         break;
       default:
         break;

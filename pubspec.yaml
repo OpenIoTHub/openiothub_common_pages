@@ -33,12 +33,15 @@ dependencies:
   # AirKiss
   airkiss: ^1.0.1
   #  获取wifi名和bssid
-  connectivity: ^0.4.8+2
+  wifi_info_flutter: ^1.0.3
+  #  获取当前网络的连接状态
+  connectivity: ^2.0.2
   #  动态请求权限，定位，存储等
   permission_handler: ^3.1.0
   #  配网end
   multicast_dns: ^0.2.2
   mdns_plugin: ^1.1.4
+  fluttertoast: ^7.1.6
 
 dev_dependencies:
   flutter_test:
