@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:openiothub_constants/constants/Config.dart';
 
-class SmartConfigTool extends StatefulWidget {
-  SmartConfigTool({
+class SettingsPage extends StatefulWidget {
+  SettingsPage({
     Key key,
     this.title,
   }) : super(key: key);
   final String title;
 
   @override
-  _SmartConfigToolState createState() => _SmartConfigToolState();
+  _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SmartConfigToolState extends State<SmartConfigTool> {
+class _SettingsPageState extends State<SettingsPage> {
 //  New
   final TextEditingController _grpcServiceHost = TextEditingController(text: Config.webgRpcIp);
   final TextEditingController _grpcServicePort = TextEditingController(text: Config.webgRpcPort.toString());
