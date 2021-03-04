@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Container(
             padding: EdgeInsets.all(10.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 TextField(
                   controller: _grpcServiceHost,
