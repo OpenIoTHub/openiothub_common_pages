@@ -18,14 +18,11 @@ dependencies:
   #  esp配网
   #  smartconfig: ^0.0.1
   #  w60x的OneShot配网
-  flutter_oneshot:
-    git: https://github.com/iotdevice/flutter_oneshot
+  flutter_oneshot: ^0.0.1
   # 庆科easylink
-  flutter_easylink:
-    git: https://github.com/iotdevice/flutter_easylink
+  flutter_easylink: ^0.0.1
   ## 汉枫smartlink
-  flutter_smartlink:
-    git: https://github.com/iotdevice/flutter_smartlink
+  flutter_smartlink: ^0.0.1
   # AirKiss
   airkiss: ^1.0.1
   #  获取wifi名和bssid
