@@ -9,18 +9,15 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class Airkiss extends StatefulWidget {
-  Airkiss({Key key, this.title, this.needCallBack}) : super(key: key);
+  Airkiss({Key key, this.title}) : super(key: key);
 
   final String title;
-  final bool needCallBack;
 
   @override
   _AirkissState createState() => _AirkissState();
 }
 
 class _AirkissState extends State<Airkiss> {
-  final int _smartConfigTypeNumber = 1;
-  int _smartConfigRemainNumber;
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
@@ -115,12 +112,7 @@ class _AirkissState extends State<Airkiss> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             LinearProgressIndicator(
-                              value: _smartConfigTypeNumber ==
-                                      _smartConfigRemainNumber
-                                  ? 0.1
-                                  : (_smartConfigTypeNumber -
-                                          _smartConfigRemainNumber) /
-                                      _smartConfigTypeNumber,
+                              value: 0.5,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.lightBlue),
                             ),
@@ -164,26 +156,11 @@ class _AirkissState extends State<Airkiss> {
                           child: Text('开始添加周围智能设备'),
                           onPressed: () async {
                             setState(() {
-                              _smartConfigRemainNumber = _smartConfigTypeNumber;
                               _isLoading = true;
                               _msg = "正在发现设备，请耐心等待，大概需要一分钟";
                             });
                             //由于微信AirKiss配网和汉枫SmartLink都是使用本地的UDP端口10000进行监听所以，先进行AirKiss然后进行SmartLink
-                            await _configureAirKiss().then((v) {
-                              _checkResult();
-                              if (v) {
-                                setState(() {
-                                  _isLoading = false;
-                                });
-                                if (widget.needCallBack) {
-                                  Navigator.of(context).pop();
-                                }
-                                return;
-                              }
-                            });
-                            if (widget.needCallBack) {
-                              Navigator.of(context).pop();
-                            }
+                            await _configureAirKiss();
                           },
                         ),
                         Container(height: 10),
@@ -260,8 +237,8 @@ class _AirkissState extends State<Airkiss> {
       AirkissConfig ac = AirkissConfig(option: option);
       AirkissResult v = await ac.config(_ssid, _password);
       setState(() {
-        _msg =
-            "附近的AirKiss设备配网任务完成${v.toString()}，\n当前剩下：${_smartConfigRemainNumber - 1}种设备的配网任务";
+        _isLoading = false;
+        _msg = "附近的AirKiss设备配网任务完成";
       });
       if (v != null) {
         return true;
@@ -269,19 +246,10 @@ class _AirkissState extends State<Airkiss> {
     } on PlatformException catch (e) {
       output = "Failed to configure: '${e.message}'.";
       setState(() {
+        _isLoading = false;
         _msg = output;
       });
     }
     return false;
-  }
-
-  Future<void> _checkResult() async {
-    _smartConfigRemainNumber--;
-    if (_smartConfigRemainNumber == 0) {
-      setState(() {
-        _isLoading = false;
-        _msg = "全部设备发现完成";
-      });
-    }
   }
 }
