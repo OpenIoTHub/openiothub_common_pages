@@ -22,7 +22,7 @@ class SmartConfigTool extends StatefulWidget {
 }
 
 class _SmartConfigToolState extends State<SmartConfigTool> {
-  final int _smartConfigTypeNumber = 5;
+  final int _smartConfigTypeNumber = 3;
   int _smartConfigRemainNumber;
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult> _connectivitySubscription;
@@ -163,7 +163,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                             obscureText: true,
                           ),
                         ),
-                        RaisedButton(
+                        TextButton(
                           child: Text('开始添加周围智能设备'),
                           onPressed: () async {
                             setState(() {
@@ -184,13 +184,10 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                                 return;
                               }
                             });
-                            await _configureOneShot().then((v) {
+                            await _configureSmartLink().then((v) {
                               _checkResult();
                             });
                             await _configureEasyLink().then((v) {
-                              _checkResult();
-                            });
-                            await _configureSmartLink().then((v) {
                               _checkResult();
                             });
                             if (widget.needCallBack) {
@@ -260,23 +257,6 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
     } else {
 //      提示失败！
       return false;
-    }
-  }
-
-  Future<void> _configureOneShot() async {
-    String output = "Unknown";
-    try {
-      await FlutterOneshot.start(_ssid, _password, 20).then((v) {
-        setState(() {
-          _msg =
-              "附近的OneShot设备配网任务完成，\n当前剩下：${_smartConfigRemainNumber - 1}种设备的配网任务";
-        });
-      });
-    } on PlatformException catch (e) {
-      output = "Failed to configure: '${e.message}'.";
-      setState(() {
-        _msg = output;
-      });
     }
   }
 
