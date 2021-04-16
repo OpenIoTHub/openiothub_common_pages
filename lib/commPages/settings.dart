@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openiothub_constants/constants/Config.dart';
+import 'package:openiothub_constants/openiothub_constants.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({
