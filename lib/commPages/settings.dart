@@ -17,6 +17,8 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController _grpcServiceHost = TextEditingController(text: Config.webgRpcIp);
   final TextEditingController _grpcServicePort = TextEditingController(text: Config.webgRpcPort.toString());
 
+  final TextEditingController _iotManagerGrpcServiceHost = TextEditingController(text: Config.iotManagergRpcIp);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +43,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   decoration: InputDecoration(labelText: 'grpc服务的端口'),
                   onChanged: (String v) {
                     Config.webgRpcPort = int.parse(v);
+                  },
+                ),
+                TextField(
+                  controller: _iotManagerGrpcServiceHost,
+                  decoration: InputDecoration(labelText: 'iot-manager grpc服务地址'),
+                  onChanged: (String v) {
+                    Config.iotManagergRpcIp = v;
                   },
                 ),
               ],
