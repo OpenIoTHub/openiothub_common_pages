@@ -5,7 +5,6 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easylink/flutter_easylink.dart';
-import 'package:flutter_oneshot/flutter_oneshot.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -197,6 +196,9 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                         ),
                         Container(height: 10),
                         Text(_msg),
+                        Image(
+                            image:
+                                ExactAssetImage('assets/images/24gwifi.png')),
                       ],
                     ))));
   }
