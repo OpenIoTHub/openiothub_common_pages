@@ -196,9 +196,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                         ),
                         Container(height: 10),
                         Text(_msg),
-                        Image(
-                            image:
-                                ExactAssetImage('assets/images/24gwifi.png')),
+                        Image.asset("assets/images/24gwifi.png", package: "openiothub_common_pages"),
                       ],
                     ))));
   }
