@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 0.0.2+9
+version: 0.0.2+10
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -37,6 +37,7 @@ dependencies:
   multicast_dns: ^0.2.2
   mdns_plugin: ^1.1.4
   fluttertoast: ^7.1.6
+  shared_preferences: ^0.5.2
 
 dev_dependencies:
   flutter_test:
