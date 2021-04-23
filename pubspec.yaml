@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 0.0.2+7
+version: 0.0.2+8
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   package_info: ^0.4.0+3
   openiothub_constants: ^0.0.1
+  openiothub_api: ^0.0.1
   openiothub_grpc_api: ^0.0.1
   openiothub_plugin: ^0.0.1
   #  配网start
