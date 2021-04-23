@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 0.0.2+8
+version: 0.0.2+9
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
   openiothub_api: ^0.0.1
   openiothub_grpc_api: ^0.0.1
   openiothub_plugin: ^0.0.1
+  iot_manager_grpc_api: ^0.0.1
   #  配网start
   #  esp配网
   #  smartconfig: ^0.0.1
