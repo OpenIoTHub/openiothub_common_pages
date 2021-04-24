@@ -72,7 +72,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
             //直接打开内置web浏览器浏览页面
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 //              return Text("${pair.iP}:${pair.port}");
-              return Gateway(serviceInfo: pair);
+              return Gateway(device: pair);
             }));
           },
           child: listItemContent,
