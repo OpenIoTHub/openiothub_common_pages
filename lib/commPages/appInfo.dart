@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluwx/fluwx.dart';
 import 'package:package_info/package_info.dart';
 
 class AppInfoPage extends StatefulWidget {
@@ -50,9 +51,16 @@ class _AppInfoPageState extends State<AppInfoPage> {
     ).toList();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("App信息"),
-      ),
+      appBar: AppBar(title: Text("App信息"), actions: <Widget>[
+        IconButton(
+            icon: Icon(
+              Icons.share,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              _share();
+            }),
+      ]),
       body: ListView(children: divided),
     );
   }
@@ -66,5 +74,15 @@ class _AppInfoPageState extends State<AppInfoPage> {
         buildNumber = packageInfo.buildNumber;
       });
     });
+  }
+
+  _share() async {
+    var model = WeChatShareWebPageModel(
+      "https://b23.tv/wVAMWn",
+      title: "云易连智能家居平台",
+      thumbnail: WeChatImage.network("/assets/images/logo.png?package=openiothub_common_pages"),
+      scene: WeChatScene.SESSION,
+    );
+    shareToWeChat(model);
   }
 }
