@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:package_info/package_info.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 class AppInfoPage extends StatefulWidget {
@@ -76,10 +77,6 @@ class _AppInfoPageState extends State<AppInfoPage> {
   }
 
   _share() async {
-    Wechat.instance.registerApp(
-      appId: "wx5c5302d3e6740145",
-      universalLink: "https://iothub.cloud/app/openiothub/",
-    );
     Wechat.instance.shareWebpage(
       scene: WechatScene.SESSION,
       webpageUrl: 'https://www.baidu.com',
