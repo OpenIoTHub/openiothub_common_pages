@@ -77,6 +77,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
   }
 
   _share() async {
+    await registerWxApi();
     var model = WeChatShareWebPageModel(
       "https://b23.tv/wVAMWn",
       title: "云易连智能家居平台",
