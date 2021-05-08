@@ -1,3 +1,7 @@
+## [0.0.2+15]
+
+* test wechat_kit
+
 ## [0.0.2+14]
 
 * test fluwx

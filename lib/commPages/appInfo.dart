@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluwx/fluwx.dart';
 import 'package:package_info/package_info.dart';
-
+import 'package:wechat_kit/wechat_kit.dart';
 class AppInfoPage extends StatefulWidget {
   AppInfoPage({Key key}) : super(key: key);
 
@@ -77,13 +76,13 @@ class _AppInfoPageState extends State<AppInfoPage> {
   }
 
   _share() async {
-    await registerWxApi();
-    var model = WeChatShareWebPageModel(
-      "https://b23.tv/wVAMWn",
-      title: "云易连智能家居平台",
-      thumbnail: WeChatImage.network("/assets/images/logo.png?package=openiothub_common_pages"),
-      scene: WeChatScene.SESSION,
+    Wechat.instance.registerApp(
+      appId: "wx5c5302d3e6740145",
+      universalLink: "https://iothub.cloud/app/openiothub/",
     );
-    shareToWeChat(model);
+    Wechat.instance.shareWebpage(
+      scene: WechatScene.SESSION,
+      webpageUrl: 'https://www.baidu.com',
+    );
   }
 }
