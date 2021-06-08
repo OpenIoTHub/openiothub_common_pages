@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info/package_info.dart';
 import 'package:wechat_kit/wechat_kit.dart';
+
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:image/image.dart' as image;
+
 class AppInfoPage extends StatefulWidget {
   AppInfoPage({Key key}) : super(key: key);
 
@@ -99,8 +106,21 @@ class _AppInfoPageState extends State<AppInfoPage> {
   }
 
   _shareAction() async {
+    final File file = await DefaultCacheManager().getSingleFile(
+        'http://yunyilian.oss-cn-shanghai.aliyuncs.com/icon-32.png');
+    final image.Image thumbnail =
+    image.decodeImage(file.readAsBytesSync());
+    Uint8List thumbData = thumbnail.getBytes();
+    if (thumbData.length > 32 * 1024) {
+      thumbData = Uint8List.fromList(image.encodeJpg(thumbnail,
+          quality: 100 * 32 * 1024 ~/ thumbData.length));
+    }
     Wechat.instance.shareWebpage(
       scene: WechatScene.TIMELINE,
+      title:"欢迎使用云易连！",
+      description:"云易连管理您的所有智能设备和私有云",
+      thumbData:thumbData,
+      // thumbData:,
       webpageUrl: 'https://github.com/OpenIoTHub',
     );
   }
