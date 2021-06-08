@@ -13,11 +13,8 @@ jobs:
         with:
           channel: 'stable'
       - run: flutter pub get
+      - name: Credentials
+        run: echo ${{ secrets.CREDENTIAL_JSON }} > $PUB_CACHE/credentials.json
       # 发布插件
       - name: Publish
-        uses: sakebook/actions-flutter-pub-publisher@v1.3.1
-        with:
-          credential: ${{ secrets.CREDENTIAL_JSON }}
-          flutter_package: true
-          skip_test: true
-          dry_run: false
+        run: flutter packages pub publish -f
