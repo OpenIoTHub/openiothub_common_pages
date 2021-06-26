@@ -6,6 +6,7 @@ import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/user/LoginPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class UserInfoPage extends StatefulWidget {
   @override
@@ -57,6 +58,24 @@ class _UserInfoPageState extends State<UserInfoPage> {
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
                 _modifyInfo("密码");
+              }),
+          ListTile(
+            //绑定微信
+              title: Text('绑定微信'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+              //  TODO
+                Fluttertoast.showToast(
+                    msg: "绑定微信");
+              }),
+          ListTile(
+            //解绑微信
+              title: Text('解除微信绑定'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+              //  TODO
+                Fluttertoast.showToast(
+                    msg: "解绑微信");
               }),
           TextButton(
               onPressed: () {
