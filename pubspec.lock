@@ -295,7 +295,7 @@ packages:
       name: iot_manager_grpc_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2+12"
+    version: "0.0.2+13"
   js:
     dependency: transitive
     description:
@@ -351,7 +351,7 @@ packages:
       name: openiothub_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.2+19"
+    version: "0.0.2+20"
   openiothub_constants:
     dependency: "direct main"
     description:
