@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 class _State extends State<LoginPage> {
   StreamSubscription<WechatAuthResp> _auth;
   List<Widget> _list = <Widget>[];
+
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
   final TextEditingController _userpassword = TextEditingController(text: "");
@@ -43,6 +44,46 @@ class _State extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _list = <Widget>[
+      TextField(
+        controller: _usermobile,
+        decoration: InputDecoration(labelText: '手机号'),
+        onChanged: (String v) {},
+      ),
+      TextField(
+        controller: _userpassword,
+        decoration: InputDecoration(labelText: '用户密码'),
+        obscureText: true,
+        onChanged: (String v) {},
+      ),
+      TextButton(
+          child: Text('登录'),
+          onPressed: () async {
+            LoginInfo loginInfo = LoginInfo();
+            loginInfo.userMobile = _usermobile.text;
+            loginInfo.password = _userpassword.text;
+            UserLoginResponse userLoginResponse =
+                await UserManager.LoginWithUserLoginInfo(loginInfo);
+            await _handleLoginResp(userLoginResponse);
+          }),
+      IconButton(
+          icon: Image.asset(
+            'assets/images/wechat.png',
+            package: "openiothub_common_pages",
+          ),
+          onPressed: () async {
+            Wechat.instance.auth(
+              scope: <String>[WechatScope.SNSAPI_USERINFO],
+              state: 'auth',
+            );
+          }),
+      TextButton(
+          child: Text('注册用户'),
+          onPressed: () async {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => RegisterPage()));
+          }),
+    ];
     return Scaffold(
         appBar: AppBar(
           title: Text("登录"),
@@ -58,58 +99,7 @@ class _State extends State<LoginPage> {
         ));
   }
 
-  Future<void> _initList() async {
-    setState(() {
-      _list = <Widget>[
-        TextField(
-          controller: _usermobile,
-          decoration: InputDecoration(labelText: '手机号'),
-          onChanged: (String v) {},
-        ),
-        TextField(
-          controller: _userpassword,
-          decoration: InputDecoration(labelText: '用户密码'),
-          obscureText: true,
-          onChanged: (String v) {},
-        ),
-        TextButton(
-            child: Text('登录'),
-            onPressed: () async {
-              LoginInfo loginInfo = LoginInfo();
-              loginInfo.userMobile = _usermobile.text;
-              loginInfo.password = _userpassword.text;
-              UserLoginResponse userLoginResponse =
-                  await UserManager.LoginWithUserLoginInfo(loginInfo);
-              await _handleLoginResp(userLoginResponse);
-            }),
-      ];
-    });
-    if (await Wechat.instance.isInstalled()) {
-      setState(() {
-        _list.add(
-          IconButton(
-              icon: Image.asset(
-                'assets/images/wechat.png',
-                package: "openiothub_common_pages",
-              ),
-              onPressed: () async {
-                Wechat.instance.auth(
-                  scope: <String>[WechatScope.SNSAPI_USERINFO],
-                  state: 'auth',
-                );
-              }),
-        );
-      });
-    }
-    setState(() {
-      _list.add(TextButton(
-          child: Text('注册用户'),
-          onPressed: () async {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => RegisterPage()));
-          }));
-    });
-  }
+  Future<void> _initList() async {}
 
   Future<void> _handleLoginResp(UserLoginResponse userLoginResponse) async {
     if (userLoginResponse.code == 0) {

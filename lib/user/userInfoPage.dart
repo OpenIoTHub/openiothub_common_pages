@@ -17,7 +17,7 @@ class UserInfoPage extends StatefulWidget {
 
 class _UserInfoPageState extends State<UserInfoPage> {
   StreamSubscription<WechatAuthResp> _auth;
-  List<Widget> list = <Widget>[];
+  List<Widget> _list = <Widget>[];
   String username = "";
   String usermobile = "";
   String useremail = "";
@@ -48,63 +48,46 @@ class _UserInfoPageState extends State<UserInfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("用户信息"),
-        ),
-        body: ListView(children: list));
-  }
-
-  Future<void> _initList() async {
-    setState(() {
-      list = <Widget>[
-        ListTile(
-            //第一个功能项
-            title: Text('用户名：$username'),
-            trailing: Icon(Icons.arrow_right),
-            onTap: () async {
-              _modifyInfo("用户名");
-            }),
-        ListTile(
-            //第一个功能项
-            title: Text('手机号：$usermobile'),
-            trailing: Icon(Icons.arrow_right),
-            onTap: () async {
-              _modifyInfo("手机号");
-            }),
-        ListTile(
-            //第一个功能项
-            title: Text('邮箱：$useremail'),
-            trailing: Icon(Icons.arrow_right),
-            onTap: () async {
-              _modifyInfo("邮箱");
-            }),
-        ListTile(
-            //第一个功能项
-            title: Text('修改密码'),
-            trailing: Icon(Icons.arrow_right),
-            onTap: () async {
-              _modifyInfo("密码");
-            }),
-        //TODO 未安装微信时不显示
-      ];
-    });
-    if (await Wechat.instance.isInstalled()) {
-      setState(() {
-        list.add(ListTile(
-            //绑定微信
-            title: Text('绑定微信'),
-            trailing: Icon(Icons.arrow_right),
-            onTap: () async {
-              Wechat.instance.auth(
-                scope: <String>[WechatScope.SNSAPI_USERINFO],
-                state: 'auth',
-              );
-            }));
-      });
-    }
-    setState(() {
-      list.add(ListTile(
+    _list = <Widget>[
+      ListTile(
+          //第一个功能项
+          title: Text('用户名：$username'),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () async {
+            _modifyInfo("用户名");
+          }),
+      ListTile(
+          //第一个功能项
+          title: Text('手机号：$usermobile'),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () async {
+            _modifyInfo("手机号");
+          }),
+      ListTile(
+          //第一个功能项
+          title: Text('邮箱：$useremail'),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () async {
+            _modifyInfo("邮箱");
+          }),
+      ListTile(
+          //第一个功能项
+          title: Text('修改密码'),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () async {
+            _modifyInfo("密码");
+          }),
+      ListTile(
+        //绑定微信
+          title: Text('绑定微信'),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () async {
+            Wechat.instance.auth(
+              scope: <String>[WechatScope.SNSAPI_USERINFO],
+              state: 'auth',
+            );
+          }),
+      ListTile(
           //解绑微信
           title: Text('解除微信绑定'),
           trailing: Icon(Icons.arrow_right),
@@ -118,10 +101,8 @@ class _UserInfoPageState extends State<UserInfoPage> {
                     msg: "解绑微信失败！原因：${operationResponse.msg}");
               }
             });
-          }));
-    });
-    setState(() {
-      list.add(TextButton(
+          }),
+      TextButton(
           onPressed: () {
             _logOut();
           },
@@ -130,8 +111,17 @@ class _UserInfoPageState extends State<UserInfoPage> {
             style: TextStyle(
               color: Colors.red,
             ),
-          )));
-    });
+          )),
+    ];
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("用户信息"),
+        ),
+        body: ListView(children: _list));
+  }
+
+  Future<void> _initList() async {
+
   }
 
   Future<void> _getUserInfo() async {
