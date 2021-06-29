@@ -41,87 +41,85 @@ class _UserInfoPageState extends State<UserInfoPage> {
     if (_auth == null) {
       _auth = Wechat.instance.authResp().listen(_listenAuth);
     }
-    _initList();
     _getUserInfo();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _list = <Widget>[
-      ListTile(
-          //第一个功能项
-          title: Text('用户名：$username'),
-          trailing: Icon(Icons.arrow_right),
-          onTap: () async {
-            _modifyInfo("用户名");
-          }),
-      ListTile(
-          //第一个功能项
-          title: Text('手机号：$usermobile'),
-          trailing: Icon(Icons.arrow_right),
-          onTap: () async {
-            _modifyInfo("手机号");
-          }),
-      ListTile(
-          //第一个功能项
-          title: Text('邮箱：$useremail'),
-          trailing: Icon(Icons.arrow_right),
-          onTap: () async {
-            _modifyInfo("邮箱");
-          }),
-      ListTile(
-          //第一个功能项
-          title: Text('修改密码'),
-          trailing: Icon(Icons.arrow_right),
-          onTap: () async {
-            _modifyInfo("密码");
-          }),
-      ListTile(
-        //绑定微信
-          title: Text('绑定微信'),
-          trailing: Icon(Icons.arrow_right),
-          onTap: () async {
-            Wechat.instance.auth(
-              scope: <String>[WechatScope.SNSAPI_USERINFO],
-              state: 'auth',
-            );
-          }),
-      ListTile(
-          //解绑微信
-          title: Text('解除微信绑定'),
-          trailing: Icon(Icons.arrow_right),
-          onTap: () async {
-            UserManager.UnbindWechat()
-                .then((OperationResponse operationResponse) {
-              if (operationResponse.code == 0) {
-                Fluttertoast.showToast(msg: "解绑微信成功！");
-              } else {
-                Fluttertoast.showToast(
-                    msg: "解绑微信失败！原因：${operationResponse.msg}");
-              }
-            });
-          }),
-      TextButton(
-          onPressed: () {
-            _logOut();
-          },
-          child: Text(
-            "退出登录",
-            style: TextStyle(
-              color: Colors.red,
-            ),
-          )),
-    ];
     return Scaffold(
         appBar: AppBar(
           title: Text("用户信息"),
         ),
-        body: ListView(children: _list));
-  }
-
-  Future<void> _initList() async {
-
+        body: ListView(children: <Widget>[
+          ListTile(
+              //第一个功能项
+              title: Text('用户名：$username'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+                _modifyInfo("用户名");
+              }),
+          ListTile(
+              //第一个功能项
+              title: Text('手机号：$usermobile'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+                _modifyInfo("手机号");
+              }),
+          ListTile(
+              //第一个功能项
+              title: Text('邮箱：$useremail'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+                _modifyInfo("邮箱");
+              }),
+          ListTile(
+              //第一个功能项
+              title: Text('修改密码'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+                _modifyInfo("密码");
+              }),
+          ListTile(
+              //绑定微信
+              title: Text('绑定微信'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+                if (await Wechat.instance.isInstalled()) {
+                  Wechat.instance.auth(
+                    scope: <String>[WechatScope.SNSAPI_USERINFO],
+                    state: 'auth',
+                  );
+                } else {
+                  Fluttertoast.showToast(msg: "只有安装了微信才能绑定微信");
+                }
+              }),
+          ListTile(
+              //解绑微信
+              title: Text('解除微信绑定'),
+              trailing: Icon(Icons.arrow_right),
+              onTap: () async {
+                UserManager.UnbindWechat()
+                    .then((OperationResponse operationResponse) {
+                  if (operationResponse.code == 0) {
+                    Fluttertoast.showToast(msg: "解绑微信成功！");
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "解绑微信失败！原因：${operationResponse.msg}");
+                  }
+                });
+              }),
+          TextButton(
+              onPressed: () {
+                _logOut();
+              },
+              child: Text(
+                "退出登录",
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              )),
+        ]));
   }
 
   Future<void> _getUserInfo() async {

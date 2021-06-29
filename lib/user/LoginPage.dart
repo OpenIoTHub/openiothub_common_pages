@@ -40,10 +40,27 @@ class _State extends State<LoginPage> {
     }
     _initList();
     super.initState();
+    _checkWechat();
   }
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("登录"),
+        ),
+        body: Center(
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: _list,
+            ),
+          ),
+        ));
+  }
+
+  Future<void> _initList() async {
     _list = <Widget>[
       TextField(
         controller: _usermobile,
@@ -66,17 +83,6 @@ class _State extends State<LoginPage> {
                 await UserManager.LoginWithUserLoginInfo(loginInfo);
             await _handleLoginResp(userLoginResponse);
           }),
-      IconButton(
-          icon: Image.asset(
-            'assets/images/wechat.png',
-            package: "openiothub_common_pages",
-          ),
-          onPressed: () async {
-            Wechat.instance.auth(
-              scope: <String>[WechatScope.SNSAPI_USERINFO],
-              state: 'auth',
-            );
-          }),
       TextButton(
           child: Text('注册用户'),
           onPressed: () async {
@@ -84,22 +90,25 @@ class _State extends State<LoginPage> {
                 .push(MaterialPageRoute(builder: (context) => RegisterPage()));
           }),
     ];
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("登录"),
-        ),
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: _list,
-            ),
-          ),
-        ));
   }
 
-  Future<void> _initList() async {}
+  Future<void> _checkWechat() async {
+    if (await Wechat.instance.isInstalled()) {
+      setState(() {
+        _list.add(IconButton(
+            icon: Image.asset(
+              'assets/images/wechat.png',
+              package: "openiothub_common_pages",
+            ),
+            onPressed: () async {
+              Wechat.instance.auth(
+                scope: <String>[WechatScope.SNSAPI_USERINFO],
+                state: 'auth',
+              );
+            }));
+      });
+    }
+  }
 
   Future<void> _handleLoginResp(UserLoginResponse userLoginResponse) async {
     if (userLoginResponse.code == 0) {
