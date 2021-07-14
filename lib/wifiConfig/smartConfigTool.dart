@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easylink/flutter_easylink.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:openiothub_common_pages/utils/ThemeUtils.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
@@ -196,7 +197,11 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                         ),
                         Container(height: 10),
                         Text(_msg),
-                        Image.asset("assets/images/24gwifi.png", package: "openiothub_common_pages"),
+                        Image.asset(
+                            ThemeUtils.isDarkMode(context)
+                                ? 'assets/images/24gwifi.png'
+                                : 'assets/images/24gwifi_black.png',
+                            package: "openiothub_common_pages"),
                       ],
                     ))));
   }
