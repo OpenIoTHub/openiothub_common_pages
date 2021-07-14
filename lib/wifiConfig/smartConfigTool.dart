@@ -197,11 +197,15 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                         ),
                         Container(height: 10),
                         Text(_msg),
-                        Image.asset(
-                            ThemeUtils.isDarkMode(context)
-                                ? 'assets/images/24gwifi.png'
-                                : 'assets/images/24gwifi_black.png',
-                            package: "openiothub_common_pages"),
+                        ThemeUtils.isDarkMode(context)
+                            ? Image.asset(
+                                'assets/images/24gwifi_black.png',
+                                package: "openiothub_common_pages",
+                              )
+                            : Image.asset(
+                                'assets/images/24gwifi.png',
+                                package: "openiothub_common_pages",
+                              ),
                       ],
                     ))));
   }
