@@ -123,6 +123,9 @@ class _State extends State<LoginPage> {
           userLoginResponse.userInfo.mobile);
       await prefs.setString(SharedPreferencesKey.USER_AVATAR_KEY,
           userLoginResponse.userInfo.avatar);
+      Future.delayed(Duration(milliseconds: 500), () {
+        UtilApi.SyncConfigWithToken();
+      });
       Navigator.of(context).pop();
     } else {
       Fluttertoast.showToast(msg: "登录失败:${userLoginResponse.msg}");
