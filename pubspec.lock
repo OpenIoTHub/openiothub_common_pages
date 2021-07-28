@@ -295,7 +295,7 @@ packages:
       name: iot_manager_grpc_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.2+24"
+    version: "0.0.2+33"
   js:
     dependency: transitive
     description:
@@ -351,7 +351,7 @@ packages:
       name: openiothub_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.2+30"
+    version: "0.0.2+46"
   openiothub_constants:
     dependency: "direct main"
     description:
@@ -365,14 +365,14 @@ packages:
       name: openiothub_grpc_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.1+10"
+    version: "0.0.1+12"
   openiothub_plugin:
     dependency: "direct main"
     description:
       name: openiothub_plugin
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.2+22"
+    version: "0.0.2+30"
   package_info:
     dependency: "direct main"
     description:
@@ -400,14 +400,14 @@ packages:
       name: path_provider_linux
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   path_provider_macos:
     dependency: transitive
     description:
       name: path_provider_macos
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   path_provider_platform_interface:
     dependency: transitive
     description:
@@ -421,7 +421,7 @@ packages:
       name: path_provider_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.3"
   pedantic:
     dependency: transitive
     description:
@@ -470,7 +470,7 @@ packages:
       name: process
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.2.1"
+    version: "4.2.3"
   protobuf:
     dependency: transitive
     description:
@@ -498,7 +498,7 @@ packages:
       name: server_grpc_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.1+2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -695,4 +695,4 @@ packages:
     version: "5.1.2"
 sdks:
   dart: ">=2.13.0 <3.0.0"
-  flutter: ">=1.24.0-10"
+  flutter: ">=2.0.0"
