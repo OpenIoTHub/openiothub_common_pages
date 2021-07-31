@@ -1,8 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:iot_manager_grpc_api/pb/gatewayManager.pb.dart';
+import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
 import 'package:mdns_plugin/mdns_plugin.dart' as mdns_plugin;
 import 'package:multicast_dns/multicast_dns.dart';
+import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/pb/service.pb.dart';
 import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
@@ -94,6 +99,14 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
               ),
               onPressed: () {
                 _findClientListBymDNS();
+              }),
+          IconButton(
+              icon: Icon(
+                Icons.add_circle,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _addGateway();
               }),
         ],
       ),
@@ -254,5 +267,104 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
 
   void onServiceRemoved(mdns_plugin.MDNSService service) {
     print("Removed: $service");
+  }
+
+  Future<void> _addGateway() async {
+    List<DropdownMenuItem<String>> l = await _listAvailableServer();
+    String value = l.first.value;
+    showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, state) {
+            return AlertDialog(
+                title: Text("手动创建一个网关？"),
+                content: ListView(
+                  children: ListTile.divideTiles(
+                    context: context,
+                    tiles: [
+                      Text(
+                          "安装的网关可以本页面发现"),
+                      Text(
+                          "自动生成一个网关信息，回头拿着token填写到网关配置文件即可，适合于手机无法同局域网发现网关的情况"),
+                      Text("从下面选择网关需要连接的服务器:", style: TextStyle(
+                        color: Colors.amber,
+                      ),),
+                      DropdownButton<String>(
+                        value: value,
+                        onChanged: (String newVal) {
+                          state(() {
+                            value = newVal;
+                          });
+                        },
+                        items: l,
+                      ),
+                    ],
+                  ).toList(),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("取消"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text("添加"),
+                    onPressed: () async {
+                      // 从服务器自动生成一个网关
+                      // TODO 选择服务器
+                      GatewayInfo gatewayInfo =
+                      await GatewayManager.GenerateOneGatewayWithServerUuid(
+                          value);
+                      await _addToMySessionList(
+                          gatewayInfo.openIoTHubJwt, gatewayInfo.name);
+                      String uuid = gatewayInfo.gatewayUuid;
+                      String gatewayJwt = gatewayInfo.gatewayJwt;
+                      String data = '''
+gatewayuuid: ${getOneUUID()}
+logconfig:
+  enablestdout: true
+  logfilepath: ""
+loginwithtokenmap:
+  $uuid: $gatewayJwt
+''';
+                      Clipboard.setData(ClipboardData(text: data));
+                      Fluttertoast.showToast(
+                          msg: "网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中");
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]);
+          });
+        });
+  }
+
+  Future _addToMySessionList(String token, name) async {
+    SessionConfig config = SessionConfig();
+    config.token = token;
+    config.description = name;
+    try {
+      await SessionApi.createOneSession(config);
+      Fluttertoast.showToast(msg: "添加网关成功！");
+    } catch (exception) {
+      Fluttertoast.showToast(msg: "登录失败：${exception}");
+    }
+  }
+
+  Future<List<DropdownMenuItem<String>>> _listAvailableServer() async {
+    ServerInfoList serverInfoList = await ServerManager.GetAllServer();
+    List<DropdownMenuItem<String>> l = [];
+    serverInfoList.serverInfoList.forEach((ServerInfo v) {
+      l.add(DropdownMenuItem<String>(
+        value: v.uuid,
+        child: Text(
+          "${v.name}(${v.serverHost}",
+          style: TextStyle(
+            color: Colors.green,
+          ),
+        ),
+      ));
+    });
+    return l;
   }
 }
