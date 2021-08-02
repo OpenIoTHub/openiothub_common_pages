@@ -8,6 +8,7 @@ import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
 import 'package:mdns_plugin/mdns_plugin.dart' as mdns_plugin;
 import 'package:multicast_dns/multicast_dns.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/pb/service.pb.dart';
 import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
@@ -108,6 +109,14 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
               onPressed: () {
                 _addGateway();
               }),
+          IconButton(
+              icon: Icon(
+                Icons.info,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _gatewayGuide();
+              }),
         ],
       ),
       body: ListView(children: divided),
@@ -116,9 +125,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
 
   void _findClientListBymDNS() async {
     print("====_findClientListBymDNS");
-    if (Platform.isIOS || Platform.isAndroid){
+    if (Platform.isIOS || Platform.isAndroid) {
       _mdnsPlg.startDiscovery(Config.mdnsGatewayService, enableUpdating: true);
-    }else{
+    } else {
       _ServiceMap.clear();
       // try {
       await for (PtrResourceRecord ptr in _mdns.lookup<PtrResourceRecord>(
@@ -178,21 +187,6 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
         }
       }
     }
-    // } catch (e) {
-    //   showDialog(
-    //       context: context,
-    //       builder: (_) => AlertDialog(
-    //               title: Text("从本地获取网关列表失败："),
-    //               content: Text("失败原因：$e"),
-    //               actions: <Widget>[
-    //                 FlatButton(
-    //                   child: Text("确认"),
-    //                   onPressed: () {
-    //                     Navigator.of(context).pop();
-    //                   },
-    //                 )
-    //               ]));
-    // }
     await _mdns.stop();
   }
 
@@ -216,7 +210,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
       print("service.serviceType:${service.serviceType}");
       PortService portService = PortService.create();
       portService.isLocal = true;
-      portService.ip = "127.0.0.1";
+      portService.ip = "";
       portService.port = 80;
       portService.info.addAll({
         "name": "网关",
@@ -230,9 +224,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
         "firmware-version": "version",
       });
       if (service.addresses != null && service.addresses.length > 0) {
-        portService.ip = service.addresses[0].contains(":")
-            ? "[${service.addresses[0]}]"
-            : service.addresses[0];
+        portService.ip = service.addresses[0];
       } else {
         portService.ip = service.hostName;
       }
@@ -269,6 +261,12 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
     print("Removed: $service");
   }
 
+  Future<void> _gatewayGuide() async {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return GatewayGuidePage();
+    }));
+  }
+
   Future<void> _addGateway() async {
     List<DropdownMenuItem<String>> l = await _listAvailableServer();
     String value = l.first.value;
@@ -282,13 +280,15 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
                   children: ListTile.divideTiles(
                     context: context,
                     tiles: [
-                      Text(
-                          "安装的网关可以本页面发现"),
+                      Text("安装的网关可以本页面发现"),
                       Text(
                           "自动生成一个网关信息，回头拿着token填写到网关配置文件即可，适合于手机无法同局域网发现网关的情况"),
-                      Text("从下面选择网关需要连接的服务器:", style: TextStyle(
-                        color: Colors.amber,
-                      ),),
+                      Text(
+                        "从下面选择网关需要连接的服务器:",
+                        style: TextStyle(
+                          color: Colors.amber,
+                        ),
+                      ),
                       DropdownButton<String>(
                         value: value,
                         onChanged: (String newVal) {
@@ -314,8 +314,8 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
                       // 从服务器自动生成一个网关
                       // TODO 选择服务器
                       GatewayInfo gatewayInfo =
-                      await GatewayManager.GenerateOneGatewayWithServerUuid(
-                          value);
+                          await GatewayManager.GenerateOneGatewayWithServerUuid(
+                              value);
                       await _addToMySessionList(
                           gatewayInfo.openIoTHubJwt, gatewayInfo.name);
                       String uuid = gatewayInfo.gatewayUuid;

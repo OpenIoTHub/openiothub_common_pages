@@ -2,6 +2,7 @@ library openiothub_common_pages;
 
 export 'commPages/appInfo.dart';
 export 'commPages/findmDNSClientList.dart';
+export 'commPages/gatewayGuide.dart';
 export 'commPages/privacyPolicy.dart';
 export 'commPages/servers.dart';
 export 'commPages/settings.dart';
