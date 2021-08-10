@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("隐私政策"),
+          actions: <Widget>[],
+        ),
+        body: Container(
       child: Text('''
       本应用非常重视用户隐私政策并严格遵守相关的法律规定。请您仔细阅读《隐私政策》后再继续使用。如果您继续使用我们的服务，表示您已经充分阅读和理解我们协议的全部内容。
 
@@ -84,6 +90,6 @@ class PrivacyPolicyPage extends StatelessWidget {
 感谢您花时间了解我们的隐私政策！我们将尽全力保护您的个人信息和合法权益，再次感谢您的信任！
 
       '''),
-    );
+    ));
   }
 }

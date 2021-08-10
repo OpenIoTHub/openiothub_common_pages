@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:package_info/package_info.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
@@ -68,9 +69,27 @@ class _AppInfoPageState extends State<AppInfoPage> {
         );
       },
     );
+    List<ListTile> tilesList = tiles.toList();
+    tilesList.add(ListTile(
+      title: Text("反馈渠道", style: TextStyle(color: Colors.green),),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+//              return Text("${pair.iP}:${pair.port}");
+          return FeedbackPage();
+        }));
+      },
+    ));
+    tilesList.add(ListTile(
+      title: Text("隐私政策", style: TextStyle(color: Colors.green),),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return PrivacyPolicyPage();
+        }));
+      },
+    ));
     final divided = ListTile.divideTiles(
       context: context,
-      tiles: tiles,
+      tiles: tilesList,
     ).toList();
 
     return Scaffold(
