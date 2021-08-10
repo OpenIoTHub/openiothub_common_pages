@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_common_pages/commPages/feedback.dart';
+import 'package:openiothub_common_pages/commPages/privacyPolicy.dart';
 import 'package:openiothub_common_pages/user/RegisterPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -89,6 +91,23 @@ class _State extends State<LoginPage> {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => RegisterPage()));
           }),
+      Row(
+        children: [
+          TextButton(
+              child: Text('隐私政策', style: TextStyle(color: Colors.red),),
+              onPressed: () async {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
+              }),
+          TextButton(
+              child: Text('反馈渠道', style: TextStyle(color: Colors.green),),
+              onPressed: () async {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => FeedbackPage()));
+              }),
+        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+      ),
     ];
   }
 
