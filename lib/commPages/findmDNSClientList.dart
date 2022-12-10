@@ -243,7 +243,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage>
                   title: Text("从本地获取网关列表失败："),
                   content: Text("失败原因：$e"),
                   actions: <Widget>[
-                    FlatButton(
+                    TextButton(
                       child: Text("确认"),
                       onPressed: () {
                         Navigator.of(context).pop();
