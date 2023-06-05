@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
-  const PrivacyPolicyPage({Key key}) : super(key: key);
+  const PrivacyPolicyPage({required Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

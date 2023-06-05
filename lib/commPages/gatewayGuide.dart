@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GatewayGuidePage extends StatefulWidget {
-  const GatewayGuidePage({Key key}) : super(key: key);
+  const GatewayGuidePage({required Key key}) : super(key: key);
 
   @override
   _GatewayGuidePageState createState() => _GatewayGuidePageState();

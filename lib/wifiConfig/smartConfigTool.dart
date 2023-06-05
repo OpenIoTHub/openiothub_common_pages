@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:airkiss/airkiss.dart';
+import 'package:airkiss_dart/airkiss_dart.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,11 +8,12 @@ import 'package:flutter_easylink/flutter_easylink.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:openiothub_common_pages/utils/ThemeUtils.dart';
+import 'package:openiothub_common_pages/wifiConfig/permission.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class SmartConfigTool extends StatefulWidget {
-  SmartConfigTool({Key key, this.title, this.needCallBack}) : super(key: key);
+  SmartConfigTool({required Key key, required this.title, required this.needCallBack}) : super(key: key);
 
   final String title;
   final bool needCallBack;
@@ -23,9 +24,9 @@ class SmartConfigTool extends StatefulWidget {
 
 class _SmartConfigToolState extends State<SmartConfigTool> {
   final int _smartConfigTypeNumber = 3;
-  int _smartConfigRemainNumber;
+  int _smartConfigRemainNumber = 0;
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
 
 //  New
   final TextEditingController _bssidFilter = TextEditingController();
@@ -79,14 +80,14 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
 
   @override
   void dispose() {
-    _connectivitySubscription.cancel();
+    _connectivitySubscription?.cancel();
     super.dispose();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initConnectivity() async {
     await requestPermission();
-    ConnectivityResult result;
+    ConnectivityResult? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
@@ -101,7 +102,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
       return;
     }
 
-    _updateConnectionStatus(result);
+    _updateConnectionStatus(result!);
   }
 
   @override
@@ -122,7 +123,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                                       _smartConfigRemainNumber
                                   ? 0.1
                                   : (_smartConfigTypeNumber -
-                                          _smartConfigRemainNumber) /
+                                          _smartConfigRemainNumber!) /
                                       _smartConfigTypeNumber,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Colors.lightBlue),
@@ -216,21 +217,21 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
         String wifiName, wifiBSSID, wifiIP;
 
         try {
-          wifiName = await WifiInfo().getWifiName();
+          wifiName = (await WifiInfo().getWifiName())!;
         } on PlatformException catch (e) {
           print(e.toString());
           wifiName = "Failed to get Wifi Name";
         }
 
         try {
-          wifiBSSID = await WifiInfo().getWifiBSSID();
+          wifiBSSID = (await WifiInfo().getWifiBSSID())!;
         } on PlatformException catch (e) {
           print(e.toString());
           wifiBSSID = "Failed to get Wifi BSSID";
         }
 
         try {
-          wifiIP = await WifiInfo().getWifiIP();
+          wifiIP = (await WifiInfo().getWifiIP())!;
         } on PlatformException catch (e) {
           print(e.toString());
           wifiIP = "Failed to get Wifi IP";
@@ -249,23 +250,6 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
         break;
       default:
         break;
-    }
-  }
-
-  Future<bool> requestPermission() async {
-    // 申请权限
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler().requestPermissions([
-      PermissionGroup.location,
-    ]);
-    // 申请结果
-    PermissionStatus permission = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.location);
-    if (permission == PermissionStatus.granted) {
-      return true;
-    } else {
-//      提示失败！
-      return false;
     }
   }
 

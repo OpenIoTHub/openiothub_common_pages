@@ -16,7 +16,7 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
-  StreamSubscription<WechatAuthResp> _auth;
+  late StreamSubscription<WechatAuthResp> _auth;
   List<Widget> _list = <Widget>[];
   String username = "";
   String usermobile = "";
@@ -25,7 +25,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
   Future<void> _listenAuth(WechatAuthResp resp) async {
     if (resp.errorCode == 0) {
       OperationResponse operationResponse =
-          await UserManager.BindWithWechatCode(resp.code);
+          await UserManager.BindWithWechatCode(resp.code!);
       if (operationResponse.code == 0) {
         Fluttertoast.showToast(msg: "绑定微信成功！");
       } else {
@@ -139,7 +139,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
         SharedPreferencesKey.USER_AVATAR_KEY, userInfo.avatar);
     if (prefs.containsKey(SharedPreferencesKey.USER_NAME_KEY)) {
       setState(() {
-        username = prefs.getString(SharedPreferencesKey.USER_NAME_KEY);
+        username = prefs.getString(SharedPreferencesKey.USER_NAME_KEY)!;
       });
     } else {
       setState(() {
@@ -148,7 +148,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     }
     if (prefs.containsKey(SharedPreferencesKey.USER_EMAIL_KEY)) {
       setState(() {
-        useremail = prefs.getString(SharedPreferencesKey.USER_EMAIL_KEY);
+        useremail = prefs.getString(SharedPreferencesKey.USER_EMAIL_KEY)!;
       });
     } else {
       setState(() {
@@ -157,7 +157,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     }
     if (prefs.containsKey(SharedPreferencesKey.USER_MOBILE_KEY)) {
       setState(() {
-        usermobile = prefs.getString(SharedPreferencesKey.USER_MOBILE_KEY);
+        usermobile = prefs.getString(SharedPreferencesKey.USER_MOBILE_KEY)!;
       });
     } else {
       setState(() {

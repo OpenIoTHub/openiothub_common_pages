@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _State extends State<LoginPage> {
-  StreamSubscription<WechatAuthResp> _auth;
+  late StreamSubscription<WechatAuthResp> _auth;
   List<Widget> _list = <Widget>[];
 
 //  New
@@ -28,7 +28,7 @@ class _State extends State<LoginPage> {
   Future<void> _listenAuth(WechatAuthResp resp) async {
     if (resp.errorCode == 0) {
       UserLoginResponse userLoginResponse =
-          await UserManager.LoginWithWechatCode(resp.code);
+          await UserManager.LoginWithWechatCode(resp.code!);
       await _handleLoginResp(userLoginResponse);
     } else {
       Fluttertoast.showToast(msg: "微信登录失败:${resp.errorMsg}");
@@ -97,13 +97,13 @@ class _State extends State<LoginPage> {
               child: Text('隐私政策', style: TextStyle(color: Colors.red),),
               onPressed: () async {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
+                    MaterialPageRoute(builder: (context) => PrivacyPolicyPage(key: UniqueKey(),)));
               }),
           TextButton(
               child: Text('反馈渠道', style: TextStyle(color: Colors.green),),
               onPressed: () async {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => FeedbackPage()));
+                    MaterialPageRoute(builder: (context) => FeedbackPage(key: UniqueKey(),)));
               }),
         ],
         mainAxisAlignment: MainAxisAlignment.center,

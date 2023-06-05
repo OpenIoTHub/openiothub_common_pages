@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({
-    Key key,
-    this.title,
+    required Key key,
+    required this.title,
   }) : super(key: key);
   final String title;
 
@@ -98,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (await prefs.containsKey("foreground")) {
       setState(() async {
-        foreground = await prefs.getBool("foreground");
+        foreground = (await prefs.getBool("foreground"))!;
       });
     } else {
       prefs.setBool("foreground", false);

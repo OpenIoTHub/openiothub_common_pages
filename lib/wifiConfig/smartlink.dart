@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:openiothub_common_pages/wifiConfig/permission.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class Smartlink extends StatefulWidget {
-  Smartlink({Key key, this.title}) : super(key: key);
+  Smartlink({required Key key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -19,7 +20,7 @@ class Smartlink extends StatefulWidget {
 
 class _SmartlinkState extends State<Smartlink> {
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
 
 //  New
   final TextEditingController _bssidFilter = TextEditingController();
@@ -73,14 +74,14 @@ class _SmartlinkState extends State<Smartlink> {
 
   @override
   void dispose() {
-    _connectivitySubscription.cancel();
+    _connectivitySubscription?.cancel();
     super.dispose();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initConnectivity() async {
     await requestPermission();
-    ConnectivityResult result;
+    ConnectivityResult? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
@@ -95,7 +96,7 @@ class _SmartlinkState extends State<Smartlink> {
       return;
     }
 
-    _updateConnectionStatus(result);
+    _updateConnectionStatus(result!);
   }
 
   @override
@@ -175,21 +176,21 @@ class _SmartlinkState extends State<Smartlink> {
         String wifiName, wifiBSSID, wifiIP;
 
         try {
-          wifiName = await WifiInfo().getWifiName();
+          wifiName = (await WifiInfo().getWifiName())!;
         } on PlatformException catch (e) {
           print(e.toString());
           wifiName = "Failed to get Wifi Name";
         }
 
         try {
-          wifiBSSID = await WifiInfo().getWifiBSSID();
+          wifiBSSID = (await WifiInfo().getWifiBSSID())!;
         } on PlatformException catch (e) {
           print(e.toString());
           wifiBSSID = "Failed to get Wifi BSSID";
         }
 
         try {
-          wifiIP = await WifiInfo().getWifiIP();
+          wifiIP = (await WifiInfo().getWifiIP())!;
         } on PlatformException catch (e) {
           print(e.toString());
           wifiIP = "Failed to get Wifi IP";
@@ -208,23 +209,6 @@ class _SmartlinkState extends State<Smartlink> {
         break;
       default:
         break;
-    }
-  }
-
-  Future<bool> requestPermission() async {
-    // 申请权限
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler().requestPermissions([
-      PermissionGroup.location,
-    ]);
-    // 申请结果
-    PermissionStatus permission = await PermissionHandler()
-        .checkPermissionStatus(PermissionGroup.location);
-    if (permission == PermissionStatus.granted) {
-      return true;
-    } else {
-//      提示失败！
-      return false;
     }
   }
 

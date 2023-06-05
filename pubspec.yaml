@@ -1,21 +1,21 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 0.0.2+83
+version: 1.0.0
 homepage: https://github.com/OpenIoTHub
 
 environment:
-  sdk: ">=3.0.0-0 <4.0.0"
+  sdk: ^3.0.0
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  package_info: ^0.4.0+3
-  openiothub_constants: ^0.0.1
-  openiothub_api: ^0.0.2+30
-  openiothub_grpc_api: ^0.0.1
-  openiothub_plugin: ^0.0.2+21
-  iot_manager_grpc_api: ^0.0.1
+  package_info_plus: ^4.0.2
+  openiothub_constants: ^1.0.0
+  openiothub_api: ^1.0.0
+  openiothub_grpc_api: ^1.0.0
+  openiothub_plugin: ^1.0.0
+  iot_manager_grpc_api: ^1.0.0
   #  配网start
   #  esp配网
   #  smartconfig: ^0.0.1
@@ -26,23 +26,22 @@ dependencies:
   ## 汉枫smartlink
   flutter_smartlink: ^0.0.1
   # AirKiss
-  airkiss: ^1.0.1
+  airkiss_dart: ^1.0.0
   #  获取wifi名和bssid
   wifi_info_flutter: ^2.0.2
   #  获取当前网络的连接状态
   connectivity: ^3.0.6
   #  动态请求权限，定位，存储等
-  permission_handler: ^3.1.0
+  permission_handler: ^10.2.0
   #  配网end
-  multicast_dns: ^0.2.2
-  mdns_plugin: ^1.1.4
+  multicast_dns: ^0.3.2+3
   fluttertoast: ^8.0.8
-  shared_preferences: ^0.5.2
+  shared_preferences: ^2.1.1
 #  fluwx: ^2.4.1
   wechat_kit: ^2.3.1
   image: ^3.0.1
-  flutter_cache_manager: ^2.0.0-nullsafety.1
-  url_launcher: ^5.0.2
+#  flutter_cache_manager: ^2.0.0-nullsafety.1
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:

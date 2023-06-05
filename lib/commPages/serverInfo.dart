@@ -4,7 +4,7 @@ import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 
 class ServerInfoPage extends StatefulWidget {
-  ServerInfoPage({Key key, this.serverInfo}) : super(key: key);
+  ServerInfoPage({required Key key, required this.serverInfo}) : super(key: key);
 
   final ServerInfo serverInfo;
 

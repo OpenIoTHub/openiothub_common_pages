@@ -6,7 +6,7 @@ import 'package:openiothub_common_pages/commPages/serverInfo.dart';
 import 'package:openiothub_constants/constants/Constants.dart';
 
 class ServerPages extends StatefulWidget {
-  ServerPages({Key key, this.title}) : super(key: key);
+  ServerPages({required Key key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -18,7 +18,7 @@ class ServerPagesState extends State<ServerPages> {
   List<ServerInfo> _availableServerList = [];
 
   @override
-  Future<void> initState() {
+  Future<void> initState() async {
     _listMyServers();
     super.initState();
   }
@@ -47,7 +47,7 @@ class ServerPagesState extends State<ServerPages> {
         return InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return ServerInfoPage(serverInfo: pair);
+              return ServerInfoPage(serverInfo: pair, key: UniqueKey(),);
             })).then((value) => _listMyServers());
           },
           child: listItemContent,

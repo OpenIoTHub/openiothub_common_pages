@@ -66,13 +66,13 @@ class _State extends State<RegisterPage> {
                         child: Text('隐私政策', style: TextStyle(color: Colors.red),),
                         onPressed: () async {
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => PrivacyPolicyPage()));
+                              MaterialPageRoute(builder: (context) => PrivacyPolicyPage(key: UniqueKey(),)));
                         }),
                     TextButton(
                         child: Text('反馈渠道', style: TextStyle(color: Colors.green),),
                         onPressed: () async {
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => FeedbackPage()));
+                              MaterialPageRoute(builder: (context) => FeedbackPage(key: UniqueKey(),)));
                         }),
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,

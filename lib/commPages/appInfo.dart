@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
 class AppInfoPage extends StatefulWidget {
-  AppInfoPage({Key key}) : super(key: key);
+  AppInfoPage({required Key key}) : super(key: key);
 
   @override
   _AppInfoPageState createState() => _AppInfoPageState();
@@ -15,18 +15,18 @@ class AppInfoPage extends StatefulWidget {
 
 class _AppInfoPageState extends State<AppInfoPage> {
   //APP名称
-  String appName;
+  late String appName;
 
   //包名
-  String packageName;
+  late String packageName;
 
   //版本名
-  String version;
+  late String version;
 
   //版本号
-  String buildNumber;
+  late String buildNumber;
 
-  StreamSubscription<WechatSdkResp> _share;
+  late StreamSubscription<WechatSdkResp> _share;
 
   void _listenShareMsg(WechatSdkResp resp) {
     final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
@@ -75,7 +75,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 //              return Text("${pair.iP}:${pair.port}");
-          return FeedbackPage();
+          return FeedbackPage(key: UniqueKey(),);
         }));
       },
     ));
@@ -83,7 +83,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
       title: Text("隐私政策", style: TextStyle(color: Colors.green),),
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return PrivacyPolicyPage();
+          return PrivacyPolicyPage(key: UniqueKey(),);
         }));
       },
     ));
