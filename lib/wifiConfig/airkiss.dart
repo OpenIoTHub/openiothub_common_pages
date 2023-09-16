@@ -223,9 +223,7 @@ class _AirkissState extends State<Airkiss> {
         _isLoading = false;
         _msg = "附近的AirKiss设备配网任务完成";
       });
-      if (v != null) {
-        return true;
-      }
+      return true;
     } on PlatformException catch (e) {
       output = "Failed to configure: '${e.message}'.";
       setState(() {

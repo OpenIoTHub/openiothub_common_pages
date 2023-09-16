@@ -16,7 +16,7 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
-  late StreamSubscription<WechatAuthResp> _auth;
+  late StreamSubscription<WechatAuthResp>? _auth;
   List<Widget> _list = <Widget>[];
   String username = "";
   String usermobile = "";

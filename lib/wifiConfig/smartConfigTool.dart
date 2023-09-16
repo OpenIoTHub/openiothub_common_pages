@@ -299,6 +299,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
         _msg =
             "附近的AirKiss设备配网任务完成${v.toString()}，\n当前剩下：${_smartConfigRemainNumber - 1}种设备的配网任务";
       });
+      //TODO nullsafety
       if (v != null) {
         return true;
       }
