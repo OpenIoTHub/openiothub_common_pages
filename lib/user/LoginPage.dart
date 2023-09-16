@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _State extends State<LoginPage> {
-  late StreamSubscription<WechatAuthResp> _auth;
+  StreamSubscription<WechatAuthResp>? _auth;
   List<Widget> _list = <Widget>[];
 
 //  New
