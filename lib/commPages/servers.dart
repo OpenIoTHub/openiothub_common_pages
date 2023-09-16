@@ -47,7 +47,10 @@ class ServerPagesState extends State<ServerPages> {
         return InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return ServerInfoPage(serverInfo: pair, key: UniqueKey(),);
+              return ServerInfoPage(
+                serverInfo: pair,
+                key: UniqueKey(),
+              );
             })).then((value) => _listMyServers());
           },
           child: listItemContent,
@@ -87,11 +90,11 @@ class ServerPagesState extends State<ServerPages> {
         ));
   }
 
-  Future<void> _listMyServers() async {
-    ServerInfoList serverInfoList = await ServerManager.GetAllMyServers();
-    setState(() {
-      _availableServerList = serverInfoList.serverInfoList;
-    });
+  void _listMyServers() {
+    ServerManager.GetAllMyServers()
+        .then((ServerInfoList serverInfoList) => setState(() {
+              _availableServerList = serverInfoList.serverInfoList;
+            }));
   }
 
   Future<void> _addMyServer() async {
@@ -130,154 +133,157 @@ class ServerPagesState extends State<ServerPages> {
     TextEditingController _description_controller =
         TextEditingController.fromValue(TextEditingValue(text: "我的服务器的描述"));
     // bool IsPublic = 12;
-    bool _is_public =false;
+    bool _is_public = false;
     return showDialog(
         context: context,
         builder: (context) {
-      return StatefulBuilder(
-        builder: (context, state) {
-          return AlertDialog(
-              title: Text("添加自建服务器："),
-              content: ListView(
-                children: <Widget>[
-                  TextFormField(
-                    controller: _uuid_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: '服务器uuid',
-                      helperText: '跟server-go服务器里面的配置文件一致',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _name_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: '名称',
-                      helperText: '自定义服务器名称',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _server_host_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: '服务器ip地址或者域名',
-                      helperText: '公网server-go服务器的地址',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _login_key_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'login_key',
-                      helperText: '秘钥',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _tcp_port_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'tcp_port',
-                      helperText: 'tcp端口',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _kcp_port_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'kcp_port',
-                      helperText: 'kcp端口',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _udp_api_port_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'udp_api_port',
-                      helperText: '端口',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _kcp_api_port_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'kcp_api_port',
-                      helperText: '端口',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _tls_port_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'tls_port',
-                      helperText: '端口',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _grpc_port_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: 'grpc_port',
-                      helperText: '端口',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: _description_controller,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(10.0),
-                      labelText: '描述',
-                      helperText: '自定义描述信息',
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text("提供给APP所有人使用:"),
-                      Switch(
-                          value: _is_public,
-                          onChanged: (bool newVal) {
-                            state(() {
-                              _is_public = newVal;
-                            });
-                          })
+          return StatefulBuilder(
+            builder: (context, state) {
+              return AlertDialog(
+                  title: Text("添加自建服务器："),
+                  content: ListView(
+                    children: <Widget>[
+                      TextFormField(
+                        controller: _uuid_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: '服务器uuid',
+                          helperText: '跟server-go服务器里面的配置文件一致',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _name_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: '名称',
+                          helperText: '自定义服务器名称',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _server_host_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: '服务器ip地址或者域名',
+                          helperText: '公网server-go服务器的地址',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _login_key_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'login_key',
+                          helperText: '秘钥',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _tcp_port_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'tcp_port',
+                          helperText: 'tcp端口',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _kcp_port_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'kcp_port',
+                          helperText: 'kcp端口',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _udp_api_port_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'udp_api_port',
+                          helperText: '端口',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _kcp_api_port_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'kcp_api_port',
+                          helperText: '端口',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _tls_port_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'tls_port',
+                          helperText: '端口',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _grpc_port_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: 'grpc_port',
+                          helperText: '端口',
+                        ),
+                      ),
+                      TextFormField(
+                        controller: _description_controller,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10.0),
+                          labelText: '描述',
+                          helperText: '自定义描述信息',
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text("提供给APP所有人使用:"),
+                          Switch(
+                              value: _is_public,
+                              onChanged: (bool newVal) {
+                                state(() {
+                                  _is_public = newVal;
+                                });
+                              })
+                        ],
+                      ),
                     ],
                   ),
-                ],
-              ),
-              actions: <Widget>[
-                TextButton(
-                  child: Text("取消"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: Text("添加到服务器"),
-                  onPressed: () {
-                    ServerInfo serverInfo = ServerInfo();
-                    serverInfo.uuid = _uuid_controller.text;
-                    serverInfo.name = _name_controller.text;
-                    serverInfo.serverHost = _server_host_controller.text;
-                    serverInfo.loginKey = _login_key_controller.text;
-                    serverInfo.tcpPort = int.parse(_tcp_port_controller.text);
-                    serverInfo.kcpPort = int.parse(_kcp_port_controller.text);
-                    serverInfo.udpApiPort =
-                        int.parse(_udp_api_port_controller.text);
-                    serverInfo.kcpApiPort =
-                        int.parse(_kcp_api_port_controller.text);
-                    serverInfo.tlsPort = int.parse(_tls_port_controller.text);
-                    serverInfo.grpcPort =
-                        int.parse(_grpc_port_controller.text);
-                    serverInfo.description = _description_controller.text;
-                    serverInfo.isPublic = _is_public;
-                    ServerManager.AddServer(serverInfo)
-                        .then((value) => Fluttertoast.showToast(
-                        msg: "添加服务器(${_name_controller.text})成功!"))
-                        .then((value) => Navigator.of(context).pop())
-                        .then((value) => _listMyServers());
-                  },
-                )
-              ]);
-        },
-      );
-    });
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text("取消"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: Text("添加到服务器"),
+                      onPressed: () {
+                        ServerInfo serverInfo = ServerInfo();
+                        serverInfo.uuid = _uuid_controller.text;
+                        serverInfo.name = _name_controller.text;
+                        serverInfo.serverHost = _server_host_controller.text;
+                        serverInfo.loginKey = _login_key_controller.text;
+                        serverInfo.tcpPort =
+                            int.parse(_tcp_port_controller.text);
+                        serverInfo.kcpPort =
+                            int.parse(_kcp_port_controller.text);
+                        serverInfo.udpApiPort =
+                            int.parse(_udp_api_port_controller.text);
+                        serverInfo.kcpApiPort =
+                            int.parse(_kcp_api_port_controller.text);
+                        serverInfo.tlsPort =
+                            int.parse(_tls_port_controller.text);
+                        serverInfo.grpcPort =
+                            int.parse(_grpc_port_controller.text);
+                        serverInfo.description = _description_controller.text;
+                        serverInfo.isPublic = _is_public;
+                        ServerManager.AddServer(serverInfo)
+                            .then((value) => Fluttertoast.showToast(
+                                msg: "添加服务器(${_name_controller.text})成功!"))
+                            .then((value) => Navigator.of(context).pop())
+                            .then((value) => _listMyServers());
+                      },
+                    )
+                  ]);
+            },
+          );
+        });
   }
 }

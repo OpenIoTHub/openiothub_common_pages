@@ -11,7 +11,7 @@ class FeedbackPage extends StatelessWidget {
     _result.add("2. 关注云易连的微信公众号<云易连智能家居>反馈");
 
     final tiles = _result.map(
-          (pair) {
+      (pair) {
         return ListTile(
           title: Text(
             pair,
@@ -28,20 +28,26 @@ class FeedbackPage extends StatelessWidget {
         "公众号",
       ),
     ));
-    divided.add(Image.asset("assets/images/feedback/gongzhonghao.png",package: "openiothub_common_pages",));
+    divided.add(Image.asset(
+      "assets/images/feedback/gongzhonghao.png",
+      package: "openiothub_common_pages",
+    ));
     divided.add(ListTile(
       title: Text(
         "QQ群",
       ),
     ));
-    divided.add(Image.asset("assets/images/feedback/qqqun.jpg",package: "openiothub_common_pages",));
+    divided.add(Image.asset(
+      "assets/images/feedback/qqqun.jpg",
+      package: "openiothub_common_pages",
+    ));
     return Scaffold(
         appBar: AppBar(
           title: Text("反馈渠道"),
           actions: <Widget>[],
         ),
         body: Container(
-      child: ListView(children: divided),
-    ));
+          child: ListView(children: divided),
+        ));
   }
 }

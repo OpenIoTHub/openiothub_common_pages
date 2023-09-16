@@ -13,7 +13,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class SmartConfigTool extends StatefulWidget {
-  SmartConfigTool({required Key key, required this.title, required this.needCallBack}) : super(key: key);
+  SmartConfigTool(
+      {required Key key, required this.title, required this.needCallBack})
+      : super(key: key);
 
   final String title;
   final bool needCallBack;

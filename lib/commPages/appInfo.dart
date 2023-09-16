@@ -31,11 +31,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
   void _listenShareMsg(WechatSdkResp resp) {
     final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
-      Fluttertoast.showToast(
-          msg: "分享成功！");
-    }else{
-      Fluttertoast.showToast(
-          msg: "分享失败！");
+      Fluttertoast.showToast(msg: "分享成功！");
+    } else {
+      Fluttertoast.showToast(msg: "分享失败！");
     }
   }
 
@@ -71,19 +69,29 @@ class _AppInfoPageState extends State<AppInfoPage> {
     );
     List<ListTile> tilesList = tiles.toList();
     tilesList.add(ListTile(
-      title: Text("反馈渠道", style: TextStyle(color: Colors.green),),
+      title: Text(
+        "反馈渠道",
+        style: TextStyle(color: Colors.green),
+      ),
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 //              return Text("${pair.iP}:${pair.port}");
-          return FeedbackPage(key: UniqueKey(),);
+          return FeedbackPage(
+            key: UniqueKey(),
+          );
         }));
       },
     ));
     tilesList.add(ListTile(
-      title: Text("隐私政策", style: TextStyle(color: Colors.green),),
+      title: Text(
+        "隐私政策",
+        style: TextStyle(color: Colors.green),
+      ),
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return PrivacyPolicyPage(key: UniqueKey(),);
+          return PrivacyPolicyPage(
+            key: UniqueKey(),
+          );
         }));
       },
     ));
@@ -122,36 +130,35 @@ class _AppInfoPageState extends State<AppInfoPage> {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-            title: Text("分享到微信"),
-            content: Text("选择需方分享的位置"),
-            actions: <Widget>[
-              TextButton(
-                child: Text("分享到个人"),
-                onPressed: () {
-                  Wechat.instance.shareWebpage(
-                    scene: WechatScene.SESSION,
-                    title:"欢迎使用云易连！",
-                    description:"云易连管理您的所有智能设备和私有云",
-                    // thumbData:,
-                    webpageUrl: 'https://github.com/OpenIoTHub',
-                  );
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text("分享到朋友圈"),
-                onPressed: () {
-                  Wechat.instance.shareWebpage(
-                    scene: WechatScene.TIMELINE,
-                    title:"欢迎使用云易连！",
-                    description:"云易连管理您的所有智能设备和私有云",
-                    // thumbData:,
-                    webpageUrl: 'https://github.com/OpenIoTHub',
-                  );
-                  Navigator.of(context).pop();
-                },
-              )
-            ]));
-
+                title: Text("分享到微信"),
+                content: Text("选择需方分享的位置"),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("分享到个人"),
+                    onPressed: () {
+                      Wechat.instance.shareWebpage(
+                        scene: WechatScene.SESSION,
+                        title: "欢迎使用云易连！",
+                        description: "云易连管理您的所有智能设备和私有云",
+                        // thumbData:,
+                        webpageUrl: 'https://github.com/OpenIoTHub',
+                      );
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: Text("分享到朋友圈"),
+                    onPressed: () {
+                      Wechat.instance.shareWebpage(
+                        scene: WechatScene.TIMELINE,
+                        title: "欢迎使用云易连！",
+                        description: "云易连管理您的所有智能设备和私有云",
+                        // thumbData:,
+                        webpageUrl: 'https://github.com/OpenIoTHub',
+                      );
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]));
   }
 }

@@ -94,16 +94,26 @@ class _State extends State<LoginPage> {
       Row(
         children: [
           TextButton(
-              child: Text('隐私政策', style: TextStyle(color: Colors.red),),
+              child: Text(
+                '隐私政策',
+                style: TextStyle(color: Colors.red),
+              ),
               onPressed: () async {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => PrivacyPolicyPage(key: UniqueKey(),)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => PrivacyPolicyPage(
+                          key: UniqueKey(),
+                        )));
               }),
           TextButton(
-              child: Text('反馈渠道', style: TextStyle(color: Colors.green),),
+              child: Text(
+                '反馈渠道',
+                style: TextStyle(color: Colors.green),
+              ),
               onPressed: () async {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => FeedbackPage(key: UniqueKey(),)));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => FeedbackPage(
+                          key: UniqueKey(),
+                        )));
               }),
         ],
         mainAxisAlignment: MainAxisAlignment.center,

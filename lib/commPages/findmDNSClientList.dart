@@ -23,7 +23,8 @@ class FindmDNSClientListPage extends StatefulWidget {
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
   Map<String, PortService> _ServiceMap = {};
   final MDnsClient _mdns = MDnsClient(rawDatagramSocketFactory:
-      (dynamic host, int port, {bool reuseAddress = false, bool reusePort = false, int ttl = 1}) {
+      (dynamic host, int port,
+          {bool reuseAddress = false, bool reusePort = false, int ttl = 1}) {
     return RawDatagramSocket.bind(host, port,
         reuseAddress: true, reusePort: false, ttl: ttl);
   });
@@ -67,7 +68,10 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
             //直接打开内置web浏览器浏览页面
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 //              return Text("${pair.iP}:${pair.port}");
-              return Gateway(device: pair, key: UniqueKey(),);
+              return Gateway(
+                device: pair,
+                key: UniqueKey(),
+              );
             }));
           },
           child: listItemContent,
@@ -184,7 +188,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
 
   Future<void> _gatewayGuide() async {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return GatewayGuidePage(key: UniqueKey(),);
+      return GatewayGuidePage(
+        key: UniqueKey(),
+      );
     }));
   }
 

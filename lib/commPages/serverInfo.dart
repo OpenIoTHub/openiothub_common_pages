@@ -4,7 +4,8 @@ import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 
 class ServerInfoPage extends StatefulWidget {
-  ServerInfoPage({required Key key, required this.serverInfo}) : super(key: key);
+  ServerInfoPage({required Key key, required this.serverInfo})
+      : super(key: key);
 
   final ServerInfo serverInfo;
 
@@ -14,6 +15,7 @@ class ServerInfoPage extends StatefulWidget {
 
 class _ServerInfoPageState extends State<ServerInfoPage> {
   bool _is_public = false;
+
   @override
   void initState() {
     _is_public = widget.serverInfo.isPublic;
