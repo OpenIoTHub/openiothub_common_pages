@@ -15,18 +15,18 @@ class AppInfoPage extends StatefulWidget {
 
 class _AppInfoPageState extends State<AppInfoPage> {
   //APP名称
-  late String appName;
+  String appName ="";
 
   //包名
-  late String packageName;
+  String packageName = "";
 
   //版本名
-  late String version;
+  String version = "";
 
   //版本号
-  late String buildNumber;
+  String buildNumber = "";
 
-  late StreamSubscription<WechatSdkResp> _share;
+  StreamSubscription<WechatSdkResp>? _share;
 
   void _listenShareMsg(WechatSdkResp resp) {
     final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
@@ -39,14 +39,18 @@ class _AppInfoPageState extends State<AppInfoPage> {
 
   @override
   void initState() {
-    _share = Wechat.instance.shareMsgResp().listen(_listenShareMsg);
+    if(_share == null){
+      _share = Wechat.instance.shareMsgResp().listen(_listenShareMsg);
+    }
     super.initState();
     _getAppInfo();
   }
 
   @override
   void dispose() {
-    _share.cancel();
+    if(_share!=null){
+      _share!.cancel();
+    }
     super.dispose();
   }
 
