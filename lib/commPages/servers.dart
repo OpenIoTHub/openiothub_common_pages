@@ -18,9 +18,9 @@ class ServerPagesState extends State<ServerPages> {
   List<ServerInfo> _availableServerList = [];
 
   @override
-  Future<void> initState() async {
-    _listMyServers();
+  void initState() {
     super.initState();
+    _listMyServers();
   }
 
   @override

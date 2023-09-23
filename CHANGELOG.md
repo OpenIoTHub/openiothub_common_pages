@@ -1,3 +1,7 @@
+## [1.0.1+5]
+
+* fix Future<void> initState() async
+
 ## [1.0.1+4]
 
 * fmt code
