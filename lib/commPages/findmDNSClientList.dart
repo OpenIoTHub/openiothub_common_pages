@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iot_manager_grpc_api/pb/gatewayManager.pb.dart';
 import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
-import 'package:multicast_dns/multicast_dns.dart';
+import 'package:flutter_nsd/flutter_nsd.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
@@ -21,25 +21,64 @@ class FindmDNSClientListPage extends StatefulWidget {
 }
 
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
-  Map<String, PortService> _ServiceMap = {};
-  final MDnsClient _mdns = MDnsClient(rawDatagramSocketFactory:
-      (dynamic host, int port,
-          {bool reuseAddress = false, bool reusePort = false, int ttl = 1}) {
-    return RawDatagramSocket.bind(host, port,
-        reuseAddress: true, reusePort: false, ttl: ttl);
-  });
+  final Map<String, PortService> _ServiceMap = {};
+
+  final flutterNsd = FlutterNsd();
+  bool initialStart = true;
+  bool _scanning = false;
 
   @override
   void initState() {
     super.initState();
-    _mdns.start();
-    _findClientListBymDNS();
+    flutterNsd.stream.listen(
+          (NsdServiceInfo oneMdnsService) {
+        setState(() {
+          PortService _portService = PortService.create();
+          _portService.ip = oneMdnsService.hostname!;
+          _portService.port = oneMdnsService.port!;
+          _portService.isLocal = true;
+          _portService.info.addAll({
+            "name": "网关:"+oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
+            "model": Gateway.modelName,
+            "mac": "mac",
+            "id": oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
+            "author": "Farry",
+            "email": "newfarry@126.com",
+            "home-page": "https://github.com/OpenIoTHub",
+            "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
+            "firmware-version": "version",
+          });
+
+          oneMdnsService.txt!.forEach((String key, value) {
+            _portService.info[key] = value as String;
+          });
+
+          if (!_ServiceMap.containsKey(_portService.info["id"])) {
+            setState(() {
+              _ServiceMap[_portService.info["id"]!] = _portService;
+            });
+          }
+        });
+      },
+      onError: (e) async {
+        if (e is NsdError) {
+          if (e.errorCode == NsdErrorCode.startDiscoveryFailed &&
+              initialStart) {
+            await stopDiscovery();
+          } else if (e.errorCode == NsdErrorCode.discoveryStopped &&
+              initialStart) {
+            initialStart = false;
+            await startDiscovery();
+          }
+        }
+      },
+    );
   }
 
   @override
   void dispose() {
     super.dispose();
-    _mdns.stop();
+    stopDiscovery();
   }
 
   @override
@@ -86,14 +125,14 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
       appBar: AppBar(
         title: Text("发现本地网关列表"),
         actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                _findClientListBymDNS();
-              }),
+          // IconButton(
+          //     icon: Icon(
+          //       Icons.refresh,
+          //       color: Colors.white,
+          //     ),
+          //     onPressed: () {
+          //       _findClientListBymDNS();
+          //     }),
           IconButton(
               icon: Icon(
                 Icons.add_circle,
@@ -116,74 +155,24 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     );
   }
 
-  void _findClientListBymDNS() async {
-    print("====_findClientListBymDNS");
-    _ServiceMap.clear();
-    // try {
-    await for (PtrResourceRecord ptr in _mdns.lookup<PtrResourceRecord>(
-        ResourceRecordQuery.serverPointer(
-            Config.mdnsGatewayService + ".local"))) {
-      await for (SrvResourceRecord srv in _mdns.lookup<SrvResourceRecord>(
-          ResourceRecordQuery.service(ptr.domainName))) {
-        print(srv);
-        PortService _portService = PortService.create();
-        _portService.isLocal = true;
-        _portService.ip = "127.0.0.1";
-        _portService.port = 80;
-        _portService.info.addAll({
-          "name": "网关",
-          "model": Gateway.modelName,
-          "mac": "mac",
-          "id": "id",
-          "author": "Farry",
-          "email": "newfarry@126.com",
-          "home-page": "https://github.com/OpenIoTHub",
-          "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
-          "firmware-version": "version",
-        });
-        await _mdns
-            .lookup<TxtResourceRecord>(ResourceRecordQuery.text(ptr.domainName))
-            .forEach((TxtResourceRecord text) {
-          List<String> _txts = text.text.split("\n");
-          print(_txts.length);
-          print(_txts);
-          _txts.forEach((String txt) {
-            List<String> _kv = txt.split("=");
-            print("_kv:");
-            print(_kv);
-            _portService.info[_kv.first] = _kv.last;
-            //  TODO value 为空是否需要添加？
-          });
-        });
-        await for (IPAddressResourceRecord ip
-            in _mdns.lookup<IPAddressResourceRecord>(
-                ResourceRecordQuery.addressIPv4(srv.target))) {
-          print(ip);
-          print('Service instance found at '
-              '${srv.target}:${srv.port} with ${ip.address}.');
-          _portService.ip = ip.address.address;
-          _portService.port = srv.port;
-          _portService.isLocal = true;
-          break;
-        }
-        print("_portService:");
-        print(_portService);
-        if (!_ServiceMap.containsKey(_portService.info["id"])) {
-          setState(() {
-            _ServiceMap[_portService.info["id"]!] = _portService;
-          });
-        }
-      }
-    }
-    _mdns.stop();
+  Future<void> startDiscovery() async {
+    if (_scanning) return;
+
+    setState(() {
+      _ServiceMap.clear();
+      _scanning = true;
+    });
+    await flutterNsd.discoverServices(Config.mdnsGatewayService + ".");
   }
 
-  void onDiscoveryStarted() {
-    print("Discovery started");
-  }
+  Future<void> stopDiscovery() async {
+    if (!_scanning) return;
 
-  void onDiscoveryStopped() {
-    print("Discovery stopped");
+    setState(() {
+      _ServiceMap.clear();
+      _scanning = false;
+    });
+    flutterNsd.stopDiscovery();
   }
 
   Future<void> _gatewayGuide() async {
