@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.1+6
+version: 1.0.1+7
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -34,8 +34,6 @@ dependencies:
   #  动态请求权限，定位，存储等
   permission_handler: ^10.2.0
   #  配网end
-#  multicast_dns: ^0.3.2+3
-  flutter_nsd: ^1.4.0
   fluttertoast: ^8.0.8
   shared_preferences: ^2.1.1
 #  fluwx: ^2.4.1
@@ -43,6 +41,9 @@ dependencies:
   image: ^3.0.1
 #  flutter_cache_manager: ^2.0.0-nullsafety.1
   url_launcher: ^6.1.11
+#  multicast_dns: ^0.3.2+3
+#  flutter_nsd: ^1.4.0
+  nsd: ^2.3.1
 
 dev_dependencies:
   flutter_test:

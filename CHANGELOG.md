@@ -1,3 +1,7 @@
+## [1.0.1+7]
+
+* find gateway by mdns
+
 ## [1.0.1+6]
 
 * find gateway by mdns
