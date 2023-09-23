@@ -19,7 +19,7 @@ class FindmDNSClientListPage extends StatefulWidget {
 }
 
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
-  final Map<String, PortService> _ServiceMap = {};
+  final Map<String, PortService> _serviceMap = {};
 
   late Discovery discovery;
   bool initialStart = true;
@@ -39,7 +39,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final tiles = _ServiceMap.values.map(
+    final tiles = _serviceMap.values.map(
       (pair) {
         var listItemContent = Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
@@ -115,9 +115,11 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     if (_scanning) return;
 
     setState(() {
-      _ServiceMap.clear();
+      _serviceMap.clear();
       _scanning = true;
     });
+    //long mdns service name
+    disableServiceTypeValidation(true);
     discovery = await startDiscovery(Config.mdnsGatewayService);
     discovery.addServiceListener((oneMdnsService, status) {
       if (status == ServiceStatus.found) {
@@ -150,9 +152,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
             _portService.info[key] = value as String;
           });
 
-          if (!_ServiceMap.containsKey(_portService.info["id"])) {
+          if (!_serviceMap.containsKey(_portService.info["id"])) {
             setState(() {
-              _ServiceMap[_portService.info["id"]!] = _portService;
+              _serviceMap[_portService.info["id"]!] = _portService;
             });
           }
         });
@@ -164,7 +166,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     if (!_scanning) return;
 
     setState(() {
-      _ServiceMap.clear();
+      _serviceMap.clear();
       _scanning = false;
     });
     stopDiscovery(discovery);
@@ -258,7 +260,7 @@ loginwithtokenmap:
       await SessionApi.createOneSession(config);
       Fluttertoast.showToast(msg: "添加网关成功！");
     } catch (exception) {
-      Fluttertoast.showToast(msg: "登录失败：${exception}");
+      Fluttertoast.showToast(msg: "登录失败：$exception");
     }
   }
 
