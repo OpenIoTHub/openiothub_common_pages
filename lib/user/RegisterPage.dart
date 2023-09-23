@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
@@ -46,10 +45,10 @@ class _State extends State<RegisterPage> {
                       loginInfo.userMobile = _usermobile.text;
                       loginInfo.password = _userpassword.text;
                       OperationResponse operationResponse =
-                      await UserManager.RegisterUserWithUserInfo(loginInfo);
+                          await UserManager.RegisterUserWithUserInfo(loginInfo);
                       if (operationResponse.code == 0) {
                         Fluttertoast.showToast(
-                            msg: "注册成功!请使用注册信息登录!${operationResponse.msg}")
+                                msg: "注册成功!请使用注册信息登录!${operationResponse.msg}")
                             .then((value) {
                           if (Navigator.of(context).canPop()) {
                             Navigator.of(context).pop();
@@ -64,19 +63,25 @@ class _State extends State<RegisterPage> {
                   children: [
                     TextButton(
                         child: Text(
-                          '隐私政策', style: TextStyle(color: Colors.red),),
+                          '隐私政策',
+                          style: TextStyle(color: Colors.red),
+                        ),
                         onPressed: () async {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) =>
-                                  PrivacyPolicyPage(key: UniqueKey(),)));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PrivacyPolicyPage(
+                                    key: UniqueKey(),
+                                  )));
                         }),
                     TextButton(
                         child: Text(
-                          '反馈渠道', style: TextStyle(color: Colors.green),),
+                          '反馈渠道',
+                          style: TextStyle(color: Colors.green),
+                        ),
                         onPressed: () async {
-                          Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) =>
-                                  FeedbackPage(key: UniqueKey(),)));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => FeedbackPage(
+                                    key: UniqueKey(),
+                                  )));
                         }),
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,

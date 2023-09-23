@@ -15,7 +15,7 @@ class AppInfoPage extends StatefulWidget {
 
 class _AppInfoPageState extends State<AppInfoPage> {
   //APP名称
-  String appName ="";
+  String appName = "";
 
   //包名
   String packageName = "";
@@ -39,7 +39,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
 
   @override
   void initState() {
-    if(_share == null){
+    if (_share == null) {
       _share = Wechat.instance.shareMsgResp().listen(_listenShareMsg);
     }
     super.initState();
@@ -48,7 +48,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
 
   @override
   void dispose() {
-    if(_share!=null){
+    if (_share != null) {
       _share!.cancel();
     }
     super.dispose();
@@ -142,8 +142,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
                     onPressed: () {
                       Wechat.instance.shareWebpage(
                         scene: WechatScene.SESSION,
-                        title: "欢迎使用云易连！",
-                        description: "云易连管理您的所有智能设备和私有云",
+                        title: "欢迎使用云亿连！",
+                        description: "云亿连管理您的所有智能设备和私有云",
                         // thumbData:,
                         webpageUrl: 'https://github.com/OpenIoTHub',
                       );
@@ -155,8 +155,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
                     onPressed: () {
                       Wechat.instance.shareWebpage(
                         scene: WechatScene.TIMELINE,
-                        title: "欢迎使用云易连！",
-                        description: "云易连管理您的所有智能设备和私有云",
+                        title: "欢迎使用云亿连！",
+                        description: "云亿连管理您的所有智能设备和私有云",
                         // thumbData:,
                         webpageUrl: 'https://github.com/OpenIoTHub',
                       );

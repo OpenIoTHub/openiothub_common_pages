@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
@@ -58,7 +57,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 (d)收集用户个人信息的时间 本应用在用户注册，登录时获取这些个人信息
 (e)收集用户个人信息的地点 本应用获取的个人信息存储于阿里云杭州服务器MySQL数据库
 8.账号注销渠道和时效
-(a)渠道 需要注销账号请联系本公司，通过微信公众号《云易连智能家居》，邮箱《yu@iotserv.com》发送必要的账号鉴别信息，本公司审核通过即可直接注销账号
+(a)渠道 需要注销账号请联系本公司，通过微信公众号《云亿连物联网》，邮箱《yu@iotserv.com》发送必要的账号鉴别信息，本公司审核通过即可直接注销账号
 (b)时效 账号将在5个工作日内被删除
 9.关应用权限收集的方式及目的
 (a)应用权限收集方式 应用权限通过向操作系统请求权限用户同意的方式获取

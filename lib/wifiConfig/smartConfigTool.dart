@@ -9,7 +9,6 @@ import 'package:flutter_smartlink/flutter_smartlink.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:openiothub_common_pages/utils/ThemeUtils.dart';
 import 'package:openiothub_common_pages/wifiConfig/permission.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class SmartConfigTool extends StatefulWidget {
@@ -302,7 +301,7 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
             "附近的AirKiss设备配网任务完成${v.toString()}，\n当前剩下：${_smartConfigRemainNumber - 1}种设备的配网任务";
       });
       //TODO nullsafety
-      if (v != null) {
+      if (v.deviceAddress != null) {
         return true;
       }
     } on PlatformException catch (e) {

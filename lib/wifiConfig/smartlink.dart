@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_smartlink/flutter_smartlink.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:openiothub_common_pages/wifiConfig/permission.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
 class Smartlink extends StatefulWidget {
