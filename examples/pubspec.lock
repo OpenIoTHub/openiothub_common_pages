@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   airkiss_dart:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: airkiss_dart
       sha256: "56c296e0984f0380afe9ad0503520542d1b8b3846e344a73894d34d891ea8bd8"
@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: "1227dc3efc4ea571eebb2dfb814506ed2cfb1d4b1b89fb918abdddde617ead3c"
+      sha256: "20071638cbe4e5964a427cfa0e86dce55d060bc7d82d56f3554095d7239a8765"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.4.0"
+    version: "3.4.2"
   args:
     dependency: transitive
     description:
@@ -66,7 +66,7 @@ packages:
     source: hosted
     version: "1.17.2"
   connectivity:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: connectivity
       sha256: a8e91263cf3e25fb5cc95e19dfde4999e32a648ac3b9e8a558a28165731678f8
@@ -113,6 +113,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.3"
+  cupertino_icons:
+    dependency: "direct main"
+    description:
+      name: cupertino_icons
+      sha256: d57953e10f9f8327ce64a508a355f0b1ec902193f66288e8cb5070e7c47eeb2d
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.6"
   dio:
     dependency: transitive
     description:
@@ -191,15 +199,23 @@ packages:
     source: hosted
     version: "1.0.3"
   flutter_easylink:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_easylink
       sha256: "9898455556381bd35bbedae8f52e879c8936f90d20d4c9cfc5f815e2e458826e"
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.5"
+  flutter_lints:
+    dependency: "direct dev"
+    description:
+      name: flutter_lints
+      sha256: a25a15ebbdfc33ab1cd26c63a6ee519df92338a9c10f122adda92938253bef04
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.3"
   flutter_nsd:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_nsd
       sha256: "5809891db1ee8553a655149979dc675c78ddd596380b4ab01079ba6ae635ec17"
@@ -207,7 +223,7 @@ packages:
     source: hosted
     version: "1.4.0"
   flutter_oneshot:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_oneshot
       sha256: "9ddd2fc3bfd657024e990e7bfdf0cdc896290c62f5308901d89583153049521f"
@@ -231,7 +247,7 @@ packages:
     source: hosted
     version: "1.0.1"
   flutter_smartlink:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_smartlink
       sha256: "99c664c799734f83efa7708c591f636e935e0aa4a60756b47698df333f163dfe"
@@ -247,10 +263,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_vlc_player
-      sha256: "73d9f9c3254b0e36a8f01ae8710b2c5f0b2a076c9aa5305742cdaaffd30a18a3"
+      sha256: "3e4094a0f2c9d8d7017dd3d8c270694286672fada162185499339feefbf7b870"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "7.3.1"
+    version: "7.4.0"
   flutter_vlc_player_platform_interface:
     dependency: transitive
     description:
@@ -265,7 +281,7 @@ packages:
     source: sdk
     version: "0.0.0"
   fluttertoast:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: fluttertoast
       sha256: "474f7d506230897a3cd28c965ec21c5328ae5605fc9c400cd330e9e9d6ac175c"
@@ -321,7 +337,7 @@ packages:
     source: hosted
     version: "4.0.2"
   image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: image
       sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
@@ -329,7 +345,7 @@ packages:
     source: hosted
     version: "3.3.0"
   iot_manager_grpc_api:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: iot_manager_grpc_api
       sha256: "69987b2f57195e209acca095d3efc3ce2db4ce6e79bbc06aa0ab166909496e63"
@@ -352,6 +368,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.8.1"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.1"
   matcher:
     dependency: transitive
     description:
@@ -385,15 +409,22 @@ packages:
     source: hosted
     version: "3.4.0"
   openiothub_api:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: openiothub_api
       sha256: "14c3063d20f53c0ba140add640a1e9da5dea347cea29045032158f19b1ba1ac7"
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.1+2"
+  openiothub_common_pages:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.1+9"
   openiothub_constants:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: openiothub_constants
       sha256: d7a245b7e039631c7e69335027ce1d4134129cf6372f33e532fc602726b65c1c
@@ -401,7 +432,7 @@ packages:
     source: hosted
     version: "1.0.0"
   openiothub_grpc_api:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: openiothub_grpc_api
       sha256: "29378a2540e48b19c0c94d7c13612c96f14a40ef8b9e9a8ac7f2d638366a15f9"
@@ -409,15 +440,15 @@ packages:
     source: hosted
     version: "1.0.0"
   openiothub_plugin:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: openiothub_plugin
-      sha256: bf47b7c5f90a5d65a393b1a972e68b5f6e2c3ccee92174526bc01271b8e8d8ad
+      sha256: "29f472148baab3079aad64f8f63bfaa0dc71af6bd859caff18a94e1d72ec4aa4"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.0+4"
+    version: "1.0.0+5"
   package_info_plus:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: package_info_plus
       sha256: "6ff267fcd9d48cb61c8df74a82680e8b82e940231bb5f68356672fde0397334a"
@@ -489,7 +520,7 @@ packages:
     source: hosted
     version: "2.2.1"
   permission_handler:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: permission_handler
       sha256: bc56bfe9d3f44c3c612d8d393bd9b174eb796d706759f9b495ac254e4294baa5
@@ -577,7 +608,7 @@ packages:
     source: hosted
     version: "1.0.0"
   shared_preferences:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: shared_preferences
       sha256: b7f41bad7e521d205998772545de63ff4e6c97714775902c199353f8bf1511ac
@@ -694,7 +725,7 @@ packages:
     source: hosted
     version: "1.3.2"
   url_launcher:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: url_launcher
       sha256: eb1e00ab44303d50dd487aab67ebc575456c146c6af44422f9c13889984c00f3
@@ -814,7 +845,7 @@ packages:
     source: hosted
     version: "3.8.0"
   wechat_kit:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: wechat_kit
       sha256: "2d1e04c6c5f1c2aacc8288f44d1e198fed57a02340a34b90394301ede6918cdb"
@@ -822,7 +853,7 @@ packages:
     source: hosted
     version: "2.3.1"
   wifi_info_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: wifi_info_flutter
       sha256: "9662240e4edb8a91b572efa0b4e4c72ee644e25611525633580afc3257386a48"
@@ -841,10 +872,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: c97defd418eef4ec88c0d1652cdce84b9f7b63dd7198e266d06ac1710d527067
+      sha256: "350a11abd2d1d97e0cc7a28a81b781c08002aa2864d9e3f192ca0ffa18b06ed3"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.0.8"
+    version: "5.0.9"
   xdg_directories:
     dependency: transitive
     description:
@@ -862,5 +893,5 @@ packages:
     source: hosted
     version: "6.3.0"
 sdks:
-  dart: ">=3.1.0-185.0.dev <4.0.0"
+  dart: ">=3.1.0-262.3.beta <4.0.0"
   flutter: ">=3.7.0"

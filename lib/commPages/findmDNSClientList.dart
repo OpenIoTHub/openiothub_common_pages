@@ -1,9 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iot_manager_grpc_api/pb/gatewayManager.pb.dart';
 import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
-import 'package:nsd/nsd.dart';
+import 'package:flutter_nsd/flutter_nsd.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
@@ -11,36 +15,98 @@ import 'package:openiothub_grpc_api/pb/service.pb.dart';
 import 'package:openiothub_grpc_api/pb/service.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
 
+const utf8encoder = Utf8Encoder();
+
 class FindmDNSClientListPage extends StatefulWidget {
-  FindmDNSClientListPage({required Key key}) : super(key: key);
+  const FindmDNSClientListPage({Key? key}) : super(key: key);
 
   @override
-  _FindmDNSClientListPageState createState() => _FindmDNSClientListPageState();
+  State createState() => _FindmDNSClientListPageState();
 }
 
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
-  final Map<String, PortService> _serviceMap = {};
-
-  late Discovery discovery;
+  final Map<String, PortService> _ServiceMap = {};
+  final flutterNsd = FlutterNsd();
   bool initialStart = true;
   bool _scanning = false;
+
+  _FindmDNSClientListPageState();
 
   @override
   void initState() {
     super.initState();
-    startCallDiscovery();
+
+    flutterNsd.stream.listen(
+          (NsdServiceInfo oneMdnsService) {
+        setState(() {
+          PortService _portService = PortService.create();
+          _portService.ip = oneMdnsService.hostname!;
+          _portService.port = oneMdnsService.port!;
+          _portService.isLocal = true;
+          _portService.info.addAll({
+            "name": "网关:"+oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
+            "model": Gateway.modelName,
+            "mac": "mac",
+            "id": oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
+            "author": "Farry",
+            "email": "newfarry@126.com",
+            "home-page": "https://github.com/OpenIoTHub",
+            "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
+            "firmware-version": "version",
+          });
+
+          oneMdnsService.txt!.forEach((String key, Uint8List value) {
+            _portService.info[key] = String.fromCharCodes(value);
+          });
+
+          if (!_ServiceMap.containsKey(_portService.info["id"])) {
+            print("_portService:$_portService");
+            setState(() {
+              _ServiceMap[_portService.info["id"]!] = _portService;
+            });
+          }
+        });
+      },
+      onError: (e) async {
+        if (e is NsdError) {
+          if (e.errorCode == NsdErrorCode.startDiscoveryFailed &&
+              initialStart) {
+            await stopDiscovery();
+          } else if (e.errorCode == NsdErrorCode.discoveryStopped &&
+              initialStart) {
+            initialStart = false;
+            await startDiscovery();
+          }
+        }
+      },
+    );
+    startDiscovery();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    stopCallDiscovery();
+  Future<void> startDiscovery() async {
+    if (_scanning) return;
+
+    setState(() {
+      _ServiceMap.clear();
+      _scanning = true;
+    });
+    await flutterNsd.discoverServices(Config.mdnsGatewayService + ".");
+  }
+
+  Future<void> stopDiscovery() async {
+    if (!_scanning) return;
+
+    setState(() {
+      _ServiceMap.clear();
+      _scanning = false;
+    });
+    flutterNsd.stopDiscovery();
   }
 
   @override
   Widget build(BuildContext context) {
-    final tiles = _serviceMap.values.map(
-      (pair) {
+    final tiles = _ServiceMap.values.map(
+          (pair) {
         var listItemContent = Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
           child: Row(
@@ -51,9 +117,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
               ),
               Expanded(
                   child: Text(
-                '${pair.ip}:${pair.port}',
-                style: Constants.titleTextStyle,
-              )),
+                    '${pair.ip}:${pair.port}',
+                    style: Constants.titleTextStyle,
+                  )),
               Constants.rightArrowIcon
             ],
           ),
@@ -111,67 +177,6 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     );
   }
 
-  Future<void> startCallDiscovery() async {
-    if (_scanning) return;
-
-    setState(() {
-      _serviceMap.clear();
-      _scanning = true;
-    });
-    //long mdns service name
-    disableServiceTypeValidation(true);
-    discovery = await startDiscovery(Config.mdnsGatewayService);
-    discovery.addServiceListener((oneMdnsService, status) {
-      if (status == ServiceStatus.found) {
-        setState(() {
-          PortService _portService = PortService.create();
-          _portService.ip = (oneMdnsService.addresses != null &&
-                  oneMdnsService.addresses!.length == 1)
-              ? oneMdnsService.addresses!.first.address
-              : oneMdnsService.host!;
-          _portService.port = oneMdnsService.port!;
-          _portService.isLocal = true;
-          _portService.info.addAll({
-            "name": "网关:" +
-                oneMdnsService.host.toString() +
-                ":" +
-                oneMdnsService.port.toString(),
-            "model": Gateway.modelName,
-            "mac": "mac",
-            "id": oneMdnsService.host.toString() +
-                ":" +
-                oneMdnsService.port.toString(),
-            "author": "Farry",
-            "email": "newfarry@126.com",
-            "home-page": "https://github.com/OpenIoTHub",
-            "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
-            "firmware-version": "version",
-          });
-
-          oneMdnsService.txt!.forEach((String key, Uint8List? value) {
-            _portService.info[key] = value as String;
-          });
-
-          if (!_serviceMap.containsKey(_portService.info["id"])) {
-            setState(() {
-              _serviceMap[_portService.info["id"]!] = _portService;
-            });
-          }
-        });
-      }
-    });
-  }
-
-  Future<void> stopCallDiscovery() async {
-    if (!_scanning) return;
-
-    setState(() {
-      _serviceMap.clear();
-      _scanning = false;
-    });
-    stopDiscovery(discovery);
-  }
-
   Future<void> _gatewayGuide() async {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
       return GatewayGuidePage(
@@ -227,8 +232,8 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
                       // 从服务器自动生成一个网关
                       // TODO 选择服务器
                       GatewayInfo gatewayInfo =
-                          await GatewayManager.GenerateOneGatewayWithServerUuid(
-                              value!);
+                      await GatewayManager.GenerateOneGatewayWithServerUuid(
+                          value!);
                       await _addToMySessionList(
                           gatewayInfo.openIoTHubJwt, gatewayInfo.name);
                       String uuid = gatewayInfo.gatewayUuid;
@@ -260,7 +265,7 @@ loginwithtokenmap:
       await SessionApi.createOneSession(config);
       Fluttertoast.showToast(msg: "添加网关成功！");
     } catch (exception) {
-      Fluttertoast.showToast(msg: "登录失败：$exception");
+      Fluttertoast.showToast(msg: "登录失败：${exception}");
     }
   }
 

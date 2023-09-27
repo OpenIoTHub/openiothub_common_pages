@@ -1,3 +1,7 @@
+## [1.0.1+9]
+
+* find gateway by mdns use flutter_mdns
+
 ## [1.0.1+8]
 
 * find gateway by mdns
