@@ -40,11 +40,11 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           (NsdServiceInfo oneMdnsService) {
         setState(() {
           PortService _portService = PortService.create();
-          _portService.ip = oneMdnsService.hostname!;
+          _portService.ip = oneMdnsService.hostname!.replaceAll(RegExp(r'local.local.'), "local.");
           _portService.port = oneMdnsService.port!;
           _portService.isLocal = true;
           _portService.info.addAll({
-            "name": "网关:"+oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
+            "name": oneMdnsService.name == null ?oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString():oneMdnsService.name!,
             "model": Gateway.modelName,
             "mac": "mac",
             "id": oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
@@ -58,9 +58,8 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           oneMdnsService.txt!.forEach((String key, Uint8List value) {
             _portService.info[key] = String.fromCharCodes(value);
           });
-
+          print("print _portService:$_portService");
           if (!_ServiceMap.containsKey(_portService.info["id"])) {
-            print("_portService:$_portService");
             setState(() {
               _ServiceMap[_portService.info["id"]!] = _portService;
             });
