@@ -265,7 +265,7 @@ packages:
     source: sdk
     version: "0.0.0"
   fluttertoast:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: fluttertoast
       sha256: "474f7d506230897a3cd28c965ec21c5328ae5605fc9c400cd330e9e9d6ac175c"
@@ -384,6 +384,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.2"
+  oktoast:
+    dependency: "direct main"
+    description:
+      name: oktoast
+      sha256: f12a6f5c26986f8e48546104d4c0bea68dd82782940876ca299f7f406f521110
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.3.2+1"
   openiothub_api:
     dependency: "direct main"
     description:

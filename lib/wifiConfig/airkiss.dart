@@ -4,7 +4,7 @@ import 'package:airkiss_dart/airkiss_dart.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/wifiConfig/permission.dart';
 import 'package:wifi_info_flutter/wifi_info_flutter.dart';
 
@@ -204,7 +204,7 @@ class _AirkissState extends State<Airkiss> {
         break;
       case ConnectivityResult.mobile:
       case ConnectivityResult.none:
-        Fluttertoast.showToast(msg: "请将手机连接到智能设备需要连接的wifi路由器上");
+        showToast("请将手机连接到智能设备需要连接的wifi路由器上");
         break;
       default:
         break;

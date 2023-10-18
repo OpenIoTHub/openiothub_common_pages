@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:wechat_kit/wechat_kit.dart';
@@ -31,9 +31,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
   void _listenShareMsg(WechatSdkResp resp) {
     final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
-      Fluttertoast.showToast(msg: "分享成功！");
+      showToast("分享成功！");
     } else {
-      Fluttertoast.showToast(msg: "分享失败！");
+      showToast("分享失败！");
     }
   }
 

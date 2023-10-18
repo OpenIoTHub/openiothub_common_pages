@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/user/LoginPage.dart';
@@ -26,12 +26,12 @@ class _UserInfoPageState extends State<UserInfoPage> {
       OperationResponse operationResponse =
           await UserManager.BindWithWechatCode(resp.code!);
       if (operationResponse.code == 0) {
-        Fluttertoast.showToast(msg: "绑定微信成功！");
+        showToast("绑定微信成功！");
       } else {
-        Fluttertoast.showToast(msg: "绑定微信失败:${operationResponse.msg}");
+        showToast("绑定微信失败:${operationResponse.msg}");
       }
     } else {
-      Fluttertoast.showToast(msg: "获取微信登录信息失败:${resp.errorMsg}");
+      showToast("获取微信登录信息失败:${resp.errorMsg}");
     }
   }
 
@@ -90,7 +90,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                     state: 'auth',
                   );
                 } else {
-                  Fluttertoast.showToast(msg: "只有安装了微信才能绑定微信");
+                  showToast("只有安装了微信才能绑定微信");
                 }
               }),
           ListTile(
@@ -101,10 +101,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
                 UserManager.UnbindWechat()
                     .then((OperationResponse operationResponse) {
                   if (operationResponse.code == 0) {
-                    Fluttertoast.showToast(msg: "解绑微信成功！");
+                    showToast("解绑微信成功！");
                   } else {
-                    Fluttertoast.showToast(
-                        msg: "解绑微信失败！原因：${operationResponse.msg}");
+                    showToast("解绑微信失败！原因：${operationResponse.msg}");
                   }
                 });
               }),

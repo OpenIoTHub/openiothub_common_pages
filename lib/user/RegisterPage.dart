@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:iot_manager_grpc_api/pb/common.pb.dart';
 import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
@@ -47,16 +47,12 @@ class _State extends State<RegisterPage> {
                       OperationResponse operationResponse =
                           await UserManager.RegisterUserWithUserInfo(loginInfo);
                       if (operationResponse.code == 0) {
-                        Fluttertoast.showToast(
-                                msg: "注册成功!请使用注册信息登录!${operationResponse.msg}")
-                            .then((value) {
-                          if (Navigator.of(context).canPop()) {
-                            Navigator.of(context).pop();
-                          } else {}
-                        });
+                        showToast("注册成功!请使用注册信息登录!${operationResponse.msg}");
+                        if (Navigator.of(context).canPop()) {
+                          Navigator.of(context).pop();
+                        } else {}
                       } else {
-                        Fluttertoast.showToast(
-                            msg: "注册失败!请重新注册:${operationResponse.msg}");
+                        showToast("注册失败!请重新注册:${operationResponse.msg}");
                       }
                     }),
                 Row(

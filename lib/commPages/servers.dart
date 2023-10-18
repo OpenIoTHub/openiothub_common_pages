@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/commPages/serverInfo.dart';
@@ -275,8 +275,8 @@ class ServerPagesState extends State<ServerPages> {
                         serverInfo.description = _description_controller.text;
                         serverInfo.isPublic = _is_public;
                         ServerManager.AddServer(serverInfo)
-                            .then((value) => Fluttertoast.showToast(
-                                msg: "添加服务器(${_name_controller.text})成功!"))
+                            .then((value) =>
+                                showToast("添加服务器(${_name_controller.text})成功!"))
                             .then((value) => Navigator.of(context).pop())
                             .then((value) => _listMyServers());
                       },

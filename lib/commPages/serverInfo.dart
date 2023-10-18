@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:iot_manager_grpc_api/iot_manager_grpc_api.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 
@@ -182,7 +182,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
             serverInfo.description = _description_controller.text;
             serverInfo.isPublic = _is_public;
             ServerManager.UpdateServer(serverInfo)
-                .then((value) => Fluttertoast.showToast(msg: "更新成功！"));
+                .then((value) => showToast("更新成功！"));
           },
           child: Text("确认修改")),
     ];
@@ -200,7 +200,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
             ),
             onPressed: () {
               ServerManager.DelServer(widget.serverInfo)
-                  .then((value) => Fluttertoast.showToast(msg: "删除成功！"))
+                  .then((value) => showToast("删除成功！"))
                   .then((value) => Navigator.of(context).pop());
             }),
       ]),

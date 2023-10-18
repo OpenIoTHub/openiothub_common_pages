@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:iot_manager_grpc_api/pb/gatewayManager.pb.dart';
 import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
 import 'package:flutter_nsd/flutter_nsd.dart';
@@ -37,17 +37,24 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     super.initState();
 
     flutterNsd.stream.listen(
-          (NsdServiceInfo oneMdnsService) {
+      (NsdServiceInfo oneMdnsService) {
         setState(() {
           PortService _portService = PortService.create();
-          _portService.ip = oneMdnsService.hostname!.replaceAll(RegExp(r'local.local.'), "local.");
+          _portService.ip = oneMdnsService.hostname!
+              .replaceAll(RegExp(r'local.local.'), "local.");
           _portService.port = oneMdnsService.port!;
           _portService.isLocal = true;
           _portService.info.addAll({
-            "name": oneMdnsService.name == null ?oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString():oneMdnsService.name!,
+            "name": oneMdnsService.name == null
+                ? oneMdnsService.hostname! +
+                    ":" +
+                    oneMdnsService.port!.toString()
+                : oneMdnsService.name!,
             "model": Gateway.modelName,
             "mac": "mac",
-            "id": oneMdnsService.hostname! + ":" +oneMdnsService.port!.toString(),
+            "id": oneMdnsService.hostname! +
+                ":" +
+                oneMdnsService.port!.toString(),
             "author": "Farry",
             "email": "newfarry@126.com",
             "home-page": "https://github.com/OpenIoTHub",
@@ -105,7 +112,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
   @override
   Widget build(BuildContext context) {
     final tiles = _ServiceMap.values.map(
-          (pair) {
+      (pair) {
         var listItemContent = Padding(
           padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
           child: Row(
@@ -116,9 +123,9 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
               ),
               Expanded(
                   child: Text(
-                    '${pair.ip}:${pair.port}',
-                    style: Constants.titleTextStyle,
-                  )),
+                '${pair.ip}:${pair.port}',
+                style: Constants.titleTextStyle,
+              )),
               Constants.rightArrowIcon
             ],
           ),
@@ -231,8 +238,8 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
                       // 从服务器自动生成一个网关
                       // TODO 选择服务器
                       GatewayInfo gatewayInfo =
-                      await GatewayManager.GenerateOneGatewayWithServerUuid(
-                          value!);
+                          await GatewayManager.GenerateOneGatewayWithServerUuid(
+                              value!);
                       await _addToMySessionList(
                           gatewayInfo.openIoTHubJwt, gatewayInfo.name);
                       String uuid = gatewayInfo.gatewayUuid;
@@ -246,8 +253,7 @@ loginwithtokenmap:
   $uuid: $gatewayJwt
 ''';
                       Clipboard.setData(ClipboardData(text: data));
-                      Fluttertoast.showToast(
-                          msg: "网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中");
+                      showToast("网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中");
                       Navigator.of(context).pop();
                     },
                   )
@@ -262,9 +268,9 @@ loginwithtokenmap:
     config.description = name;
     try {
       await SessionApi.createOneSession(config);
-      Fluttertoast.showToast(msg: "添加网关成功！");
+      showToast("添加网关成功！");
     } catch (exception) {
-      Fluttertoast.showToast(msg: "登录失败：${exception}");
+      showToast("登录失败：${exception}");
     }
   }
 
