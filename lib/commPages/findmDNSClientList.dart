@@ -63,7 +63,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           });
 
           oneMdnsService.txt!.forEach((String key, Uint8List value) {
-            _portService.info[key] = String.fromCharCodes(value);
+            _portService.info[key] = Utf8Decoder().convert(value);
           });
           print("print _portService:$_portService");
           if (!_ServiceMap.containsKey(_portService.info["id"])) {
