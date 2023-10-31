@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.1+12
+version: 1.0.1+13
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -38,7 +38,7 @@ dependencies:
   shared_preferences: ^2.1.1
 #  fluwx: ^2.4.1
   wechat_kit: ^2.3.1
-  image: ^3.0.1
+  image: ^4.0.9
 #  flutter_cache_manager: ^2.0.0-nullsafety.1
   url_launcher: ^6.1.11
 #  multicast_dns: ^0.3.2+3
