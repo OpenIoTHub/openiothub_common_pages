@@ -7,7 +7,7 @@ class PrivacyPolicyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("隐私政策"),
+          title: Text("隐私政策(2023.11.15)"),
           actions: <Widget>[],
         ),
         body: ListView(children: [
@@ -62,6 +62,7 @@ class PrivacyPolicyPage extends StatelessWidget {
 9.关应用权限收集的方式及目的
 (a)应用权限收集方式 应用权限通过向操作系统请求权限用户同意的方式获取
 (b)应用权限收集目的 应用权限收集用于本APP的正常运行，比如获取存储权限是为了保持用户配置到手机；获取位置权限是为了获取wifi信息进而帮助智能设备配网
+        日期2023年11月15日
       '''),
         ]));
   }

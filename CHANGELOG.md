@@ -1,3 +1,7 @@
+## [1.0.1+14]
+
+* privacyPolicy.dart date
+
 ## [1.0.1+13]
 
 * image lib
