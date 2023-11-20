@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:iot_manager_grpc_api/pb/common.pb.dart';
-import 'package:iot_manager_grpc_api/pb/userManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 

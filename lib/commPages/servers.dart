@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:iot_manager_grpc_api/pb/serverManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/commPages/serverInfo.dart';
 import 'package:openiothub_constants/constants/Constants.dart';
