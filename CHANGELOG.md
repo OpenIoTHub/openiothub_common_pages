@@ -1,3 +1,7 @@
+## [1.0.2]
+
+* gateway QR
+
 ## [1.0.1+15]
 
 * upgrade lib
