@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -30,7 +30,7 @@ dependencies:
   #  获取wifi名和bssid
   wifi_info_flutter: ^2.0.2
   #  获取当前网络的连接状态
-  connectivity: ^3.0.6
+#  connectivity: ^3.0.6
   #  动态请求权限，定位，存储等
   permission_handler: ^10.2.0
   #  配网end
@@ -45,6 +45,7 @@ dependencies:
   flutter_nsd: ^1.4.0
   oktoast: ^3.3.2+1
   qr_flutter: ^4.1.0
+  connectivity_plus: ^5.0.2
 #  nsd: ^2.3.1
 
 dev_dependencies:

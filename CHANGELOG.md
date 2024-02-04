@@ -1,3 +1,7 @@
+## [1.0.4]
+
+* connectivity_plus
+
 ## [1.0.3]
 
 * upgrade lib

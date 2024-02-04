@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:airkiss_dart/airkiss_dart.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easylink/flutter_easylink.dart';
