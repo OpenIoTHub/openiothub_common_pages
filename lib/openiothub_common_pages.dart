@@ -7,6 +7,7 @@ export 'commPages/gatewayGuide.dart';
 export 'commPages/privacyPolicy.dart';
 export 'commPages/servers.dart';
 export 'commPages/settings.dart';
+export 'gateway/GatewayQrPage.dart';
 export 'user/LoginPage.dart';
 export 'user/RegisterPage.dart';
 export 'user/userInfoPage.dart';
