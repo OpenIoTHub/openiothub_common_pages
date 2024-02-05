@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_grpc_api/proto/manager/publicApi.pb.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -27,6 +28,21 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
     //   version: QrVersions.auto,
     //   size: 320,
     // );
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("作为网关"),
+          actions: <Widget>[],
+        ),
+        body: Container(
+          child: ListView(children: [
+          Center(child:QrImageView(
+              data: jwtQRCodePair != null ? jwtQRCodePair!.qRCodeForMobileAdd : "https://iothub.cloud",
+              version: QrVersions.auto,
+              size: 320,
+            )),
+            Center(child:Text("使用云亿连APP扫描上述二维码添加本网关"))
+          ]),
+        ));
     return ListView(children: [
       QrImageView(
         data: jwtQRCodePair != null ? jwtQRCodePair!.qRCodeForMobileAdd : "https://iothub.cloud",

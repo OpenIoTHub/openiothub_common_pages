@@ -2,6 +2,10 @@
 
 * gateway QR
 
+## [1.0.4+1]
+
+* gateway QR
+
 ## [1.0.4]
 
 * connectivity_plus
