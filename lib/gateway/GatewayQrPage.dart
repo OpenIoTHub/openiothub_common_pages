@@ -40,6 +40,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
               data: qRCodeForMobileAdd,
               version: QrVersions.auto,
               size: 320,
+              backgroundColor: Colors.orangeAccent,
             )),
             Center(child: Text("使用云亿连APP扫描上述二维码添加本网关"))
           ]),
