@@ -164,7 +164,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           IconButton(
               icon: Icon(
                 Icons.add_circle,
-                color: Colors.white,
+                // color: Colors.white,
               ),
               onPressed: () {
                 _addGateway();
@@ -172,7 +172,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           IconButton(
               icon: Icon(
                 Icons.info,
-                color: Colors.white,
+                // color: Colors.white,
               ),
               onPressed: () {
                 _gatewayGuide();

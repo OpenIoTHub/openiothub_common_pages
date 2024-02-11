@@ -1,3 +1,7 @@
+## [1.0.4+4]
+
+* Button color
+
 ## [1.0.4+3]
 
 * gateway QR

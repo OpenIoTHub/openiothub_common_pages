@@ -109,7 +109,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
         IconButton(
             icon: Icon(
               Icons.share,
-              color: Colors.white,
+              // color: Colors.white,
             ),
             onPressed: () {
               _shareAction();
