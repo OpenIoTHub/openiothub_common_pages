@@ -1,3 +1,7 @@
+## [1.0.5+1]
+
+* update
+
 ## [1.0.5]
 
 * upgrade wechat_kit

@@ -128,6 +128,9 @@ class _State extends State<LoginPage> {
               'assets/images/wechat.png',
               package: "openiothub_common_pages",
             ),
+            style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromWidth(3.0)),
+                maximumSize: MaterialStateProperty.all(Size.fromWidth(10.0))),
             onPressed: () async {
               WechatKitPlatform.instance.auth(
                 scope: <String>[WechatScope.kSNSApiUserInfo],
@@ -156,7 +159,7 @@ class _State extends State<LoginPage> {
       });
       Navigator.of(context).pop();
     } else {
-      showToast("登录失败:${userLoginResponse.msg}");
+      showToast("登录失败:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
     }
   }
 }
