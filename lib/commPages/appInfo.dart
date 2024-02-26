@@ -26,10 +26,10 @@ class _AppInfoPageState extends State<AppInfoPage> {
   //版本号
   String buildNumber = "";
 
-  StreamSubscription<WechatSdkResp>? _share;
+  StreamSubscription<WechatResp>? _share;
 
-  void _listenShareMsg(WechatSdkResp resp) {
-    final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
+  void _listenShareMsg(WechatResp resp) {
+    // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
       showToast("分享成功！");
     } else {
@@ -40,7 +40,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
   @override
   void initState() {
     if (_share == null) {
-      _share = Wechat.instance.shareMsgResp().listen(_listenShareMsg);
+      _share = WechatKitPlatform.instance.respStream().listen(_listenShareMsg);
     }
     super.initState();
     _getAppInfo();
@@ -140,8 +140,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
                   TextButton(
                     child: Text("分享到个人"),
                     onPressed: () {
-                      Wechat.instance.shareWebpage(
-                        scene: WechatScene.SESSION,
+                      WechatKitPlatform.instance.shareWebpage(
+                        scene: WechatScene.kSession,
                         title: "欢迎使用云亿连！",
                         description: "云亿连管理您的所有智能设备和私有云",
                         // thumbData:,
@@ -153,8 +153,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
                   TextButton(
                     child: Text("分享到朋友圈"),
                     onPressed: () {
-                      Wechat.instance.shareWebpage(
-                        scene: WechatScene.TIMELINE,
+                      WechatKitPlatform.instance.shareWebpage(
+                        scene: WechatScene.kTimeline,
                         title: "欢迎使用云亿连！",
                         description: "云亿连管理您的所有智能设备和私有云",
                         // thumbData:,

@@ -16,14 +16,14 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
-  StreamSubscription<WechatAuthResp>? _auth;
+  StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
   String username = "";
   String usermobile = "";
   String useremail = "";
 
-  Future<void> _listenAuth(WechatAuthResp resp) async {
-    if (resp.errorCode == 0) {
+  Future<void> _listenAuth(WechatResp resp) async {
+    if (resp.errorCode == 0 && resp is WechatAuthResp) {
       OperationResponse operationResponse =
           await UserManager.BindWithWechatCode(resp.code!);
       if (operationResponse.code == 0) {
@@ -39,7 +39,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
   @override
   void initState() {
     if (_auth == null) {
-      _auth = Wechat.instance.authResp().listen(_listenAuth);
+      _auth = WechatKitPlatform.instance.respStream().listen(_listenAuth);
     }
     _getUserInfo();
     super.initState();
@@ -85,9 +85,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
               title: Text('绑定微信'),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
-                if (await Wechat.instance.isInstalled()) {
-                  Wechat.instance.auth(
-                    scope: <String>[WechatScope.SNSAPI_USERINFO],
+                if (await WechatKitPlatform.instance.isInstalled()) {
+                  WechatKitPlatform.instance.auth(
+                    scope: <String>[WechatScope.kSNSApiUserInfo],
                     state: 'auth',
                   );
                 } else {

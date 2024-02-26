@@ -17,15 +17,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _State extends State<LoginPage> {
-  StreamSubscription<WechatAuthResp>? _auth;
+  StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
 
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
   final TextEditingController _userpassword = TextEditingController(text: "");
 
-  Future<void> _listenAuth(WechatAuthResp resp) async {
-    if (resp.errorCode == 0) {
+  Future<void> _listenAuth(WechatResp resp) async {
+    if (resp.errorCode == 0 && resp is WechatAuthResp) {
       UserLoginResponse userLoginResponse =
           await UserManager.LoginWithWechatCode(resp.code!);
       await _handleLoginResp(userLoginResponse);
@@ -37,7 +37,7 @@ class _State extends State<LoginPage> {
   @override
   void initState() {
     if (_auth == null) {
-      _auth = Wechat.instance.authResp().listen(_listenAuth);
+      _auth = WechatKitPlatform.instance.respStream().listen(_listenAuth);
     }
     _initList();
     super.initState();
@@ -121,7 +121,7 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _checkWechat() async {
-    if (await Wechat.instance.isInstalled()) {
+    if (await WechatKitPlatform.instance.isInstalled()) {
       setState(() {
         _list.add(IconButton(
             icon: Image.asset(
@@ -129,8 +129,8 @@ class _State extends State<LoginPage> {
               package: "openiothub_common_pages",
             ),
             onPressed: () async {
-              Wechat.instance.auth(
-                scope: <String>[WechatScope.SNSAPI_USERINFO],
+              WechatKitPlatform.instance.auth(
+                scope: <String>[WechatScope.kSNSApiUserInfo],
                 state: 'auth',
               );
             }));

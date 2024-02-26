@@ -1,3 +1,7 @@
+## [1.0.5]
+
+* upgrade wechat_kit
+
 ## [1.0.4+4]
 
 * Button color
