@@ -128,9 +128,9 @@ class _State extends State<LoginPage> {
               'assets/images/wechat.png',
               package: "openiothub_common_pages",
             ),
-            // style: ButtonStyle(
-            //     minimumSize: MaterialStateProperty.all(Size.fromWidth(3.0)),
-            //     maximumSize: MaterialStateProperty.all(Size.fromWidth(10.0))),
+            style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size.fromWidth(45.0)),
+                maximumSize: MaterialStateProperty.all(Size.fromWidth(70.0))),
             onPressed: () async {
               WechatKitPlatform.instance.auth(
                 scope: <String>[WechatScope.kSNSApiUserInfo],
