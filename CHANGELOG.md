@@ -1,3 +1,7 @@
+## [1.0.5+5]
+
+* share gateway QR
+
 ## [1.0.5+4]
 
 * update
