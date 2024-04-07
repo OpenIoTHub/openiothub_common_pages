@@ -1,3 +1,7 @@
+## [1.0.5+6]
+
+* style
+
 ## [1.0.5+5]
 
 * share gateway QR

@@ -81,7 +81,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
               size: 320,
               backgroundColor: Colors.orangeAccent,
             )),
-            Center(child: Text("使用云亿连APP扫描上述二维码添加本网关"))
+            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 50, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关"),))
           ]),
         ));
     // return ListView(children: [
@@ -132,6 +132,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                 title: Text("分享到微信"),
                 content: Text("选择需方分享的位置"),
                 actions: <Widget>[
+                  // 分享网关:二维码图片、小程序链接、网页
                   TextButton(
                     child: Text("分享链接到个人"),
                     onPressed: () {
