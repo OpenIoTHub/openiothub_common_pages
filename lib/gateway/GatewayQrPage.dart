@@ -79,7 +79,15 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
               data: qRCodeForMobileAdd,
               version: QrVersions.auto,
               size: 320,
-              backgroundColor: Colors.orangeAccent,
+              // backgroundColor: Colors.orangeAccent,
+              eyeStyle: const QrEyeStyle(
+                eyeShape: QrEyeShape.square,
+                color: Colors.yellow,
+              ),
+              dataModuleStyle: const QrDataModuleStyle(
+                dataModuleShape: QrDataModuleShape.square,
+                color: Colors.orange,
+              )
             )),
             Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 50, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关"),))
           ]),
