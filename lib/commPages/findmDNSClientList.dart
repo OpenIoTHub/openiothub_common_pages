@@ -241,7 +241,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
                           await GatewayManager.GenerateOneGatewayWithServerUuid(
                               value!);
                       await _addToMySessionList(
-                          gatewayInfo.openIoTHubJwt, gatewayInfo.name);
+                          gatewayInfo.openIoTHubJwt, gatewayInfo.name, gatewayInfo.description);
                       String uuid = gatewayInfo.gatewayUuid;
                       String gatewayJwt = gatewayInfo.gatewayJwt;
                       String data = '''
@@ -262,10 +262,11 @@ loginwithtokenmap:
         });
   }
 
-  Future _addToMySessionList(String token, name) async {
+  Future _addToMySessionList(String token, name, description) async {
     SessionConfig config = SessionConfig();
     config.token = token;
-    config.description = name;
+    config.name = name;
+    config.description = description;
     try {
       await SessionApi.createOneSession(config);
       showToast("添加网关成功！");
