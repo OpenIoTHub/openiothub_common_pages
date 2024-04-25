@@ -33,7 +33,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
 
   @override
   void initState() {
-    _generateJwtQRCodePair();
+    _generateJwtQRCodePair(false);
     if (_share == null && (Platform.isAndroid || Platform.isIOS)) {
       _share = WechatKitPlatform.instance.respStream().listen(_listenShareMsg);
     }
@@ -72,7 +72,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
           ],
         ),
         body: Container(
-          padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
           child: ListView(children: [
             Center(
                 child: QrImageView(
@@ -89,7 +89,8 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                 color: Colors.orange,
               )
             )),
-            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 50, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关"),))
+            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 40, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关"),)),
+            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 50, 0, 0) ,child: TextButton(child: Text("更换网关ID"), onPressed: (){_generateJwtQRCodePair(true);},),))
           ]),
         ));
     // return ListView(children: [
@@ -104,12 +105,13 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
     // ]);
   }
 
-  Future<void> _generateJwtQRCodePair() async {
+  Future<void> _generateJwtQRCodePair(bool is_change_gateway_uuid) async {
     // TODO 先检查本地存储有没有保存的网关配置，如果有则使用旧的启动
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (prefs.containsKey(SharedPreferencesKey.Gateway_Jwt_KEY) &&
-        prefs.containsKey(SharedPreferencesKey.QR_Code_For_Mobile_Add_KEY)) {
+        prefs.containsKey(SharedPreferencesKey.QR_Code_For_Mobile_Add_KEY)&&
+    !is_change_gateway_uuid) {
       var gatewayJwt = prefs.getString(SharedPreferencesKey.Gateway_Jwt_KEY)!;
       setState(() {
         qRCodeForMobileAdd =

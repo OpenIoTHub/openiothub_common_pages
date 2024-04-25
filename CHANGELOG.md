@@ -1,3 +1,7 @@
+## [1.0.5+8]
+
+* change gateway uuid
+
 ## [1.0.5+7]
 
 * style
