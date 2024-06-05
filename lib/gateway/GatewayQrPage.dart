@@ -89,8 +89,10 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                 color: Colors.orange,
               )
             )),
-            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 40, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关"),)),
-            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 50, 0, 0) ,child: TextButton(child: Text("更换网关ID"), onPressed: (){_generateJwtQRCodePair(true);},),))
+            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 40, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关以访问本网络"),)),
+            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 20, 0, 0) ,child: TextButton(child: Text("更换网关ID"), onPressed: (){_generateJwtQRCodePair(true);},),)),
+            // Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 15, 0, 0) ,child: TextButton(child: Text("返回主界面"), onPressed: (){Navigator.of(context).pop();},),))
+            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 15, 0, 0) ,child: IconButton(icon: Icon(Icons.arrow_back_outlined),tooltip: "返回主界面", onPressed: (){Navigator.of(context).pop();},),))
           ]),
         ));
     // return ListView(children: [
