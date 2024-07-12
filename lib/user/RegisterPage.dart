@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
-import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 
 import '../utils/goToUrl.dart';
 
@@ -15,6 +15,7 @@ class RegisterPage extends StatefulWidget {
 class _State extends State<RegisterPage> {
   // 是否已经同意隐私政策
   bool _isChecked = false;
+
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
   final TextEditingController _userpassword = TextEditingController(text: "");
@@ -82,7 +83,10 @@ class _State extends State<RegisterPage> {
                           style: TextStyle(color: Colors.red),
                         ),
                         onPressed: () async {
-                          goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html", "隐私政策");
+                          goToURL(
+                              context,
+                              "https://docs.iothub.cloud/privacyPolicy/index.html",
+                              "隐私政策");
                         }),
                     TextButton(
                         child: Text(

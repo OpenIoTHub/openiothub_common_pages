@@ -1,16 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_grpc_api/proto/manager/gatewayManager.pb.dart';
-import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 import 'package:flutter_nsd/flutter_nsd.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
+import 'package:openiothub_grpc_api/proto/manager/gatewayManager.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
@@ -240,8 +239,8 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
                       GatewayInfo gatewayInfo =
                           await GatewayManager.GenerateOneGatewayWithServerUuid(
                               value!);
-                      await _addToMySessionList(
-                          gatewayInfo.openIoTHubJwt, gatewayInfo.name, gatewayInfo.description);
+                      await _addToMySessionList(gatewayInfo.openIoTHubJwt,
+                          gatewayInfo.name, gatewayInfo.description);
                       String uuid = gatewayInfo.gatewayUuid;
                       String gatewayJwt = gatewayInfo.gatewayJwt;
                       String data = '''

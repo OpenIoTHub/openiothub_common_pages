@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 
 class ServerInfoPage extends StatefulWidget {
   ServerInfoPage({required Key key, required this.serverInfo})

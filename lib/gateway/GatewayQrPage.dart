@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/proto/manager/publicApi.pb.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
 class GatewayQrPage extends StatefulWidget {
@@ -76,23 +76,45 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
           child: ListView(children: [
             Center(
                 child: QrImageView(
-              data: qRCodeForMobileAdd,
-              version: QrVersions.auto,
-              size: 320,
-              // backgroundColor: Colors.orangeAccent,
-              eyeStyle: const QrEyeStyle(
-                eyeShape: QrEyeShape.square,
-                color: Colors.yellow,
-              ),
-              dataModuleStyle: const QrDataModuleStyle(
-                dataModuleShape: QrDataModuleShape.square,
-                color: Colors.orange,
-              )
+                    data: qRCodeForMobileAdd,
+                    version: QrVersions.auto,
+                    size: 320,
+                    // backgroundColor: Colors.orangeAccent,
+                    eyeStyle: const QrEyeStyle(
+                      eyeShape: QrEyeShape.square,
+                      color: Colors.yellow,
+                    ),
+                    dataModuleStyle: const QrDataModuleStyle(
+                      dataModuleShape: QrDataModuleShape.square,
+                      color: Colors.orange,
+                    ))),
+            Center(
+                child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
+              child: Text("使用云亿连APP扫描上述二维码添加本网关以访问本网络"),
             )),
-            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 40, 0, 0) ,child: Text("使用云亿连APP扫描上述二维码添加本网关以访问本网络"),)),
-            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 20, 0, 0) ,child: TextButton(child: Text("更换网关ID"), onPressed: (){_generateJwtQRCodePair(true);},),)),
+            Center(
+                child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+              child: TextButton(
+                child: Text("更换网关ID"),
+                onPressed: () {
+                  _generateJwtQRCodePair(true);
+                },
+              ),
+            )),
             // Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 15, 0, 0) ,child: TextButton(child: Text("返回主界面"), onPressed: (){Navigator.of(context).pop();},),))
-            Center(child: Padding(padding:EdgeInsets.fromLTRB(0, 15, 0, 0) ,child: IconButton(icon: Icon(Icons.arrow_back_outlined),tooltip: "返回主界面", onPressed: (){Navigator.of(context).pop();},),))
+            Center(
+                child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_outlined),
+                tooltip: "返回主界面",
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ))
           ]),
         ));
     // return ListView(children: [
@@ -112,8 +134,8 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     if (prefs.containsKey(SharedPreferencesKey.Gateway_Jwt_KEY) &&
-        prefs.containsKey(SharedPreferencesKey.QR_Code_For_Mobile_Add_KEY)&&
-    !is_change_gateway_uuid) {
+        prefs.containsKey(SharedPreferencesKey.QR_Code_For_Mobile_Add_KEY) &&
+        !is_change_gateway_uuid) {
       var gatewayJwt = prefs.getString(SharedPreferencesKey.Gateway_Jwt_KEY)!;
       setState(() {
         qRCodeForMobileAdd =

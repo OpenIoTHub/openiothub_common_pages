@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
-import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/user/LoginPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
+import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
@@ -53,21 +53,21 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
         ),
         body: ListView(children: <Widget>[
           ListTile(
-            //第一个功能项
+              //第一个功能项
               title: Text('用户名：$username'),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
                 _modifyInfo("用户名");
               }),
           ListTile(
-            //第一个功能项
+              //第一个功能项
               title: Text('手机号：$usermobile'),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
                 _modifyInfo("手机号");
               }),
           ListTile(
-            //第一个功能项
+              //第一个功能项
               title: Text('邮箱：$useremail'),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
@@ -109,7 +109,7 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                 });
               }),
           ListTile(
-            //注销账号
+              //注销账号
               title: Text('注销账号'),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
@@ -159,20 +159,6 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
       setState(() {
         usermobile = "";
       });
-    }
-  }
-
-  Future<void> _logOut() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(SharedPreferencesKey.USER_TOKEN_KEY);
-    await prefs.remove(SharedPreferencesKey.USER_NAME_KEY);
-    await prefs.remove(SharedPreferencesKey.USER_EMAIL_KEY);
-    await prefs.remove(SharedPreferencesKey.USER_MOBILE_KEY);
-    if (Navigator.of(context).canPop()) {
-      Navigator.of(context).pop();
-    } else {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => LoginPage()));
     }
   }
 

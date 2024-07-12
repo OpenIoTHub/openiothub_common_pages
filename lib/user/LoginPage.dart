@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/commPages/feedback.dart';
-import 'package:openiothub_common_pages/commPages/privacyPolicy.dart';
 import 'package:openiothub_common_pages/user/RegisterPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
+import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
@@ -119,7 +118,10 @@ class _State extends State<LoginPage> {
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () async {
-                goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html", "隐私政策");
+                goToURL(
+                    context,
+                    "https://docs.iothub.cloud/privacyPolicy/index.html",
+                    "隐私政策");
               }),
           TextButton(
               child: Text(
@@ -147,7 +149,7 @@ class _State extends State<LoginPage> {
               package: "openiothub_common_pages",
             ),
             style: ButtonStyle(
-              fixedSize: const  MaterialStatePropertyAll<Size>(Size(60,60)),
+              fixedSize: const MaterialStatePropertyAll<Size>(Size(60, 60)),
             ),
             onPressed: () async {
               WechatKitPlatform.instance.auth(
@@ -177,7 +179,8 @@ class _State extends State<LoginPage> {
       });
       Navigator.of(context).pop();
     } else {
-      showToast("登录失败:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
+      showToast(
+          "登录失败:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
     }
   }
 }

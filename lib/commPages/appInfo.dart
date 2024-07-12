@@ -94,7 +94,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
         style: TextStyle(color: Colors.green),
       ),
       onTap: () {
-        goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html", "隐私政策");
+        goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html",
+            "隐私政策");
       },
     ));
     final divided = ListTile.divideTiles(
