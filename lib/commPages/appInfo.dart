@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+import 'package:openiothub_common_pages/utils/goToUrl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
@@ -61,6 +62,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
     _result.add("包名:$packageName");
     _result.add("版本:$version");
     _result.add("版本号:$buildNumber");
+    _result.add("APP备案号:皖ICP备2022013511号-2A");
 
     final tiles = _result.map(
       (pair) {
@@ -92,11 +94,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
         style: TextStyle(color: Colors.green),
       ),
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return PrivacyPolicyPage(
-            key: UniqueKey(),
-          );
-        }));
+        goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html", "隐私政策");
       },
     ));
     final divided = ListTile.divideTiles(

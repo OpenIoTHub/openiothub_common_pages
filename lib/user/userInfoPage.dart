@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/user/LoginPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wechat_kit/wechat_kit.dart';
+
+import 'accountSecurityPage.dart';
 
 class UserInfoPage extends StatefulWidget {
   @override
@@ -16,31 +15,12 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
-  StreamSubscription<WechatResp>? _auth;
-  List<Widget> _list = <Widget>[];
   String username = "";
   String usermobile = "";
   String useremail = "";
 
-  Future<void> _listenAuth(WechatResp resp) async {
-    if (resp.errorCode == 0 && resp is WechatAuthResp) {
-      OperationResponse operationResponse =
-          await UserManager.BindWithWechatCode(resp.code!);
-      if (operationResponse.code == 0) {
-        showToast("绑定微信成功！");
-      } else {
-        showToast("绑定微信失败:${operationResponse.msg}");
-      }
-    } else {
-      showToast("获取微信登录信息失败:${resp.errorMsg}");
-    }
-  }
-
   @override
   void initState() {
-    if (_auth == null) {
-      _auth = WechatKitPlatform.instance.respStream().listen(_listenAuth);
-    }
     _getUserInfo();
     super.initState();
   }
@@ -53,60 +33,29 @@ class _UserInfoPageState extends State<UserInfoPage> {
         ),
         body: ListView(children: <Widget>[
           ListTile(
-              //第一个功能项
-              title: Text('用户名：$username'),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () async {
-                _modifyInfo("用户名");
-              }),
+            //第一个功能项
+            title: Text('用户名：$username'),
+            trailing: Icon(Icons.arrow_right),
+          ),
           ListTile(
-              //第一个功能项
-              title: Text('手机号：$usermobile'),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () async {
-                _modifyInfo("手机号");
-              }),
+            //第二个功能项
+            title: Text('手机号：$usermobile'),
+            trailing: Icon(Icons.arrow_right),
+          ),
           ListTile(
-              //第一个功能项
-              title: Text('邮箱：$useremail'),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () async {
-                _modifyInfo("邮箱");
-              }),
+            //第三个功能项
+            title: Text('邮箱：$useremail'),
+            trailing: Icon(Icons.arrow_right),
+          ),
           ListTile(
-              //第一个功能项
-              title: Text('修改密码'),
+              //第四个功能项
+              title: Text('账号与安全'),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
-                _modifyInfo("密码");
-              }),
-          ListTile(
-              //绑定微信
-              title: Text('绑定微信'),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () async {
-                if (await WechatKitPlatform.instance.isInstalled()) {
-                  WechatKitPlatform.instance.auth(
-                    scope: <String>[WechatScope.kSNSApiUserInfo],
-                    state: 'auth',
-                  );
-                } else {
-                  showToast("只有安装了微信才能绑定微信");
-                }
-              }),
-          ListTile(
-              //解绑微信
-              title: Text('解除微信绑定'),
-              trailing: Icon(Icons.arrow_right),
-              onTap: () async {
-                UserManager.UnbindWechat()
-                    .then((OperationResponse operationResponse) {
-                  if (operationResponse.code == 0) {
-                    showToast("解绑微信成功！");
-                  } else {
-                    showToast("解绑微信失败！原因：${operationResponse.msg}");
-                  }
-                });
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return AccountSecurityPage();
+                }));
               }),
           TextButton(
               onPressed: () {
@@ -177,62 +126,5 @@ class _UserInfoPageState extends State<UserInfoPage> {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => LoginPage()));
     }
-  }
-
-  Future<void> _modifyInfo(String type) async {
-    TextEditingController _new_value_controller =
-        TextEditingController.fromValue(TextEditingValue(text: ""));
-    showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-                title: Text("修改：$type"),
-                content: ListView(
-                  children: <Widget>[
-                    TextField(
-                      controller: _new_value_controller,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(10.0),
-                        labelText: '请输入新的值',
-                        helperText: '新值',
-                      ),
-                      obscureText: type == "密码",
-                    ),
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text("取消"),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    child: Text("修改"),
-                    onPressed: () async {
-                      StringValue stringValue = StringValue();
-                      stringValue.value = _new_value_controller.text;
-                      switch (type) {
-                        case "用户名":
-                          OperationResponse operationResponse =
-                              await UserManager.UpdateUserNanme(stringValue);
-                          break;
-                        case "手机号":
-                          OperationResponse operationResponse =
-                              await UserManager.UpdateUserMobile(stringValue);
-                          break;
-                        case "邮箱":
-                          OperationResponse operationResponse =
-                              await UserManager.UpdateUserEmail(stringValue);
-                          break;
-                        case "密码":
-                          OperationResponse operationResponse =
-                              await UserManager.UpdateUserPassword(stringValue);
-                          break;
-                      }
-                      Navigator.of(context).pop();
-                      _getUserInfo();
-                    },
-                  )
-                ]));
   }
 }

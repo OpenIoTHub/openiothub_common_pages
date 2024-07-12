@@ -11,12 +11,16 @@ import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
+import '../utils/goToUrl.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
 class _State extends State<LoginPage> {
+  // 是否已经同意隐私政策
+  bool _isChecked = false;
   StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
 
@@ -77,6 +81,11 @@ class _State extends State<LoginPage> {
       TextButton(
           child: Text('登录'),
           onPressed: () async {
+            // 只有同意隐私政策才可以进行下一步
+            if (!_isChecked) {
+              showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+              return;
+            }
             LoginInfo loginInfo = LoginInfo();
             loginInfo.userMobile = _usermobile.text;
             loginInfo.password = _userpassword.text;
@@ -92,16 +101,25 @@ class _State extends State<LoginPage> {
           }),
       Row(
         children: [
+          Checkbox(
+            value: _isChecked,
+            onChanged: (bool? newValue) {
+              setState(() {
+                _isChecked = newValue ?? false;
+              });
+            },
+            activeColor: Colors.green, // 选中时的颜色
+            checkColor: Colors.white, // 选中标记的颜色
+          ),
+          Text("同意"),
           TextButton(
+              // TODO 勾选才可以下一步
               child: Text(
                 '隐私政策',
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () async {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => PrivacyPolicyPage(
-                          key: UniqueKey(),
-                        )));
+                goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html", "隐私政策");
               }),
           TextButton(
               child: Text(

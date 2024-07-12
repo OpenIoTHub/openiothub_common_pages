@@ -5,12 +5,16 @@ import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 
+import '../utils/goToUrl.dart';
+
 class RegisterPage extends StatefulWidget {
   @override
   _State createState() => _State();
 }
 
 class _State extends State<RegisterPage> {
+  // 是否已经同意隐私政策
+  bool _isChecked = false;
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
   final TextEditingController _userpassword = TextEditingController(text: "");
@@ -41,6 +45,10 @@ class _State extends State<RegisterPage> {
                 TextButton(
                     child: Text('注册'),
                     onPressed: () async {
+                      if (!_isChecked) {
+                        showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                        return;
+                      }
                       LoginInfo loginInfo = LoginInfo();
                       loginInfo.userMobile = _usermobile.text;
                       loginInfo.password = _userpassword.text;
@@ -57,16 +65,24 @@ class _State extends State<RegisterPage> {
                     }),
                 Row(
                   children: [
+                    Checkbox(
+                      value: _isChecked,
+                      onChanged: (bool? newValue) {
+                        setState(() {
+                          _isChecked = newValue ?? false;
+                        });
+                      },
+                      activeColor: Colors.green, // 选中时的颜色
+                      checkColor: Colors.white, // 选中标记的颜色
+                    ),
+                    Text("同意"),
                     TextButton(
                         child: Text(
                           '隐私政策',
                           style: TextStyle(color: Colors.red),
                         ),
                         onPressed: () async {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => PrivacyPolicyPage(
-                                    key: UniqueKey(),
-                                  )));
+                          goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html", "隐私政策");
                         }),
                     TextButton(
                         child: Text(
