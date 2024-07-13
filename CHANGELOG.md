@@ -1,3 +1,7 @@
+## [1.0.5+19]
+
+* delete account
+
 ## [1.0.5+18]
 
 * update

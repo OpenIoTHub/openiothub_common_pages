@@ -7,6 +7,7 @@ import 'package:openiothub_common_pages/user/LoginPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
@@ -118,7 +119,8 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
               ),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
-                // TODO 删除账号操作，删除账号时需要输入自己的密码进行确认
+                // 删除账号操作，删除账号时需要输入自己的密码进行确认
+                _delete_my_account();
               }),
         ]));
   }
@@ -174,19 +176,22 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
         context: context,
         builder: (_) => AlertDialog(
                 title: Text("修改：$type"),
-                content: ListView(
-                  children: <Widget>[
-                    TextField(
-                      controller: _new_value_controller,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(10.0),
-                        labelText: '请输入新的$type',
-                        helperText: '新值',
-                      ),
-                      obscureText: type == "密码",
-                    ),
-                  ],
-                ),
+                scrollable: true,
+                content: SizedBox(
+                    height: 100, // 设置Dialog的高度
+                    child: ListView(
+                      children: <Widget>[
+                        TextField(
+                          controller: _new_value_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: '请输入新的$type',
+                            helperText: '新值',
+                          ),
+                          obscureText: type == "密码",
+                        ),
+                      ],
+                    )),
                 actions: <Widget>[
                   TextButton(
                     child: Text("取消"),
@@ -222,5 +227,56 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                     },
                   )
                 ]));
+  }
+
+  Future<void> _delete_my_account() async {
+    TextEditingController _new_value_controller =
+    TextEditingController.fromValue(TextEditingValue(text: ""));
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+            title: Text("删除我的账号"),
+            scrollable: true,
+            content: SizedBox(
+                height: 120, // 设置Dialog的高度
+                child: ListView(
+                  children: <Widget>[
+                    Text("请注意，确认删除之后删除操作立马生效，且不可恢复！", style: TextStyle(color: Colors.red),),
+                    Text("操作不可恢复！", style: TextStyle(color: Colors.red),),
+                    TextField(
+                      controller: _new_value_controller,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
+                        labelText: '请输入你的密码',
+                        helperText: '当前账号的密码',
+                      ),
+                      obscureText: true,
+                    ),
+                  ],
+                )),
+            actions: <Widget>[
+              TextButton(
+                child: Text("取消"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text("确认删除账号"),
+                onPressed: () async {
+                  LoginInfo login_info = LoginInfo();
+                  login_info.password = _new_value_controller.text;
+                  OperationResponse operationResponse =
+                  await UserManager.DeleteMyAccount(login_info);
+                  if (operationResponse.code==0) {
+                    //删除账号成功
+                    showToast("删除账号成功！");
+                    Navigator.of(context).pop();
+                  }else{
+                    showToast("删除账号失败:${operationResponse.msg}");
+                  }
+                },
+              )
+            ]));
   }
 }
