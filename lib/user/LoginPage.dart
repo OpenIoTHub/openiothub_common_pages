@@ -22,7 +22,6 @@ class _State extends State<LoginPage> {
   bool _isChecked = false;
   StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
-  bool _wechatInited = false;
 
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
@@ -143,7 +142,7 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _checkWechat() async {
-    if (await WechatKitPlatform.instance.isInstalled() && !_wechatInited) {
+    if (await WechatKitPlatform.instance.isInstalled()) {
       setState(() {
         _list.add(IconButton(
             icon: Image.asset(
@@ -164,7 +163,6 @@ class _State extends State<LoginPage> {
                 state: 'auth',
               );
             }));
-        _wechatInited = true;
       });
     }
   }
