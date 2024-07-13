@@ -32,7 +32,7 @@ goToURL(BuildContext context, String url, title) async {
         onPageFinished: (String url) {},
         onWebResourceError: (WebResourceError error) {
           // 如果内置浏览器打开出错则尝试系统浏览器
-          goToURL(context, url, title);
+          launchURL(url);
         },
         onNavigationRequest: (NavigationRequest request) {
           return NavigationDecision.navigate;
