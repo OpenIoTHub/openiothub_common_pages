@@ -30,7 +30,10 @@ goToURL(BuildContext context, String url, title) async {
         },
         onPageStarted: (String url) {},
         onPageFinished: (String url) {},
-        onWebResourceError: (WebResourceError error) {},
+        onWebResourceError: (WebResourceError error) {
+          // 如果内置浏览器打开出错则尝试系统浏览器
+          goToURL(context, url, title);
+        },
         onNavigationRequest: (NavigationRequest request) {
           return NavigationDecision.navigate;
         },
@@ -41,13 +44,12 @@ goToURL(BuildContext context, String url, title) async {
     return Scaffold(
       appBar: AppBar(title: Text(title), actions: const <Widget>[
         // IconButton(
-        //     icon: Icon(
+        //     icon: const Icon(
         //       Icons.open_in_browser,
         //       color: Colors.white,
         //     ),
-        //     onPressed: () {
-        //       _launchURL(url);
-        //     })
+        //   onPressed: goToURL(context, url, title),
+        // )
       ]),
       body: WebViewWidget(controller: controller),
     );

@@ -90,6 +90,16 @@ class _AppInfoPageState extends State<AppInfoPage> {
     ));
     tilesList.add(ListTile(
       title: Text(
+        "在线反馈",
+        style: TextStyle(color: Colors.green),
+      ),
+      onTap: () {
+        goToURL(context, "https://support.qq.com/product/657356",
+            "在线反馈");
+      },
+    ));
+    tilesList.add(ListTile(
+      title: Text(
         "隐私政策",
         style: TextStyle(color: Colors.green),
       ),
