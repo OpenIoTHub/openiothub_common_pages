@@ -22,6 +22,7 @@ class _State extends State<LoginPage> {
   bool _isChecked = false;
   StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
+  bool _wechatInited = false;
 
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
@@ -136,50 +137,13 @@ class _State extends State<LoginPage> {
               }),
         ],
         mainAxisAlignment: MainAxisAlignment.center,
-      ),      Row(
-        children: [
-          Checkbox(
-            value: _isChecked,
-            onChanged: (bool? newValue) {
-              setState(() {
-                _isChecked = newValue!;
-              });
-            },
-            activeColor: Colors.green, // 选中时的颜色
-            checkColor: Colors.white, // 选中标记的颜色
-          ),
-          Text("同意"),
-          TextButton(
-            // TODO 勾选才可以下一步
-              child: Text(
-                '隐私政策',
-                style: TextStyle(color: Colors.red),
-              ),
-              onPressed: () async {
-                goToURL(
-                    context,
-                    "https://docs.iothub.cloud/privacyPolicy/index.html",
-                    "隐私政策");
-              }),
-          TextButton(
-              child: Text(
-                '反馈渠道',
-                style: TextStyle(color: Colors.green),
-              ),
-              onPressed: () async {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => FeedbackPage(
-                      key: UniqueKey(),
-                    )));
-              }),
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
       ),
     ];
+    _checkWechat();
   }
 
   Future<void> _checkWechat() async {
-    if (await WechatKitPlatform.instance.isInstalled()) {
+    if (await WechatKitPlatform.instance.isInstalled() && !_wechatInited) {
       setState(() {
         _list.add(IconButton(
             icon: Image.asset(
@@ -200,6 +164,7 @@ class _State extends State<LoginPage> {
                 state: 'auth',
               );
             }));
+        _wechatInited = true;
       });
     }
   }
