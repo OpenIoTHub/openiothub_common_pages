@@ -35,17 +35,17 @@ class _UserInfoPageState extends State<UserInfoPage> {
           ListTile(
             //第一个功能项
             title: Text('用户名：$username'),
-            trailing: Icon(Icons.arrow_right),
+            // trailing: Icon(Icons.arrow_right),
           ),
           ListTile(
             //第二个功能项
             title: Text('手机号：$usermobile'),
-            trailing: Icon(Icons.arrow_right),
+            // trailing: Icon(Icons.arrow_right),
           ),
           ListTile(
             //第三个功能项
             title: Text('邮箱：$useremail'),
-            trailing: Icon(Icons.arrow_right),
+            // trailing: Icon(Icons.arrow_right),
           ),
           ListTile(
               //第四个功能项

@@ -104,7 +104,7 @@ class _State extends State<LoginPage> {
             value: _isChecked,
             onChanged: (bool? newValue) {
               setState(() {
-                _isChecked = newValue ?? false;
+                _isChecked = newValue!;
               });
             },
             activeColor: Colors.green, // 选中时的颜色
@@ -152,6 +152,11 @@ class _State extends State<LoginPage> {
               fixedSize: const MaterialStatePropertyAll<Size>(Size(60, 60)),
             ),
             onPressed: () async {
+              // 只有同意隐私政策才可以进行下一步
+              if (!_isChecked) {
+                showToast("请勾选☑️上述同意隐私政策才可以进行下一步");
+                return;
+              }
               WechatKitPlatform.instance.auth(
                 scope: <String>[WechatScope.kSNSApiUserInfo],
                 state: 'auth',

@@ -70,7 +70,7 @@ class _State extends State<RegisterPage> {
                       value: _isChecked,
                       onChanged: (bool? newValue) {
                         setState(() {
-                          _isChecked = newValue ?? false;
+                          _isChecked = newValue!;
                         });
                       },
                       activeColor: Colors.green, // 选中时的颜色

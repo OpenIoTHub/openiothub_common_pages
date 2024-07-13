@@ -110,7 +110,12 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
               }),
           ListTile(
               //注销账号
-              title: Text('注销账号'),
+              title: Text(
+                '注销账号',
+                style: TextStyle(
+                  color: Colors.red,
+                ),
+              ),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
                 // TODO 删除账号操作，删除账号时需要输入自己的密码进行确认
