@@ -252,17 +252,12 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                       ),
                       obscureText: true,
                     ),
+                    Text("操作不可恢复！", style: TextStyle(color: Colors.red),),
                   ],
                 )),
             actions: <Widget>[
               TextButton(
-                child: Text("取消"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text("确认删除账号"),
+                child: Text("确认删除账号?", style: TextStyle(color: Colors.red)),
                 onPressed: () async {
                   LoginInfo login_info = LoginInfo();
                   login_info.password = _new_value_controller.text;
@@ -276,7 +271,13 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                     showToast("删除账号失败:${operationResponse.msg}");
                   }
                 },
-              )
+              ),
+              TextButton(
+                child: Text("取消", style: TextStyle(color: Colors.green),),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ]));
   }
 }
