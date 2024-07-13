@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:openiothub_common_pages/gateway/GatewayQrPage.dart';
+import 'package:openiothub_common_pages/user/LoginPage.dart';
+import 'package:openiothub_common_pages/user/RegisterPage.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 void main() {
@@ -35,7 +37,9 @@ class MyApp extends StatelessWidget {
       // ),
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
-      home: GatewayQrPage(key: UniqueKey(),),
+      // home: GatewayQrPage(key: UniqueKey(),),
+      // home: LoginPage(),
+      home: RegisterPage(),
     );
   }
 }
