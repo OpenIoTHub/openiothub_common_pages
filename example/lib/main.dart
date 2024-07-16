@@ -3,8 +3,14 @@ import 'package:openiothub_common_pages/gateway/GatewayQrPage.dart';
 import 'package:openiothub_common_pages/user/LoginPage.dart';
 import 'package:openiothub_common_pages/user/RegisterPage.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:wechat_kit/wechat_kit.dart';
+import 'package:openiothub_constants/constants/WeChatConfig.dart';
 
 void main() {
+  WechatKitPlatform.instance.registerApp(
+    appId: WeChatConfig.WECHAT_APPID,
+    universalLink: WeChatConfig.WECHAT_UNIVERSAL_LINK,
+  );
   runApp(const MyApp());
 }
 
@@ -38,8 +44,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light(),
       debugShowCheckedModeBanner: false,
       // home: GatewayQrPage(key: UniqueKey(),),
-      // home: LoginPage(),
-      home: RegisterPage(),
+      home: LoginPage(),
+      // home: RegisterPage(),
     );
   }
 }

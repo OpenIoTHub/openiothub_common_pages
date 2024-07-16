@@ -43,7 +43,6 @@ class _State extends State<LoginPage> {
       _auth = WechatKitPlatform.instance.respStream().listen(_listenAuth);
     }
     super.initState();
-    _checkWechat();
   }
 
   @override
@@ -112,7 +111,7 @@ class _State extends State<LoginPage> {
           ),
           Text("同意"),
           TextButton(
-            // TODO 勾选才可以下一步
+              // TODO 勾选才可以下一步
               child: Text(
                 '隐私政策',
                 style: TextStyle(color: Colors.red),
@@ -131,39 +130,33 @@ class _State extends State<LoginPage> {
               onPressed: () async {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => FeedbackPage(
-                      key: UniqueKey(),
-                    )));
+                          key: UniqueKey(),
+                        )));
               }),
         ],
         mainAxisAlignment: MainAxisAlignment.center,
       ),
     ];
-    _checkWechat();
-  }
-
-  Future<void> _checkWechat() async {
     if (await WechatKitPlatform.instance.isInstalled()) {
-      setState(() {
-        _list.add(IconButton(
-            icon: Image.asset(
-              'assets/images/wechat.png',
-              package: "openiothub_common_pages",
-            ),
-            style: ButtonStyle(
-              fixedSize: const MaterialStatePropertyAll<Size>(Size(60, 60)),
-            ),
-            onPressed: () async {
-              // 只有同意隐私政策才可以进行下一步
-              if (!_isChecked) {
-                showToast("请勾选☑️上述同意隐私政策才可以进行下一步");
-                return;
-              }
-              WechatKitPlatform.instance.auth(
-                scope: <String>[WechatScope.kSNSApiUserInfo],
-                state: 'auth',
-              );
-            }));
-      });
+      _list.add(IconButton(
+          icon: Image.asset(
+            'assets/images/wechat.png',
+            package: "openiothub_common_pages",
+          ),
+          style: ButtonStyle(
+            fixedSize: const MaterialStatePropertyAll<Size>(Size(60, 60)),
+          ),
+          onPressed: () async {
+            // 只有同意隐私政策才可以进行下一步
+            if (!_isChecked) {
+              showToast("请勾选☑️上述同意隐私政策才可以进行下一步");
+              return;
+            }
+            WechatKitPlatform.instance.auth(
+              scope: <String>[WechatScope.kSNSApiUserInfo],
+              state: 'auth',
+            );
+          }));
     }
   }
 

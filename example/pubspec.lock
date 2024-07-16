@@ -462,7 +462,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.5+18"
+    version: "1.0.5+21"
   openiothub_constants:
     dependency: "direct dev"
     description:
@@ -909,7 +909,7 @@ packages:
     source: hosted
     version: "3.14.0"
   wechat_kit:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: wechat_kit
       sha256: "4608b8f40af0201a324a2d8078c300c3dee85d550dfcb5bdf6811a0949008226"

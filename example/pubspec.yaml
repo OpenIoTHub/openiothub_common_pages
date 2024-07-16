@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   qr_flutter: ^4.1.0
+  wechat_kit: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -92,3 +93,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+wechat_kit:
+  #  ios: no_pay # 默认 pay
+  app_id: wx9211939fcd68a318
+  universal_link: https://iothub.cloud/app/openiothub/
