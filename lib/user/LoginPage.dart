@@ -43,11 +43,12 @@ class _State extends State<LoginPage> {
       _auth = WechatKitPlatform.instance.respStream().listen(_listenAuth);
     }
     super.initState();
+    _initList();
+    _checkWechat();
   }
 
   @override
   Widget build(BuildContext context) {
-    _initList();
     return Scaffold(
         appBar: AppBar(
           title: Text("登录"),
@@ -137,30 +138,27 @@ class _State extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
       ),
     ];
-    if (await WechatKitPlatform.instance.isInstalled()) {
-      _list.add(IconButton(
-          icon: Image.asset(
-            'assets/images/wechat.png',
-            package: "openiothub_common_pages",
-          ),
-          style: ButtonStyle(
-            fixedSize: const MaterialStatePropertyAll<Size>(Size(60, 60)),
-          ),
-          onPressed: () async {
-            // 只有同意隐私政策才可以进行下一步
-            if (!_isChecked) {
-              showToast("请勾选☑️上述同意隐私政策才可以进行下一步");
-              return;
-            }
-            WechatKitPlatform.instance.auth(
-              scope: <String>[WechatScope.kSNSApiUserInfo],
-              state: 'auth',
-            );
-          }));
-    }
-    setState(() {
+  }
 
-    });
+  Future<void> _checkWechat() async {
+    if (await WechatKitPlatform.instance.isInstalled()) {
+      setState(() {
+        _list.add(IconButton(
+            icon: Image.asset(
+              'assets/images/wechat.png',
+              package: "openiothub_common_pages",
+            ),
+            style: ButtonStyle(
+              fixedSize: const  MaterialStatePropertyAll<Size>(Size(60,60)),
+            ),
+            onPressed: () async {
+              WechatKitPlatform.instance.auth(
+                scope: <String>[WechatScope.kSNSApiUserInfo],
+                state: 'auth',
+              );
+            }));
+      });
+    }
   }
 
   Future<void> _handleLoginResp(UserLoginResponse userLoginResponse) async {
