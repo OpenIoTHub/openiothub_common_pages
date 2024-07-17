@@ -65,79 +65,82 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _initList() async {
-    _list = <Widget>[
-      TextField(
-        controller: _usermobile,
-        decoration: InputDecoration(labelText: '手机号'),
-        onChanged: (String v) {},
-      ),
-      TextField(
-        controller: _userpassword,
-        decoration: InputDecoration(labelText: '用户密码'),
-        obscureText: true,
-        onChanged: (String v) {},
-      ),
-      TextButton(
-          child: Text('登录'),
-          onPressed: () async {
-            // 只有同意隐私政策才可以进行下一步
-            if (!_isChecked) {
-              showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
-              return;
-            }
-            LoginInfo loginInfo = LoginInfo();
-            loginInfo.userMobile = _usermobile.text;
-            loginInfo.password = _userpassword.text;
-            UserLoginResponse userLoginResponse =
-                await UserManager.LoginWithUserLoginInfo(loginInfo);
-            await _handleLoginResp(userLoginResponse);
-          }),
-      TextButton(
-          child: Text('注册用户'),
-          onPressed: () async {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => RegisterPage()));
-          }),
-      Row(
-        children: [
-          Checkbox(
-            value: _isChecked,
-            onChanged: (bool? newValue) {
-              setState(() {
-                _isChecked = newValue!;
-              });
-            },
-            activeColor: Colors.green, // 选中时的颜色
-            checkColor: Colors.white, // 选中标记的颜色
-          ),
-          Text("同意"),
-          TextButton(
+    setState(() {
+      _list = <Widget>[
+        TextField(
+          controller: _usermobile,
+          decoration: InputDecoration(labelText: '手机号'),
+          onChanged: (String v) {},
+        ),
+        TextField(
+          controller: _userpassword,
+          decoration: InputDecoration(labelText: '用户密码'),
+          obscureText: true,
+          onChanged: (String v) {},
+        ),
+        TextButton(
+            child: Text('登录'),
+            onPressed: () async {
+              // 只有同意隐私政策才可以进行下一步
+              if (!_isChecked) {
+                showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                return;
+              }
+              LoginInfo loginInfo = LoginInfo();
+              loginInfo.userMobile = _usermobile.text;
+              loginInfo.password = _userpassword.text;
+              UserLoginResponse userLoginResponse =
+              await UserManager.LoginWithUserLoginInfo(loginInfo);
+              await _handleLoginResp(userLoginResponse);
+            }),
+        TextButton(
+            child: Text('注册用户'),
+            onPressed: () async {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => RegisterPage()));
+            }),
+        Row(
+          children: [
+            Checkbox(
+              value: _isChecked,
+              onChanged: (bool? newValue) {
+                setState(() {
+                  _isChecked = newValue!;
+                  _initList().then((value) => _checkWechat());
+                });
+              },
+              activeColor: Colors.green, // 选中时的颜色
+              checkColor: Colors.white, // 选中标记的颜色
+            ),
+            Text("同意"),
+            TextButton(
               // TODO 勾选才可以下一步
-              child: Text(
-                '隐私政策',
-                style: TextStyle(color: Colors.red),
-              ),
-              onPressed: () async {
-                goToURL(
-                    context,
-                    "https://docs.iothub.cloud/privacyPolicy/index.html",
-                    "隐私政策");
-              }),
-          TextButton(
-              child: Text(
-                '反馈渠道',
-                style: TextStyle(color: Colors.green),
-              ),
-              onPressed: () async {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => FeedbackPage(
-                          key: UniqueKey(),
-                        )));
-              }),
-        ],
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
-    ];
+                child: Text(
+                  '隐私政策',
+                  style: TextStyle(color: Colors.red),
+                ),
+                onPressed: () async {
+                  goToURL(
+                      context,
+                      "https://docs.iothub.cloud/privacyPolicy/index.html",
+                      "隐私政策");
+                }),
+            TextButton(
+                child: Text(
+                  '反馈渠道',
+                  style: TextStyle(color: Colors.green),
+                ),
+                onPressed: () async {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => FeedbackPage(
+                        key: UniqueKey(),
+                      )));
+                }),
+          ],
+          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+      ];
+    });
   }
 
   Future<void> _checkWechat() async {
