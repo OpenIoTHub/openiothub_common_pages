@@ -1,3 +1,7 @@
+## [1.0.5+25]
+
+* wechat login
+
 ## [1.0.5+24]
 
 * wechat login

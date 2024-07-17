@@ -43,8 +43,7 @@ class _State extends State<LoginPage> {
       _auth = WechatKitPlatform.instance.respStream().listen(_listenAuth);
     }
     super.initState();
-    _initList();
-    _checkWechat();
+    _initList().then((value) => _checkWechat());
   }
 
   @override
