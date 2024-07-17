@@ -158,6 +158,9 @@ class _State extends State<LoginPage> {
             );
           }));
     }
+    setState(() {
+
+    });
   }
 
   Future<void> _handleLoginResp(UserLoginResponse userLoginResponse) async {
