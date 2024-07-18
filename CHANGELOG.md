@@ -1,3 +1,7 @@
+## [1.0.5+26]
+
+* location
+
 ## [1.0.5+25]
 
 * wechat login

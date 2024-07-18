@@ -74,9 +74,6 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
   @override
   void initState() {
     super.initState();
-    initConnectivity();
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   @override
@@ -166,7 +163,14 @@ class _SmartConfigToolState extends State<SmartConfigTool> {
                           ),
                         ),
                         TextButton(
-                          child: Text('开始添加周围智能设备'),
+                            child: Text('1.请求权限并获取网络信息'),
+                            onPressed: () async {
+                              initConnectivity();
+                              _connectivitySubscription =
+                                  _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+                            }),
+                        TextButton(
+                          child: Text('2.开始添加周围智能设备'),
                           onPressed: () async {
                             setState(() {
                               _smartConfigRemainNumber = _smartConfigTypeNumber;
