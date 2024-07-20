@@ -94,8 +94,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
         style: TextStyle(color: Colors.green),
       ),
       onTap: () {
-        goToURL(context, "https://support.qq.com/product/657356",
-            "在线反馈");
+        launchURL("https://support.qq.com/product/657356");
       },
     ));
     tilesList.add(ListTile(

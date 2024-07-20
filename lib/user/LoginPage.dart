@@ -154,6 +154,11 @@ class _State extends State<LoginPage> {
               fixedSize: const  MaterialStatePropertyAll<Size>(Size(60,60)),
             ),
             onPressed: () async {
+              // 只有同意隐私政策才可以进行下一步
+              if (!_isChecked) {
+                showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                return;
+              }
               WechatKitPlatform.instance.auth(
                 scope: <String>[WechatScope.kSNSApiUserInfo],
                 state: 'auth',

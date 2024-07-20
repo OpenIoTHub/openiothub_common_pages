@@ -25,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
       TextEditingController(text: Config.webgRpcPort.toString());
 
   final TextEditingController _iotManagerGrpcServiceHost =
-      TextEditingController(text: Config.iotManagergRpcIp);
+      TextEditingController(text: Config.iotManagerGrpcIp);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
         controller: _iotManagerGrpcServiceHost,
         decoration: InputDecoration(labelText: 'iot-manager grpc服务地址'),
         onChanged: (String v) {
-          Config.iotManagergRpcIp = v;
+          Config.iotManagerGrpcIp = v;
         },
       ),
     ];
