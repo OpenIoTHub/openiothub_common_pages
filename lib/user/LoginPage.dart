@@ -145,6 +145,7 @@ class _State extends State<LoginPage> {
   Future<void> _checkWechat() async {
     if (await WechatKitPlatform.instance.isInstalled()) {
       setState(() {
+        // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
         _list.add(IconButton(
             icon: Image.asset(
               'assets/images/wechat.png',
