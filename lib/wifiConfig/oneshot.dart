@@ -18,6 +18,7 @@ class Oneshot extends StatefulWidget {
 }
 
 class _OneshotState extends State<Oneshot> {
+  bool _privilege_required = false;
   final Connectivity _connectivity = Connectivity();
   StreamSubscription<ConnectivityResult>? _connectivitySubscription;
 
@@ -149,16 +150,64 @@ class _OneshotState extends State<Oneshot> {
                             obscureText: true,
                           ),
                         ),
+                        // TextButton(
+                        //     child: Text('1.请求权限并获取网络信息'),
+                        //     onPressed: () async {
+                        //       initConnectivity();
+                        //       _connectivitySubscription =
+                        //           _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+                        //     }),
                         TextButton(
-                            child: Text('1.请求权限并获取网络信息'),
-                            onPressed: () async {
-                              initConnectivity();
-                              _connectivitySubscription =
-                                  _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-                            }),
-                        TextButton(
-                          child: Text('2.开始添加周围智能设备'),
+                          child: _privilege_required
+                              ? Text('开始添加周围智能设备')
+                              : Text('获取网络和位置权限以获取WiFi信息'),
                           onPressed: () async {
+                            if (!_privilege_required) {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                          title: const Text("获取网络和位置权限提示！"),
+                                          scrollable: true,
+                                          content: SizedBox(
+                                              height: 120, // 设置Dialog的高度
+                                              child: ListView(
+                                                children: const <Widget>[
+                                                  Text(
+                                                    "请注意，点击下方 确定 我们将请求位置和网络权限以获取网络信息",
+                                                    style: TextStyle(
+                                                        color: Colors.red),
+                                                  ),
+                                                ],
+                                              )),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: const Text("取消",
+                                                  style: TextStyle(
+                                                      color: Colors.grey)),
+                                              onPressed: () async {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                            TextButton(
+                                              child: const Text(
+                                                "确定",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                _privilege_required = true;
+                                                initConnectivity();
+                                                _connectivitySubscription =
+                                                    _connectivity
+                                                        .onConnectivityChanged
+                                                        .listen(
+                                                            _updateConnectionStatus);
+                                              },
+                                            ),
+                                          ]));
+                              return;
+                            }
                             setState(() {
                               _isLoading = true;
                               _msg = "正在发现设备，请耐心等待，大概需要一分钟";

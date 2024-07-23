@@ -484,10 +484,10 @@ packages:
     dependency: "direct main"
     description:
       name: openiothub_plugin
-      sha256: "8bcb75d923d319202303be1f5a2c175f2c7aa8ba65c80917d337ad7fd1e54a40"
+      sha256: "04ae0b447753f28c58ca4341cc3304a4672e623cf33e0f5b1b213b7309637a44"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2+2"
+    version: "1.0.2+3"
   package_info_plus:
     dependency: "direct main"
     description:
@@ -624,14 +624,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.5"
-  platform_info:
-    dependency: transitive
-    description:
-      name: platform_info
-      sha256: "012e73712166cf0b56d3eb95c0d33491f56b428c169eca385f036448474147e4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.0"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -873,10 +865,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_windows
-      sha256: ecf9725510600aa2bb6d7ddabe16357691b6d2805f66216a97d1b881e21beff7
+      sha256: "49c10f879746271804767cb45551ec5592cdab00ee105c06dddde1a98f73b185"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.1"
+    version: "3.1.2"
   uuid:
     dependency: transitive
     description:
@@ -993,10 +985,18 @@ packages:
     dependency: transitive
     description:
       name: xterm
-      sha256: "6a02b15d03152b8186e12790902ff28c8a932fc441e89fa7255a7491661a8e69"
+      sha256: "168dfedca77cba33fdb6f52e2cd001e9fde216e398e89335c19b524bb22da3a2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.0"
+    version: "4.0.0"
+  zmodem:
+    dependency: transitive
+    description:
+      name: zmodem
+      sha256: "3b7e5b29f3a7d8aee472029b05165a68438eff2f3f7766edf13daba1e297adbf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
 sdks:
   dart: ">=3.4.0 <4.0.0"
   flutter: ">=3.22.0"
