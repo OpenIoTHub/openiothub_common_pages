@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.5+30
+version: 1.0.5+31
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -35,7 +35,7 @@ dependencies:
   #  获取当前网络的连接状态
 #  connectivity: ^3.0.6
   #  动态请求权限，定位，存储等
-  permission_handler: ^10.2.0
+  permission_handler: ^11.3.1
   #  配网end
 #  fluttertoast: ^8.0.8
   shared_preferences: ^2.1.1
