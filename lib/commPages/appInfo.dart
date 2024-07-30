@@ -5,6 +5,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_common_pages/utils/goToUrl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:tencent_kit/tencent_kit.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
 class AppInfoPage extends StatefulWidget {
@@ -27,7 +28,11 @@ class _AppInfoPageState extends State<AppInfoPage> {
   //版本号
   String buildNumber = "";
 
-  StreamSubscription<WechatResp>? _share;
+  // 微信分享
+  late final StreamSubscription<WechatResp> _share;
+  // QQ分享
+  late final StreamSubscription<TencentResp> _respSubs;
+  TencentLoginResp? _loginResp;
 
   void _listenShareMsg(WechatResp resp) {
     // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
@@ -40,18 +45,14 @@ class _AppInfoPageState extends State<AppInfoPage> {
 
   @override
   void initState() {
-    if (_share == null) {
-      _share = WechatKitPlatform.instance.respStream().listen(_listenShareMsg);
-    }
+    _share = WechatKitPlatform.instance.respStream().listen(_listenShareMsg);
     super.initState();
     _getAppInfo();
   }
 
   @override
   void dispose() {
-    if (_share != null) {
-      _share!.cancel();
-    }
+    _share.cancel();
     super.dispose();
   }
 
@@ -139,37 +140,72 @@ class _AppInfoPageState extends State<AppInfoPage> {
   }
 
   _shareAction() async {
+    var title = "云亿连内网穿透和智能家居管理";
+    var description = "云亿连全平台管理您的所有智能设备和私有云";
+    var url = "https://iothub.cloud/download.html";
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-                title: Text("分享到微信"),
+                title: Text("分享"),
                 content: Text("选择需方分享的位置"),
                 actions: <Widget>[
-                  TextButton(
-                    child: Text("分享到个人"),
-                    onPressed: () {
-                      WechatKitPlatform.instance.shareWebpage(
-                        scene: WechatScene.kSession,
-                        title: "欢迎使用云亿连！",
-                        description: "云亿连管理您的所有智能设备和私有云",
-                        // thumbData:,
-                        webpageUrl: 'https://github.com/OpenIoTHub',
-                      );
-                      Navigator.of(context).pop();
-                    },
+                  Row(
+                    children: [
+                      TextButton(
+                        child: Text("分享到微信"),
+                        onPressed: () {
+                          WechatKitPlatform.instance.shareWebpage(
+                            scene: WechatScene.kSession,
+                            title: title,
+                            description: description,
+                            // thumbData:,
+                            webpageUrl: url,
+                          );
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text("分享到朋友圈"),
+                        onPressed: () {
+                          WechatKitPlatform.instance.shareWebpage(
+                            scene: WechatScene.kTimeline,
+                            title: title,
+                            description: description,
+                            // thumbData:,
+                            webpageUrl: url,
+                          );
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   ),
-                  TextButton(
-                    child: Text("分享到朋友圈"),
-                    onPressed: () {
-                      WechatKitPlatform.instance.shareWebpage(
-                        scene: WechatScene.kTimeline,
-                        title: "欢迎使用云亿连！",
-                        description: "云亿连管理您的所有智能设备和私有云",
-                        // thumbData:,
-                        webpageUrl: 'https://github.com/OpenIoTHub',
-                      );
-                      Navigator.of(context).pop();
-                    },
+                  Row(
+                    children: [
+                      TextButton(
+                        child: Text("分享到QQ"),
+                        onPressed: () {
+                          TencentKitPlatform.instance.shareWebpage(
+                            scene: TencentScene.kScene_QQ,
+                            title: title,
+                            summary: description,
+                            targetUrl: url,
+                          );
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text("分享到QQ空间"),
+                        onPressed: () {
+                          TencentKitPlatform.instance.shareWebpage(
+                            scene: TencentScene.kScene_QZone,
+                            title: title,
+                            summary: description,
+                            targetUrl: url,
+                          );
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
                   )
                 ]));
   }
