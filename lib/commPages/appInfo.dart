@@ -162,8 +162,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
                 title: Text("分享"),
                 content: Text("选择需方分享的位置"),
                 actions: <Widget>[
-                  Row(
-                    children: [
+                  // Row(
+                  //   children: [
                       TextButton(
                         child: Text("分享到微信"),
                         onPressed: () {
@@ -190,36 +190,36 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           Navigator.of(context).pop();
                         },
                       ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      TextButton(
-                        child: Text("分享到QQ"),
-                        onPressed: () {
-                          TencentKitPlatform.instance.shareWebpage(
-                            scene: TencentScene.kScene_QQ,
-                            title: title,
-                            summary: description,
-                            targetUrl: url,
-                          );
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      TextButton(
-                        child: Text("分享到QQ空间"),
-                        onPressed: () {
-                          TencentKitPlatform.instance.shareWebpage(
-                            scene: TencentScene.kScene_QZone,
-                            title: title,
-                            summary: description,
-                            targetUrl: url,
-                          );
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  )
+                    // ],
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     TextButton(
+                  //       child: Text("分享到QQ"),
+                  //       onPressed: () {
+                  //         TencentKitPlatform.instance.shareWebpage(
+                  //           scene: TencentScene.kScene_QQ,
+                  //           title: title,
+                  //           summary: description,
+                  //           targetUrl: url,
+                  //         );
+                  //         Navigator.of(context).pop();
+                  //       },
+                  //     ),
+                  //     TextButton(
+                  //       child: Text("分享到QQ空间"),
+                  //       onPressed: () {
+                  //         TencentKitPlatform.instance.shareWebpage(
+                  //           scene: TencentScene.kScene_QZone,
+                  //           title: title,
+                  //           summary: description,
+                  //           targetUrl: url,
+                  //         );
+                  //         Navigator.of(context).pop();
+                  //       },
+                  //     ),
+                  //   ],
+                  // )
                 ]));
   }
 }

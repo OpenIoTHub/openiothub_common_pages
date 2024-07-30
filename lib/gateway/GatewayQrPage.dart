@@ -160,6 +160,9 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
 
   // 分享网关
   _shareAction() async {
+    Uri? uri = Uri.tryParse(qRCodeForMobileAdd);
+    String id = uri!.queryParameters["id"]!;
+    String url = "https://api.iot-manager.iothub.cloud/v1/displayGatewayQRCodeById?id=$id";
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -175,7 +178,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                         title: "云亿连网关分享",
                         description: "通过云亿连网关管理您的所有智能设备和私有云",
                         // thumbData:,
-                        webpageUrl: qRCodeForMobileAdd,
+                        webpageUrl: url,
                       );
                       Navigator.of(context).pop();
                     },

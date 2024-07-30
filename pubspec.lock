@@ -481,10 +481,10 @@ packages:
     dependency: "direct main"
     description:
       name: openiothub_constants
-      sha256: "053a93d2f6d16836e453a7ce4f0acbe2c76f1b89ad948f99f21048f166b5dc5f"
+      sha256: c084026f8caf1818b8ad767ee4481470b7115cc243265f65838e56d932ade34a
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.2+2"
   openiothub_grpc_api:
     dependency: "direct main"
     description:
