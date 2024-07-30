@@ -43,9 +43,21 @@ class _AppInfoPageState extends State<AppInfoPage> {
     }
   }
 
+  void _listenLogin(TencentResp resp) {
+    if (resp is TencentLoginResp) {
+      _loginResp = resp;
+      final String content = 'login: ${resp.openid} - ${resp.accessToken}';
+      showToast('登录:$content');
+    } else if (resp is TencentShareMsgResp) {
+      final String content = 'share: ${resp.ret} - ${resp.msg}';
+      showToast('分享:$content');
+    }
+  }
+
   @override
   void initState() {
     _share = WechatKitPlatform.instance.respStream().listen(_listenShareMsg);
+    _respSubs = TencentKitPlatform.instance.respStream().listen(_listenLogin);
     super.initState();
     _getAppInfo();
   }
