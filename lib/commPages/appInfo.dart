@@ -65,6 +65,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
   @override
   void dispose() {
     _share.cancel();
+    _respSubs.cancel();
     super.dispose();
   }
 
