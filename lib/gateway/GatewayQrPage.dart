@@ -176,7 +176,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                       WechatKitPlatform.instance.shareWebpage(
                         scene: WechatScene.kSession,
                         title: "云亿连网关分享",
-                        description: "通过云亿连网关管理您的所有智能设备和私有云",
+                        description: "使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云",
                         // thumbData:,
                         webpageUrl: url,
                       );
