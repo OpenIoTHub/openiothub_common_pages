@@ -86,6 +86,7 @@ class _State extends State<LoginPage> {
         Padding(
           padding: const EdgeInsets.only(top: 20.0), // 设置顶部距离
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TDButton(
                   icon: TDIcons.login,
@@ -107,60 +108,66 @@ class _State extends State<LoginPage> {
                         await UserManager.LoginWithUserLoginInfo(loginInfo);
                     await _handleLoginResp(userLoginResponse);
                   }),
-              TDButton(
-                  icon: TDIcons.user,
-                  text: '注册用户',
-                  size: TDButtonSize.medium,
-                  type: TDButtonType.outline,
-                  shape: TDButtonShape.rectangle,
-                  theme: TDButtonTheme.light,
-                  onTap: () async {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RegisterPage()));
-                  }),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0), // 设置顶部距离
+                child: TDButton(
+                    icon: TDIcons.user,
+                    text: '注册用户',
+                    size: TDButtonSize.medium,
+                    type: TDButtonType.outline,
+                    shape: TDButtonShape.rectangle,
+                    theme: TDButtonTheme.defaultTheme,
+                    onTap: () async {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RegisterPage()));
+                    }),
+              )
             ],
           ),
         ),
-        Row(
-          children: [
-            Checkbox(
-              value: _isChecked,
-              onChanged: (bool? newValue) {
-                setState(() {
-                  _isChecked = newValue!;
-                  _initList().then((value) => _checkWechat());
-                });
-              },
-              activeColor: Colors.green, // 选中时的颜色
-              checkColor: Colors.white, // 选中标记的颜色
-            ),
-            Text("同意"),
-            TextButton(
-                // TODO 勾选才可以下一步
-                child: Text(
-                  '隐私政策',
-                  style: TextStyle(color: Colors.red),
-                ),
-                onPressed: () async {
-                  goToURL(
-                      context,
-                      "https://docs.iothub.cloud/privacyPolicy/index.html",
-                      "隐私政策");
-                }),
-            TextButton(
-                child: Text(
-                  '反馈渠道',
-                  style: TextStyle(color: Colors.green),
-                ),
-                onPressed: () async {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => FeedbackPage(
-                            key: UniqueKey(),
-                          )));
-                }),
-          ],
-          mainAxisAlignment: MainAxisAlignment.center,
-        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0), // 设置顶部距离
+          child: Row(
+            children: [
+              Checkbox(
+                value: _isChecked,
+                onChanged: (bool? newValue) {
+                  setState(() {
+                    _isChecked = newValue!;
+                    _initList().then((value) => _checkWechat());
+                  });
+                },
+                activeColor: Colors.green, // 选中时的颜色
+                checkColor: Colors.white, // 选中标记的颜色
+              ),
+              Text("同意"),
+              TextButton(
+                  // TODO 勾选才可以下一步
+                  child: Text(
+                    '隐私政策',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () async {
+                    goToURL(
+                        context,
+                        "https://docs.iothub.cloud/privacyPolicy/index.html",
+                        "隐私政策");
+                  }),
+              TextButton(
+                  child: Text(
+                    '反馈渠道',
+                    style: TextStyle(color: Colors.green),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => FeedbackPage(
+                              key: UniqueKey(),
+                            )));
+                  }),
+            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+        )
       ];
     });
   }
@@ -173,7 +180,7 @@ class _State extends State<LoginPage> {
             icon: Icon(
               TDIcons.logo_wechat,
               color: Colors.green,
-              size: 60,
+              size: 45,
             ),
             style: ButtonStyle(
               fixedSize: const WidgetStatePropertyAll<Size>(Size(70, 70)),
