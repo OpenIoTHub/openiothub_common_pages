@@ -4,6 +4,7 @@ import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 import '../utils/goToUrl.dart';
 
@@ -32,20 +33,27 @@ class _State extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                TextField(
+                TDInput(
                   controller: _usermobile,
-                  decoration: InputDecoration(labelText: '手机号'),
+                  leftLabel: "手机号",
+                  hintText: '请输入手机号',
                   onChanged: (String v) {},
                 ),
-                TextField(
+                TDInput(
                   controller: _userpassword,
-                  decoration: InputDecoration(labelText: '用户密码'),
+                  leftLabel: "用户密码",
+                  hintText: '请输入用户密码',
                   obscureText: true,
                   onChanged: (String v) {},
                 ),
-                TextButton(
-                    child: Text('注册'),
-                    onPressed: () async {
+                TDButton(
+                    icon: TDIcons.login,
+                    text: '注册',
+                    size: TDButtonSize.large,
+                    type: TDButtonType.outline,
+                    shape: TDButtonShape.rectangle,
+                    theme: TDButtonTheme.primary,
+                    onTap: () async {
                       if (!_isChecked) {
                         showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
                         return;

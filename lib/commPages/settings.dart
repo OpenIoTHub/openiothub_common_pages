@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({
@@ -30,23 +31,26 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     List<Widget> listView = <Widget>[
-      TextField(
+      TDInput(
         controller: _grpcServiceHost,
-        decoration: InputDecoration(labelText: 'grpc服务的IP或者域名'),
+        leftLabel: "grpc服务的地址",
+        hintText: '请输入grpc服务的IP或者域名',
         onChanged: (String v) {
           Config.webgRpcIp = v;
         },
       ),
-      TextField(
+      TDInput(
         controller: _grpcServicePort,
-        decoration: InputDecoration(labelText: 'grpc服务的端口'),
+        leftLabel: "grpc服务的端口",
+        hintText: '请输入grpc服务的端口',
         onChanged: (String v) {
           Config.webgRpcPort = int.parse(v);
         },
       ),
-      TextField(
+      TDInput(
         controller: _iotManagerGrpcServiceHost,
-        decoration: InputDecoration(labelText: 'iot-manager grpc服务地址'),
+        leftLabel: "iot-manager地址",
+        hintText: '请输入iot-manager grpc服务地址',
         onChanged: (String v) {
           Config.iotManagerGrpcIp = v;
         },

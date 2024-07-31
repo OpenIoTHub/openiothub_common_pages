@@ -67,20 +67,27 @@ class _State extends State<LoginPage> {
   Future<void> _initList() async {
     setState(() {
       _list = <Widget>[
-        TextField(
+        TDInput(
           controller: _usermobile,
-          decoration: InputDecoration(labelText: '手机号'),
+          leftLabel: "手机号",
+          hintText: '请输入手机号',
           onChanged: (String v) {},
         ),
-        TextField(
+        TDInput(
           controller: _userpassword,
-          decoration: InputDecoration(labelText: '用户密码'),
+          leftLabel: "用户密码",
+          hintText: '请输入用户密码',
           obscureText: true,
           onChanged: (String v) {},
         ),
-        TextButton(
-            child: Text('登录'),
-            onPressed: () async {
+        TDButton(
+            icon: TDIcons.login,
+            text: '登陆',
+            size: TDButtonSize.large,
+            type: TDButtonType.outline,
+            shape: TDButtonShape.rectangle,
+            theme: TDButtonTheme.primary,
+            onTap: () async {
               // 只有同意隐私政策才可以进行下一步
               if (!_isChecked) {
                 showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
@@ -93,9 +100,14 @@ class _State extends State<LoginPage> {
               await UserManager.LoginWithUserLoginInfo(loginInfo);
               await _handleLoginResp(userLoginResponse);
             }),
-        TextButton(
-            child: Text('注册用户'),
-            onPressed: () async {
+        TDButton(
+            icon: TDIcons.user,
+            text: '注册用户',
+            size: TDButtonSize.large,
+            type: TDButtonType.outline,
+            shape: TDButtonShape.rectangle,
+            theme: TDButtonTheme.primary,
+            onTap: () async {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => RegisterPage()));
             }),
@@ -150,7 +162,7 @@ class _State extends State<LoginPage> {
         _list.add(IconButton(
             icon: Icon(TDIcons.logo_wechat, color: Colors.green,),
             style: ButtonStyle(
-              fixedSize: const  WidgetStatePropertyAll<Size>(Size(60,60)),
+              fixedSize: const  WidgetStatePropertyAll<Size>(Size(75,75)),
             ),
             onPressed: () async {
               // 只有同意隐私政策才可以进行下一步

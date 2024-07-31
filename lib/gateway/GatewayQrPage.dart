@@ -8,6 +8,7 @@ import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/proto/manager/publicApi.pb.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
 class GatewayQrPage extends StatefulWidget {
@@ -107,10 +108,14 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
             Center(
                 child: Padding(
               padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-              child: IconButton(
-                icon: Icon(Icons.arrow_back_outlined),
-                tooltip: "返回主界面",
-                onPressed: () {
+              child:                       TDButton(
+                icon: TDIcons.backward,
+                text: '返回主界面',
+                size: TDButtonSize.small,
+                type: TDButtonType.outline,
+                shape: TDButtonShape.rectangle,
+                theme: TDButtonTheme.primary,
+                onTap: () {
                   Navigator.of(context).pop();
                 },
               ),
@@ -170,9 +175,14 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                 content: Text("选择需方分享的位置"),
                 actions: <Widget>[
                   // 分享网关:二维码图片、小程序链接、网页
-                  TextButton(
-                    child: Text("分享链接到个人"),
-                    onPressed: () {
+                  TDButton(
+                    icon: TDIcons.logo_wechat,
+                    text: '分享到微信',
+                    size: TDButtonSize.small,
+                    type: TDButtonType.outline,
+                    shape: TDButtonShape.rectangle,
+                    theme: TDButtonTheme.primary,
+                    onTap: () {
                       WechatKitPlatform.instance.shareWebpage(
                         scene: WechatScene.kSession,
                         title: "云亿连网关分享",

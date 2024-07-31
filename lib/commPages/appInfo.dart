@@ -50,8 +50,13 @@ class _AppInfoPageState extends State<AppInfoPage> {
       final String content = 'login: ${resp.openid} - ${resp.accessToken}';
       showToast('登录:$content');
     } else if (resp is TencentShareMsgResp) {
-      final String content = 'share: ${resp.ret} - ${resp.msg}';
-      showToast('分享:$content');
+      // final String content = 'share: ${resp.ret} - ${resp.msg}';
+      // showToast('分享:$content');
+      if (resp.ret == 0) {
+        showToast("分享成功！");
+      } else {
+        showToast("分享失败！");
+      }
     }
   }
 
@@ -168,7 +173,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                       TDButton(
                         icon: TDIcons.logo_wechat,
                         text: '分享到微信',
-                        size: TDButtonSize.large,
+                        size: TDButtonSize.small,
                         type: TDButtonType.outline,
                         shape: TDButtonShape.rectangle,
                         theme: TDButtonTheme.primary,
@@ -186,7 +191,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                       TDButton(
                       icon: TDIcons.logo_wechat,
                       text: '分享到朋友圈',
-                      size: TDButtonSize.large,
+                      size: TDButtonSize.small,
                       type: TDButtonType.outline,
                       shape: TDButtonShape.rectangle,
                       theme: TDButtonTheme.primary,
@@ -206,9 +211,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
                   Row(
                     children: [
                   TDButton(
-                  icon: TDIcons.logo_wechat,
+                  icon: TDIcons.logo_qq,
                         text: '分享到QQ',
-                        size: TDButtonSize.large,
+                        size: TDButtonSize.small,
                         type: TDButtonType.outline,
                         shape: TDButtonShape.rectangle,
                         theme: TDButtonTheme.primary,
@@ -223,9 +228,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
                         },
                       ),
                       TDButton(
-                        icon: TDIcons.logo_wechat,
+                        icon: TDIcons.logo_qq,
                         text: '分享到QQ空间',
-                        size: TDButtonSize.large,
+                        size: TDButtonSize.small,
                         type: TDButtonType.outline,
                         shape: TDButtonShape.rectangle,
                         theme: TDButtonTheme.primary,
