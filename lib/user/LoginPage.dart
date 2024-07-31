@@ -8,6 +8,7 @@ import 'package:openiothub_common_pages/user/RegisterPage.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
 import '../utils/goToUrl.dart';
@@ -147,12 +148,9 @@ class _State extends State<LoginPage> {
       setState(() {
         // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
         _list.add(IconButton(
-            icon: Image.asset(
-              'assets/images/wechat.png',
-              package: "openiothub_common_pages",
-            ),
+            icon: Icon(TDIcons.logo_wechat, color: Colors.green,),
             style: ButtonStyle(
-              fixedSize: const  MaterialStatePropertyAll<Size>(Size(60,60)),
+              fixedSize: const  WidgetStatePropertyAll<Size>(Size(60,60)),
             ),
             onPressed: () async {
               // 只有同意隐私政策才可以进行下一步

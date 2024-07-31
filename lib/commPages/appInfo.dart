@@ -5,6 +5,7 @@ import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_common_pages/utils/goToUrl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:tencent_kit/tencent_kit.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
@@ -164,9 +165,14 @@ class _AppInfoPageState extends State<AppInfoPage> {
                 actions: <Widget>[
                   Row(
                     children: [
-                      TextButton(
-                        child: Text("分享到微信"),
-                        onPressed: () {
+                      TDButton(
+                        icon: TDIcons.logo_wechat,
+                        text: '分享到微信',
+                        size: TDButtonSize.large,
+                        type: TDButtonType.outline,
+                        shape: TDButtonShape.rectangle,
+                        theme: TDButtonTheme.primary,
+                        onTap: () {
                           WechatKitPlatform.instance.shareWebpage(
                             scene: WechatScene.kSession,
                             title: title,
@@ -177,9 +183,14 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      TextButton(
-                        child: Text("分享到朋友圈"),
-                        onPressed: () {
+                      TDButton(
+                      icon: TDIcons.logo_wechat,
+                      text: '分享到朋友圈',
+                      size: TDButtonSize.large,
+                      type: TDButtonType.outline,
+                      shape: TDButtonShape.rectangle,
+                      theme: TDButtonTheme.primary,
+                      onTap: () {
                           WechatKitPlatform.instance.shareWebpage(
                             scene: WechatScene.kTimeline,
                             title: title,
@@ -194,9 +205,14 @@ class _AppInfoPageState extends State<AppInfoPage> {
                   ),
                   Row(
                     children: [
-                      TextButton(
-                        child: Text("分享到QQ"),
-                        onPressed: () {
+                  TDButton(
+                  icon: TDIcons.logo_wechat,
+                        text: '分享到QQ',
+                        size: TDButtonSize.large,
+                        type: TDButtonType.outline,
+                        shape: TDButtonShape.rectangle,
+                        theme: TDButtonTheme.primary,
+                        onTap: () {
                           TencentKitPlatform.instance.shareWebpage(
                             scene: TencentScene.kScene_QQ,
                             title: title,
@@ -206,9 +222,14 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      TextButton(
-                        child: Text("分享到QQ空间"),
-                        onPressed: () {
+                      TDButton(
+                        icon: TDIcons.logo_wechat,
+                        text: '分享到QQ空间',
+                        size: TDButtonSize.large,
+                        type: TDButtonType.outline,
+                        shape: TDButtonShape.rectangle,
+                        theme: TDButtonTheme.primary,
+                        onTap: () {
                           TencentKitPlatform.instance.shareWebpage(
                             scene: TencentScene.kScene_QZone,
                             title: title,
