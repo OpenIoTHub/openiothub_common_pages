@@ -67,11 +67,14 @@ class _State extends State<LoginPage> {
   Future<void> _initList() async {
     setState(() {
       _list = <Widget>[
-        TDInput(
-          controller: _usermobile,
-          leftLabel: "手机号",
-          hintText: '请输入手机号',
-          onChanged: (String v) {},
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0), // 设置顶部距离
+          child: TDInput(
+            controller: _usermobile,
+            leftLabel: "手机号",
+            hintText: '请输入手机号',
+            onChanged: (String v) {},
+          ),
         ),
         TDInput(
           controller: _userpassword,
@@ -80,37 +83,44 @@ class _State extends State<LoginPage> {
           obscureText: true,
           onChanged: (String v) {},
         ),
-        TDButton(
-            icon: TDIcons.login,
-            text: '登陆',
-            size: TDButtonSize.large,
-            type: TDButtonType.outline,
-            shape: TDButtonShape.rectangle,
-            theme: TDButtonTheme.primary,
-            onTap: () async {
-              // 只有同意隐私政策才可以进行下一步
-              if (!_isChecked) {
-                showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
-                return;
-              }
-              LoginInfo loginInfo = LoginInfo();
-              loginInfo.userMobile = _usermobile.text;
-              loginInfo.password = _userpassword.text;
-              UserLoginResponse userLoginResponse =
-              await UserManager.LoginWithUserLoginInfo(loginInfo);
-              await _handleLoginResp(userLoginResponse);
-            }),
-        TDButton(
-            icon: TDIcons.user,
-            text: '注册用户',
-            size: TDButtonSize.large,
-            type: TDButtonType.outline,
-            shape: TDButtonShape.rectangle,
-            theme: TDButtonTheme.primary,
-            onTap: () async {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => RegisterPage()));
-            }),
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0), // 设置顶部距离
+          child: Row(
+            children: [
+              TDButton(
+                  icon: TDIcons.login,
+                  text: '登陆',
+                  size: TDButtonSize.medium,
+                  type: TDButtonType.outline,
+                  shape: TDButtonShape.rectangle,
+                  theme: TDButtonTheme.primary,
+                  onTap: () async {
+                    // 只有同意隐私政策才可以进行下一步
+                    if (!_isChecked) {
+                      showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                      return;
+                    }
+                    LoginInfo loginInfo = LoginInfo();
+                    loginInfo.userMobile = _usermobile.text;
+                    loginInfo.password = _userpassword.text;
+                    UserLoginResponse userLoginResponse =
+                        await UserManager.LoginWithUserLoginInfo(loginInfo);
+                    await _handleLoginResp(userLoginResponse);
+                  }),
+              TDButton(
+                  icon: TDIcons.user,
+                  text: '注册用户',
+                  size: TDButtonSize.medium,
+                  type: TDButtonType.outline,
+                  shape: TDButtonShape.rectangle,
+                  theme: TDButtonTheme.light,
+                  onTap: () async {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RegisterPage()));
+                  }),
+            ],
+          ),
+        ),
         Row(
           children: [
             Checkbox(
@@ -126,7 +136,7 @@ class _State extends State<LoginPage> {
             ),
             Text("同意"),
             TextButton(
-              // TODO 勾选才可以下一步
+                // TODO 勾选才可以下一步
                 child: Text(
                   '隐私政策',
                   style: TextStyle(color: Colors.red),
@@ -145,8 +155,8 @@ class _State extends State<LoginPage> {
                 onPressed: () async {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => FeedbackPage(
-                        key: UniqueKey(),
-                      )));
+                            key: UniqueKey(),
+                          )));
                 }),
           ],
           mainAxisAlignment: MainAxisAlignment.center,
@@ -160,9 +170,13 @@ class _State extends State<LoginPage> {
       setState(() {
         // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
         _list.add(IconButton(
-            icon: Icon(TDIcons.logo_wechat, color: Colors.green,),
+            icon: Icon(
+              TDIcons.logo_wechat,
+              color: Colors.green,
+              size: 60,
+            ),
             style: ButtonStyle(
-              fixedSize: const  WidgetStatePropertyAll<Size>(Size(75,75)),
+              fixedSize: const WidgetStatePropertyAll<Size>(Size(70, 70)),
             ),
             onPressed: () async {
               // 只有同意隐私政策才可以进行下一步
