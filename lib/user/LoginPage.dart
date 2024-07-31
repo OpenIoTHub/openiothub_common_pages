@@ -71,6 +71,7 @@ class _State extends State<LoginPage> {
           padding: const EdgeInsets.only(top: 20.0), // 设置顶部距离
           child: TDInput(
             controller: _usermobile,
+            backgroundColor: Colors.white,
             leftLabel: "手机号",
             hintText: '请输入手机号',
             onChanged: (String v) {},
@@ -78,6 +79,7 @@ class _State extends State<LoginPage> {
         ),
         TDInput(
           controller: _userpassword,
+          backgroundColor: Colors.white,
           leftLabel: "用户密码",
           hintText: '请输入用户密码',
           obscureText: true,
@@ -99,6 +101,10 @@ class _State extends State<LoginPage> {
                     // 只有同意隐私政策才可以进行下一步
                     if (!_isChecked) {
                       showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                      return;
+                    }
+                    if (_usermobile.text.isEmpty || _userpassword.text.isEmpty) {
+                      showToast("用户名与密码不能为空");
                       return;
                     }
                     LoginInfo loginInfo = LoginInfo();

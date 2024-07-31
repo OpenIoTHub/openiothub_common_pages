@@ -33,6 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
     List<Widget> listView = <Widget>[
       TDInput(
         controller: _grpcServiceHost,
+        backgroundColor: Colors.white,
         leftLabel: "grpc服务的地址",
         hintText: '请输入grpc服务的IP或者域名',
         onChanged: (String v) {
@@ -41,6 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       TDInput(
         controller: _grpcServicePort,
+        backgroundColor: Colors.white,
         leftLabel: "grpc服务的端口",
         hintText: '请输入grpc服务的端口',
         onChanged: (String v) {
@@ -49,6 +51,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       TDInput(
         controller: _iotManagerGrpcServiceHost,
+        backgroundColor: Colors.white,
         leftLabel: "iot-manager地址",
         hintText: '请输入iot-manager grpc服务地址',
         onChanged: (String v) {
