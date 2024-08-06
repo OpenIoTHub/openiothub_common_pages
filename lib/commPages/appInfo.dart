@@ -31,6 +31,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
 
   // 微信分享
   late final StreamSubscription<WechatResp> _share;
+
   // QQ分享
   late final StreamSubscription<TencentResp> _respSubs;
   TencentLoginResp? _loginResp;
@@ -188,30 +189,33 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      TDButton(
-                      icon: TDIcons.logo_wechat,
-                      text: '分享到朋友圈',
-                      size: TDButtonSize.small,
-                      type: TDButtonType.outline,
-                      shape: TDButtonShape.rectangle,
-                      theme: TDButtonTheme.primary,
-                      onTap: () {
-                          WechatKitPlatform.instance.shareWebpage(
-                            scene: WechatScene.kTimeline,
-                            title: title,
-                            description: description,
-                            // thumbData:,
-                            webpageUrl: url,
-                          );
-                          Navigator.of(context).pop();
-                        },
-                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0), // 设置左边距离
+                        child: TDButton(
+                          icon: TDIcons.logo_wechat,
+                          text: '分享到朋友圈',
+                          size: TDButtonSize.small,
+                          type: TDButtonType.outline,
+                          shape: TDButtonShape.rectangle,
+                          theme: TDButtonTheme.primary,
+                          onTap: () {
+                            WechatKitPlatform.instance.shareWebpage(
+                              scene: WechatScene.kTimeline,
+                              title: title,
+                              description: description,
+                              // thumbData:,
+                              webpageUrl: url,
+                            );
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      )
                     ],
                   ),
                   Row(
                     children: [
-                  TDButton(
-                  icon: TDIcons.logo_qq,
+                      TDButton(
+                        icon: TDIcons.logo_qq,
                         text: '分享到QQ',
                         size: TDButtonSize.small,
                         type: TDButtonType.outline,
@@ -227,23 +231,26 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           Navigator.of(context).pop();
                         },
                       ),
-                      TDButton(
-                        icon: TDIcons.logo_qq,
-                        text: '分享到QQ空间',
-                        size: TDButtonSize.small,
-                        type: TDButtonType.outline,
-                        shape: TDButtonShape.rectangle,
-                        theme: TDButtonTheme.primary,
-                        onTap: () {
-                          TencentKitPlatform.instance.shareWebpage(
-                            scene: TencentScene.kScene_QZone,
-                            title: title,
-                            summary: description,
-                            targetUrl: url,
-                          );
-                          Navigator.of(context).pop();
-                        },
-                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0), // 设置左边距离
+                        child: TDButton(
+                          icon: TDIcons.logo_qq,
+                          text: '分享到QQ空间',
+                          size: TDButtonSize.small,
+                          type: TDButtonType.outline,
+                          shape: TDButtonShape.rectangle,
+                          theme: TDButtonTheme.primary,
+                          onTap: () {
+                            TencentKitPlatform.instance.shareWebpage(
+                              scene: TencentScene.kScene_QZone,
+                              title: title,
+                              summary: description,
+                              targetUrl: url,
+                            );
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      )
                     ],
                   )
                 ]));

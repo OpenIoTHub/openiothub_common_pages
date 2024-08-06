@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
@@ -10,6 +11,7 @@ import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:wechat_kit/wechat_kit.dart';
+import 'package:dio/dio.dart';
 
 import '../utils/goToUrl.dart';
 
@@ -179,7 +181,6 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _checkWechat() async {
-    if (await WechatKitPlatform.instance.isInstalled()) {
       setState(() {
         // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
         _list.add(IconButton(
@@ -197,13 +198,37 @@ class _State extends State<LoginPage> {
                 showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
                 return;
               }
-              WechatKitPlatform.instance.auth(
-                scope: <String>[WechatScope.kSNSApiUserInfo],
-                state: 'auth',
-              );
+              // 判断是否安装了微信，安装了微信则打开微信进行登录，否则显示二维码由手机扫描登录
+              if (await WechatKitPlatform.instance.isInstalled()) {
+                WechatKitPlatform.instance.auth(
+                  scope: <String>[WechatScope.kSNSApiUserInfo],
+                  state: 'auth',
+                );
+              }else{
+                //显示二维码扫描登录
+                String qrUrl = await getPicUrl();
+                showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                        title: Text("微信扫码登录"),
+                        content: Image.network(qrUrl),
+                        actions: <Widget>[
+                          // 分享网关:二维码图片、小程序链接、网页
+                          TDButton(
+                            icon: TDIcons.fullscreen_exit,
+                            text: '退出',
+                            size: TDButtonSize.small,
+                            type: TDButtonType.outline,
+                            shape: TDButtonShape.rectangle,
+                            theme: TDButtonTheme.primary,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ]));
+              }
             }));
       });
-    }
   }
 
   Future<void> _handleLoginResp(UserLoginResponse userLoginResponse) async {
@@ -227,5 +252,33 @@ class _State extends State<LoginPage> {
       showToast(
           "登录失败:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
     }
+  }
+}
+
+String generateRandomString(int length) {
+  if (length == 0){
+    length = 12;
+  }
+  const String charset = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
+  final Random random = Random();
+  String result = '';
+  for (var i = 0; i < length; i++) {
+    result += charset[random.nextInt(charset.length)];
+  }
+  return result;
+}
+
+Future<String> getPicUrl() async {
+  final dio = Dio();
+  late String url;
+  String loginFlag = generateRandomString(12);
+  String reqUrl = "https://${Config.iotManagerHttpIp}/wxLogin/getLoginPic?loginFlag=$loginFlag";
+  final response = await dio.get(reqUrl);
+  if (response.data["code"] == 0) {
+    String ticket = response.data["data"]["ticket"];
+    url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=$ticket";
+    return url;
+  }else{
+    return "";
   }
 }

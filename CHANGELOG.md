@@ -1,3 +1,7 @@
+## [1.0.5+43]
+
+* wechat QR login
+
 ## [1.0.5+42]
 
 * TDesign
