@@ -52,7 +52,7 @@ class _State extends State<LoginPage> {
     _initList().then((value) => _checkWechat());
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
       if (loginFlag !=null && !loginFlag!.isEmpty) {
-        String loginRetUrl = "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?loginFlag=$loginFlag";
+        String loginRetUrl = "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?clientType=app&loginFlag=$loginFlag";
         final dio = Dio();
         final response = await dio.get(loginRetUrl);
         if (response.data["code"] == 0 &&
