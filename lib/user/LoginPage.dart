@@ -236,7 +236,13 @@ class _State extends State<LoginPage> {
                 return;
               }
               // 判断是否安装了微信，安装了微信则打开微信进行登录，否则显示二维码由手机扫描登录
-              if (await WechatKitPlatform.instance.isInstalled()) {
+              bool wechatInstalled = false;
+              try {
+                wechatInstalled = await WechatKitPlatform.instance.isInstalled();
+              }on Exception catch (e) {
+                wechatInstalled = false;
+              }
+              if (wechatInstalled) {
                 WechatKitPlatform.instance.auth(
                   scope: <String>[WechatScope.kSNSApiUserInfo],
                   state: 'auth',
