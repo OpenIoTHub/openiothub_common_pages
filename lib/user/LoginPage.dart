@@ -25,6 +25,9 @@ class _State extends State<LoginPage> {
   bool _isChecked = false;
   StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
+  //微信扫码登录随机id
+  String? loginFlag;
+  late Timer _timer;
 
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
@@ -47,6 +50,40 @@ class _State extends State<LoginPage> {
     }
     super.initState();
     _initList().then((value) => _checkWechat());
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      if (loginFlag !=null && !loginFlag!.isEmpty) {
+        String loginRetUrl = "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?loginFlag=$loginFlag";
+        final dio = Dio();
+        final response = await dio.get(loginRetUrl);
+        if (response.data["code"] == 0 &&
+            response.data["data"]["token"] != null &&
+            response.data["data"]["token"] != "") {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString(
+              SharedPreferencesKey.USER_TOKEN_KEY, response.data["data"]["token"]);
+          await prefs.setString(
+              SharedPreferencesKey.USER_NAME_KEY, response.data["data"]["user"]["nickName"]);
+          await prefs.setString(SharedPreferencesKey.USER_EMAIL_KEY,
+              response.data["data"]["user"]["email"]);
+          await prefs.setString(SharedPreferencesKey.USER_MOBILE_KEY,
+              response.data["data"]["user"]["phone"]);
+          await prefs.setString(SharedPreferencesKey.USER_AVATAR_KEY,
+              response.data["data"]["user"]["headerImg"]);
+          Future.delayed(Duration(milliseconds: 500), () {
+            UtilApi.SyncConfigWithToken();
+          });
+          timer.cancel();
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -206,7 +243,13 @@ class _State extends State<LoginPage> {
                 );
               }else{
                 //显示二维码扫描登录
-                String qrUrl = await getPicUrl();
+                loginFlag = generateRandomString(12);
+                String qrUrl = await getPicUrl(loginFlag!);
+                if (qrUrl=="") {
+                  showToast("获取微信登陆二维码失败！");
+                  return;
+                }
+                // 循环获取登录结果
                 showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
@@ -268,10 +311,9 @@ String generateRandomString(int length) {
   return result;
 }
 
-Future<String> getPicUrl() async {
+Future<String> getPicUrl(String loginFlag) async {
   final dio = Dio();
   late String url;
-  String loginFlag = generateRandomString(12);
   String reqUrl = "https://${Config.iotManagerHttpIp}/wxLogin/getLoginPic?loginFlag=$loginFlag";
   final response = await dio.get(reqUrl);
   if (response.data["code"] == 0) {
