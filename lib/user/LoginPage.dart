@@ -50,34 +50,7 @@ class _State extends State<LoginPage> {
     }
     super.initState();
     _initList().then((value) => _checkWechat());
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      if (loginFlag !=null && !loginFlag!.isEmpty) {
-        String loginRetUrl = "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?clientType=app&loginFlag=$loginFlag";
-        final dio = Dio();
-        final response = await dio.get(loginRetUrl);
-        if (response.data["code"] == 0 &&
-            response.data["data"]["token"] != null &&
-            response.data["data"]["token"] != "") {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-              SharedPreferencesKey.USER_TOKEN_KEY, response.data["data"]["token"]);
-          await prefs.setString(
-              SharedPreferencesKey.USER_NAME_KEY, response.data["data"]["user"]["nickName"]);
-          await prefs.setString(SharedPreferencesKey.USER_EMAIL_KEY,
-              response.data["data"]["user"]["email"]);
-          await prefs.setString(SharedPreferencesKey.USER_MOBILE_KEY,
-              response.data["data"]["user"]["phone"]);
-          await prefs.setString(SharedPreferencesKey.USER_AVATAR_KEY,
-              response.data["data"]["user"]["headerImg"]);
-          Future.delayed(Duration(milliseconds: 500), () {
-            UtilApi.SyncConfigWithToken();
-          });
-          timer.cancel();
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-        }
-      }
-    });
+    _init_timer();
   }
 
   @override
@@ -274,7 +247,7 @@ class _State extends State<LoginPage> {
                               Navigator.of(context).pop();
                             },
                           ),
-                        ]));
+                        ])).then((_)=>{loginFlag = null});
               }
             }));
       });
@@ -301,6 +274,41 @@ class _State extends State<LoginPage> {
       showToast(
           "登录失败:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
     }
+  }
+
+  Future<void> _init_timer() async {
+    // 获取扫码登录结果
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
+      if (loginFlag !=null && !loginFlag!.isEmpty) {
+        String loginRetUrl = "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?clientType=app&loginFlag=$loginFlag";
+        final dio = Dio();
+        final response = await dio.get(loginRetUrl);
+        if (response.data["code"] == 0 &&
+            (response.data["data"] as Map<String, dynamic>).containsKey("token") &&
+            response.data["data"]["token"] != null &&
+            response.data["data"]["token"] != "") {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString(
+              SharedPreferencesKey.USER_TOKEN_KEY, response.data["data"]["token"]);
+          await prefs.setString(
+              SharedPreferencesKey.USER_NAME_KEY, response.data["data"]["user"]["nickName"]);
+          await prefs.setString(SharedPreferencesKey.USER_EMAIL_KEY,
+              response.data["data"]["user"]["email"]);
+          await prefs.setString(SharedPreferencesKey.USER_MOBILE_KEY,
+              response.data["data"]["user"]["phone"]);
+          await prefs.setString(SharedPreferencesKey.USER_AVATAR_KEY,
+              response.data["data"]["user"]["headerImg"]);
+          Future.delayed(Duration(milliseconds: 500), () {
+            UtilApi.SyncConfigWithToken();
+          });
+          timer.cancel();
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+        }else{
+          showToast("请现将本微信绑定一个账号再使用微信快捷登录");
+        }
+      }
+    });
   }
 }
 
