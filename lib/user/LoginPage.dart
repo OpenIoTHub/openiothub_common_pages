@@ -304,9 +304,11 @@ class _State extends State<LoginPage> {
           timer.cancel();
           Navigator.of(context).pop();
           Navigator.of(context).pop();
-        }else if ((response.data["data"] as Map<String, dynamic>).containsKey("scan")){
-          showToast("请现将本微信绑定一个账号再使用微信快捷登录");
         }
+        showToast("msg:$response");
+        // else if ((response.data["data"] as Map<String, dynamic>).containsKey("scan")){
+        //   showToast("请现将本微信绑定一个账号再使用微信快捷登录");
+        // }
         // else{
         //   showToast("微信快捷登录失败：${response.data["msg"]}");
         // }
