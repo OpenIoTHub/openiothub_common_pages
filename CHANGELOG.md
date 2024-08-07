@@ -1,3 +1,7 @@
+## [1.0.5+48]
+
+* wechat QR login
+
 ## [1.0.5+47]
 
 * wechat QR login
