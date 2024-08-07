@@ -178,7 +178,11 @@ class _AppInfoPageState extends State<AppInfoPage> {
                         type: TDButtonType.outline,
                         shape: TDButtonShape.rectangle,
                         theme: TDButtonTheme.primary,
-                        onTap: () {
+                        onTap: () async {
+                          if (!await WechatKitPlatform.instance.isInstalled()){
+                            showToast("微信未安装！");
+                            return;
+                          }
                           WechatKitPlatform.instance.shareWebpage(
                             scene: WechatScene.kSession,
                             title: title,
@@ -198,7 +202,11 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           type: TDButtonType.outline,
                           shape: TDButtonShape.rectangle,
                           theme: TDButtonTheme.primary,
-                          onTap: () {
+                          onTap: () async {
+                            if (!await WechatKitPlatform.instance.isInstalled()){
+                            showToast("微信未安装！");
+                            return;
+                            }
                             WechatKitPlatform.instance.shareWebpage(
                               scene: WechatScene.kTimeline,
                               title: title,
@@ -221,7 +229,12 @@ class _AppInfoPageState extends State<AppInfoPage> {
                         type: TDButtonType.outline,
                         shape: TDButtonShape.rectangle,
                         theme: TDButtonTheme.primary,
-                        onTap: () {
+                        onTap: () async {
+                          if (!await TencentKitPlatform.instance.isQQInstalled() &&
+                              !await TencentKitPlatform.instance.isTIMInstalled()){
+                            showToast("QQ未安装！");
+                            return;
+                          }
                           TencentKitPlatform.instance.shareWebpage(
                             scene: TencentScene.kScene_QQ,
                             title: title,
@@ -240,7 +253,12 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           type: TDButtonType.outline,
                           shape: TDButtonShape.rectangle,
                           theme: TDButtonTheme.primary,
-                          onTap: () {
+                          onTap: () async {
+                            if (!await TencentKitPlatform.instance.isQQInstalled() &&
+                            !await TencentKitPlatform.instance.isTIMInstalled()){
+                            showToast("QQ未安装！");
+                            return;
+                            }
                             TencentKitPlatform.instance.shareWebpage(
                               scene: TencentScene.kScene_QZone,
                               title: title,
