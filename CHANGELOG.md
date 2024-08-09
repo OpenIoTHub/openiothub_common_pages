@@ -1,3 +1,7 @@
+## [1.0.5+52]
+
+* flutter pub upgrade
+
 ## [1.0.5+51]
 
 * wechat and QQ share
