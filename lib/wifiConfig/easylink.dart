@@ -20,7 +20,7 @@ class Easylink extends StatefulWidget {
 class _EasylinkState extends State<Easylink> {
   bool _privilege_required = false;
   final Connectivity _connectivity = Connectivity();
-  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
 //  New
   final TextEditingController _bssidFilter = TextEditingController();
@@ -78,7 +78,7 @@ class _EasylinkState extends State<Easylink> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initConnectivity() async {
     await requestPermission();
-    ConnectivityResult? result;
+    List<ConnectivityResult>? result;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       result = await _connectivity.checkConnectivity();
@@ -222,46 +222,48 @@ class _EasylinkState extends State<Easylink> {
                     ))));
   }
 
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    switch (result) {
-      case ConnectivityResult.wifi:
-        String wifiName, wifiBSSID, wifiIP;
+  Future<void> _updateConnectionStatus(List<ConnectivityResult> results) async {
+    results.forEach((ConnectivityResult result) async {
+      switch (result) {
+        case ConnectivityResult.wifi:
+          String wifiName, wifiBSSID, wifiIP;
 
-        try {
-          wifiName = (await WifiInfo().getWifiName())!;
-        } on PlatformException catch (e) {
-          print(e.toString());
-          wifiName = "Failed to get Wifi Name";
-        }
+          try {
+            wifiName = (await WifiInfo().getWifiName())!;
+          } on PlatformException catch (e) {
+            print(e.toString());
+            wifiName = "Failed to get Wifi Name";
+          }
 
-        try {
-          wifiBSSID = (await WifiInfo().getWifiBSSID())!;
-        } on PlatformException catch (e) {
-          print(e.toString());
-          wifiBSSID = "Failed to get Wifi BSSID";
-        }
+          try {
+            wifiBSSID = (await WifiInfo().getWifiBSSID())!;
+          } on PlatformException catch (e) {
+            print(e.toString());
+            wifiBSSID = "Failed to get Wifi BSSID";
+          }
 
-        try {
-          wifiIP = (await WifiInfo().getWifiIP())!;
-        } on PlatformException catch (e) {
-          print(e.toString());
-          wifiIP = "Failed to get Wifi IP";
-        }
+          try {
+            wifiIP = (await WifiInfo().getWifiIP())!;
+          } on PlatformException catch (e) {
+            print(e.toString());
+            wifiIP = "Failed to get Wifi IP";
+          }
 
-        setState(() {
-          _ssidFilter.text = wifiName;
-          _bssidFilter.text = wifiBSSID;
+          setState(() {
+            _ssidFilter.text = wifiName;
+            _bssidFilter.text = wifiBSSID;
 
-          _msg = "输入路由器WIFI(2.4G频率)密码后开始配网";
-        });
-        break;
-      case ConnectivityResult.mobile:
-      case ConnectivityResult.none:
-        showToast("请将手机连接到智能设备需要连接的wifi路由器上");
-        break;
-      default:
-        break;
-    }
+            _msg = "输入路由器WIFI(2.4G频率)密码后开始配网";
+          });
+          break;
+        case ConnectivityResult.mobile:
+        case ConnectivityResult.none:
+          showToast("请将手机连接到智能设备需要连接的wifi路由器上");
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   Future<void> _configureEasyLink() async {
