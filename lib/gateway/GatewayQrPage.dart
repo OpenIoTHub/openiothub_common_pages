@@ -108,7 +108,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
             Center(
                 child: Padding(
               padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-              child:                       TDButton(
+              child: TDButton(
                 icon: TDIcons.backward,
                 text: '返回主界面',
                 size: TDButtonSize.small,
@@ -167,12 +167,15 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
   _shareAction() async {
     Uri? uri = Uri.tryParse(qRCodeForMobileAdd);
     String id = uri!.queryParameters["id"]!;
-    String url = "https://api.iot-manager.iothub.cloud/v1/displayGatewayQRCodeById?id=$id";
+    String url =
+        "https://api.iot-manager.iothub.cloud/v1/displayGatewayQRCodeById?id=$id";
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
                 title: Text("分享到微信"),
-                content: Text("选择需方分享的位置"),
+                content: SizedBox.expand(
+                  child: Text("选择需方分享的位置"),
+                ),
                 actions: <Widget>[
                   // 分享网关:二维码图片、小程序链接、网页
                   TDButton(

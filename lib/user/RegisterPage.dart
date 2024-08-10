@@ -60,7 +60,8 @@ class _State extends State<RegisterPage> {
                         showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
                         return;
                       }
-                      if (_usermobile.text.isEmpty || _userpassword.text.isEmpty) {
+                      if (_usermobile.text.isEmpty ||
+                          _userpassword.text.isEmpty) {
                         showToast("用户名与密码不能为空");
                         return;
                       }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
@@ -11,7 +12,6 @@ import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:wechat_kit/wechat_kit.dart';
-import 'package:dio/dio.dart';
 
 import '../utils/goToUrl.dart';
 
@@ -25,6 +25,7 @@ class _State extends State<LoginPage> {
   bool _isChecked = false;
   StreamSubscription<WechatResp>? _auth;
   List<Widget> _list = <Widget>[];
+
   //微信扫码登录随机id
   String? loginFlag;
   late Timer _timer;
@@ -115,7 +116,8 @@ class _State extends State<LoginPage> {
                       showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
                       return;
                     }
-                    if (_usermobile.text.isEmpty || _userpassword.text.isEmpty) {
+                    if (_usermobile.text.isEmpty ||
+                        _userpassword.text.isEmpty) {
                       showToast("用户名与密码不能为空");
                       return;
                     }
@@ -191,66 +193,66 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _checkWechat() async {
-      setState(() {
-        // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
-        _list.add(IconButton(
-            icon: Icon(
-              TDIcons.logo_wechat,
-              color: Colors.green,
-              size: 45,
-            ),
-            style: ButtonStyle(
-              fixedSize: const WidgetStatePropertyAll<Size>(Size(70, 70)),
-            ),
-            onPressed: () async {
-              // 只有同意隐私政策才可以进行下一步
-              if (!_isChecked) {
-                showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+    setState(() {
+      // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
+      _list.add(IconButton(
+          icon: Icon(
+            TDIcons.logo_wechat,
+            color: Colors.green,
+            size: 45,
+          ),
+          style: ButtonStyle(
+            fixedSize: const WidgetStatePropertyAll<Size>(Size(70, 70)),
+          ),
+          onPressed: () async {
+            // 只有同意隐私政策才可以进行下一步
+            if (!_isChecked) {
+              showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+              return;
+            }
+            // 判断是否安装了微信，安装了微信则打开微信进行登录，否则显示二维码由手机扫描登录
+            bool wechatInstalled = false;
+            try {
+              wechatInstalled = await WechatKitPlatform.instance.isInstalled();
+            } on Exception catch (e) {
+              wechatInstalled = false;
+            }
+            if (wechatInstalled) {
+              WechatKitPlatform.instance.auth(
+                scope: <String>[WechatScope.kSNSApiUserInfo],
+                state: 'auth',
+              );
+            } else {
+              //显示二维码扫描登录
+              loginFlag = generateRandomString(12);
+              String qrUrl = await getPicUrl(loginFlag!);
+              if (qrUrl == "") {
+                showToast("获取微信登陆二维码失败！");
                 return;
               }
-              // 判断是否安装了微信，安装了微信则打开微信进行登录，否则显示二维码由手机扫描登录
-              bool wechatInstalled = false;
-              try {
-                wechatInstalled = await WechatKitPlatform.instance.isInstalled();
-              }on Exception catch (e) {
-                wechatInstalled = false;
-              }
-              if (wechatInstalled) {
-                WechatKitPlatform.instance.auth(
-                  scope: <String>[WechatScope.kSNSApiUserInfo],
-                  state: 'auth',
-                );
-              }else{
-                //显示二维码扫描登录
-                loginFlag = generateRandomString(12);
-                String qrUrl = await getPicUrl(loginFlag!);
-                if (qrUrl=="") {
-                  showToast("获取微信登陆二维码失败！");
-                  return;
-                }
-                // 循环获取登录结果
-                showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                        title: Text("微信扫码登录"),
-                        content: Image.network(qrUrl),
-                        actions: <Widget>[
-                          // 分享网关:二维码图片、小程序链接、网页
-                          TDButton(
-                            icon: TDIcons.fullscreen_exit,
-                            text: '退出',
-                            size: TDButtonSize.small,
-                            type: TDButtonType.outline,
-                            shape: TDButtonShape.rectangle,
-                            theme: TDButtonTheme.primary,
-                            onTap: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ])).then((_)=>{loginFlag = null});
-              }
-            }));
-      });
+              // 循环获取登录结果
+              showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                          title: Text("微信扫码登录"),
+                          content: SizedBox.expand(child: Image.network(qrUrl)),
+                          actions: <Widget>[
+                            // 分享网关:二维码图片、小程序链接、网页
+                            TDButton(
+                              icon: TDIcons.fullscreen_exit,
+                              text: '退出',
+                              size: TDButtonSize.small,
+                              type: TDButtonType.outline,
+                              shape: TDButtonShape.rectangle,
+                              theme: TDButtonTheme.primary,
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ])).then((_) => {loginFlag = null});
+            }
+          }));
+    });
   }
 
   Future<void> _handleLoginResp(UserLoginResponse userLoginResponse) async {
@@ -279,19 +281,21 @@ class _State extends State<LoginPage> {
   Future<void> _init_timer() async {
     // 获取扫码登录结果
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      if (loginFlag !=null && !loginFlag!.isEmpty) {
-        String loginRetUrl = "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?clientType=app&loginFlag=$loginFlag";
+      if (loginFlag != null && !loginFlag!.isEmpty) {
+        String loginRetUrl =
+            "https://${Config.iotManagerHttpIp}/wxLogin/loginOrCreate?clientType=app&loginFlag=$loginFlag";
         final dio = Dio();
         final response = await dio.get(loginRetUrl);
         if (response.data["code"] == 0 &&
-            (response.data["data"] as Map<String, dynamic>).containsKey("token") &&
+            (response.data["data"] as Map<String, dynamic>)
+                .containsKey("token") &&
             response.data["data"]["token"] != null &&
             response.data["data"]["token"] != "") {
           SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString(
-              SharedPreferencesKey.USER_TOKEN_KEY, response.data["data"]["token"]);
-          await prefs.setString(
-              SharedPreferencesKey.USER_NAME_KEY, response.data["data"]["user"]["nickName"]);
+          await prefs.setString(SharedPreferencesKey.USER_TOKEN_KEY,
+              response.data["data"]["token"]);
+          await prefs.setString(SharedPreferencesKey.USER_NAME_KEY,
+              response.data["data"]["user"]["nickName"]);
           await prefs.setString(SharedPreferencesKey.USER_EMAIL_KEY,
               response.data["data"]["user"]["email"]);
           await prefs.setString(SharedPreferencesKey.USER_MOBILE_KEY,
@@ -304,11 +308,15 @@ class _State extends State<LoginPage> {
           timer.cancel();
           Navigator.of(context).pop();
           Navigator.of(context).pop();
-        }else if ((response.data["data"] as Map<String, dynamic>).containsKey("scan") && (response.data["data"] as Map<String, dynamic>)["scan"] == true){
+        } else if ((response.data["data"] as Map<String, dynamic>)
+                .containsKey("scan") &&
+            (response.data["data"] as Map<String, dynamic>)["scan"] == true) {
           showToast("请现将本微信绑定一个账号再使用微信快捷登录");
-        }else if ((response.data["data"] as Map<String, dynamic>).containsKey("scan") && (response.data["data"] as Map<String, dynamic>)["scan"] == false){
+        } else if ((response.data["data"] as Map<String, dynamic>)
+                .containsKey("scan") &&
+            (response.data["data"] as Map<String, dynamic>)["scan"] == false) {
           // showToast("请扫码！");
-        }else{
+        } else {
           showToast("微信快捷登录失败：${response.data["msg"]}");
         }
       }
@@ -317,10 +325,11 @@ class _State extends State<LoginPage> {
 }
 
 String generateRandomString(int length) {
-  if (length == 0){
+  if (length == 0) {
     length = 12;
   }
-  const String charset = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
+  const String charset =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
   final Random random = Random();
   String result = '';
   for (var i = 0; i < length; i++) {
@@ -332,13 +341,14 @@ String generateRandomString(int length) {
 Future<String> getPicUrl(String loginFlag) async {
   final dio = Dio();
   late String url;
-  String reqUrl = "https://${Config.iotManagerHttpIp}/wxLogin/getLoginPic?loginFlag=$loginFlag";
+  String reqUrl =
+      "https://${Config.iotManagerHttpIp}/wxLogin/getLoginPic?loginFlag=$loginFlag";
   final response = await dio.get(reqUrl);
   if (response.data["code"] == 0) {
     String ticket = response.data["data"]["ticket"];
     url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=$ticket";
     return url;
-  }else{
+  } else {
     return "";
   }
 }

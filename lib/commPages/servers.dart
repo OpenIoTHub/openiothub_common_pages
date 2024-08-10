@@ -141,109 +141,111 @@ class ServerPagesState extends State<ServerPages> {
             builder: (context, state) {
               return AlertDialog(
                   title: Text("添加自建服务器："),
-                  content: ListView(
-                    children: <Widget>[
-                      TextFormField(
-                        controller: _uuid_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: '服务器uuid',
-                          helperText: '跟server-go服务器里面的配置文件一致',
+                  content: SizedBox.expand(
+                    child: ListView(
+                      children: <Widget>[
+                        TextFormField(
+                          controller: _uuid_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: '服务器uuid',
+                            helperText: '跟server-go服务器里面的配置文件一致',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _name_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: '名称',
-                          helperText: '自定义服务器名称',
+                        TextFormField(
+                          controller: _name_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: '名称',
+                            helperText: '自定义服务器名称',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _server_host_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: '服务器ip地址或者域名',
-                          helperText: '公网server-go服务器的地址',
+                        TextFormField(
+                          controller: _server_host_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: '服务器ip地址或者域名',
+                            helperText: '公网server-go服务器的地址',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _login_key_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'login_key',
-                          helperText: '秘钥',
+                        TextFormField(
+                          controller: _login_key_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'login_key',
+                            helperText: '秘钥',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _tcp_port_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'tcp_port',
-                          helperText: 'tcp端口',
+                        TextFormField(
+                          controller: _tcp_port_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'tcp_port',
+                            helperText: 'tcp端口',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _kcp_port_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'kcp_port',
-                          helperText: 'kcp端口',
+                        TextFormField(
+                          controller: _kcp_port_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'kcp_port',
+                            helperText: 'kcp端口',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _udp_api_port_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'udp_api_port',
-                          helperText: '端口',
+                        TextFormField(
+                          controller: _udp_api_port_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'udp_api_port',
+                            helperText: '端口',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _kcp_api_port_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'kcp_api_port',
-                          helperText: '端口',
+                        TextFormField(
+                          controller: _kcp_api_port_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'kcp_api_port',
+                            helperText: '端口',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _tls_port_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'tls_port',
-                          helperText: '端口',
+                        TextFormField(
+                          controller: _tls_port_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'tls_port',
+                            helperText: '端口',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _grpc_port_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: 'grpc_port',
-                          helperText: '端口',
+                        TextFormField(
+                          controller: _grpc_port_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: 'grpc_port',
+                            helperText: '端口',
+                          ),
                         ),
-                      ),
-                      TextFormField(
-                        controller: _description_controller,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10.0),
-                          labelText: '描述',
-                          helperText: '自定义描述信息',
+                        TextFormField(
+                          controller: _description_controller,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(10.0),
+                            labelText: '描述',
+                            helperText: '自定义描述信息',
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Text("提供给APP所有人使用:"),
-                          Switch(
-                              value: _is_public,
-                              onChanged: (bool newVal) {
-                                state(() {
-                                  _is_public = newVal;
-                                });
-                              })
-                        ],
-                      ),
-                    ],
+                        Row(
+                          children: [
+                            Text("提供给APP所有人使用:"),
+                            Switch(
+                                value: _is_public,
+                                onChanged: (bool newVal) {
+                                  state(() {
+                                    _is_public = newVal;
+                                  });
+                                })
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   actions: <Widget>[
                     TextButton(

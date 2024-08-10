@@ -168,17 +168,16 @@ class _EasylinkState extends State<Easylink> {
                                   builder: (_) => AlertDialog(
                                           title: const Text("获取网络和位置权限提示！"),
                                           scrollable: true,
-                                          content: SizedBox(
-                                              height: 120, // 设置Dialog的高度
+                                          content: SizedBox.expand(
                                               child: ListView(
-                                                children: const <Widget>[
-                                                  Text(
-                                                    "请注意，点击下方 确定 我们将请求位置和网络权限以获取网络信息",
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ),
-                                                ],
-                                              )),
+                                            children: const <Widget>[
+                                              Text(
+                                                "请注意，点击下方 确定 我们将请求位置和网络权限以获取网络信息",
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                            ],
+                                          )),
                                           actions: <Widget>[
                                             TextButton(
                                               child: const Text("取消",

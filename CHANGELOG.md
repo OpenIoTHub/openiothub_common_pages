@@ -1,3 +1,7 @@
+## [1.0.5+54]
+
+* SizedBox.expand
+
 ## [1.0.5+53]
 
 * flutter pub upgrade

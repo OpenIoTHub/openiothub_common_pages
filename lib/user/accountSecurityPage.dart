@@ -177,21 +177,20 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
         builder: (_) => AlertDialog(
                 title: Text("修改：$type"),
                 scrollable: true,
-                content: SizedBox(
-                    height: 100, // 设置Dialog的高度
+                content: SizedBox.expand(
                     child: ListView(
-                      children: <Widget>[
-                        TextField(
-                          controller: _new_value_controller,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(10.0),
-                            labelText: '请输入新的$type',
-                            helperText: '新值',
-                          ),
-                          obscureText: type == "密码",
-                        ),
-                      ],
-                    )),
+                  children: <Widget>[
+                    TextField(
+                      controller: _new_value_controller,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.all(10.0),
+                        labelText: '请输入新的$type',
+                        helperText: '新值',
+                      ),
+                      obscureText: type == "密码",
+                    ),
+                  ],
+                )),
                 actions: <Widget>[
                   TextButton(
                     child: Text("取消"),
@@ -231,18 +230,23 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
 
   Future<void> _delete_my_account() async {
     TextEditingController _new_value_controller =
-    TextEditingController.fromValue(TextEditingValue(text: ""));
+        TextEditingController.fromValue(TextEditingValue(text: ""));
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-            title: Text("删除我的账号"),
-            scrollable: true,
-            content: SizedBox(
-                height: 120, // 设置Dialog的高度
-                child: ListView(
+                title: Text("删除我的账号"),
+                scrollable: true,
+                content: SizedBox.expand(
+                    child: ListView(
                   children: <Widget>[
-                    Text("请注意，确认删除之后删除操作立马生效，且不可恢复！", style: TextStyle(color: Colors.red),),
-                    Text("操作不可恢复！", style: TextStyle(color: Colors.red),),
+                    Text(
+                      "请注意，确认删除之后删除操作立马生效，且不可恢复！",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    Text(
+                      "操作不可恢复！",
+                      style: TextStyle(color: Colors.red),
+                    ),
                     TextField(
                       controller: _new_value_controller,
                       decoration: InputDecoration(
@@ -252,32 +256,38 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                       ),
                       obscureText: true,
                     ),
-                    Text("操作不可恢复！", style: TextStyle(color: Colors.red),),
+                    Text(
+                      "操作不可恢复！",
+                      style: TextStyle(color: Colors.red),
+                    ),
                   ],
                 )),
-            actions: <Widget>[
-              TextButton(
-                child: Text("确认删除账号?", style: TextStyle(color: Colors.red)),
-                onPressed: () async {
-                  LoginInfo login_info = LoginInfo();
-                  login_info.password = _new_value_controller.text;
-                  OperationResponse operationResponse =
-                  await UserManager.DeleteMyAccount(login_info);
-                  if (operationResponse.code==0) {
-                    //删除账号成功
-                    showToast("删除账号成功！");
-                    Navigator.of(context).pop();
-                  }else{
-                    showToast("删除账号失败:${operationResponse.msg}");
-                  }
-                },
-              ),
-              TextButton(
-                child: Text("取消", style: TextStyle(color: Colors.green),),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ]));
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("确认删除账号?", style: TextStyle(color: Colors.red)),
+                    onPressed: () async {
+                      LoginInfo login_info = LoginInfo();
+                      login_info.password = _new_value_controller.text;
+                      OperationResponse operationResponse =
+                          await UserManager.DeleteMyAccount(login_info);
+                      if (operationResponse.code == 0) {
+                        //删除账号成功
+                        showToast("删除账号成功！");
+                        Navigator.of(context).pop();
+                      } else {
+                        showToast("删除账号失败:${operationResponse.msg}");
+                      }
+                    },
+                  ),
+                  TextButton(
+                    child: Text(
+                      "取消",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ]));
   }
 }

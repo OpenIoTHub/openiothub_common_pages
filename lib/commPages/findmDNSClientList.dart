@@ -199,7 +199,8 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           return StatefulBuilder(builder: (context, state) {
             return AlertDialog(
                 title: Text("手动创建一个网关？"),
-                content: ListView(
+                content: SizedBox.expand(
+                    child: ListView(
                   children: ListTile.divideTiles(
                     context: context,
                     tiles: [
@@ -223,7 +224,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
                       ),
                     ],
                   ).toList(),
-                ),
+                )),
                 actions: <Widget>[
                   TextButton(
                     child: Text("取消"),
