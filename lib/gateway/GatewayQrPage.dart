@@ -173,9 +173,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
         context: context,
         builder: (_) => AlertDialog(
                 title: Text("分享到微信"),
-                content: SizedBox.expand(
-                  child: Text("选择需方分享的位置"),
-                ),
+                content: Text("选择需方分享的位置"),
                 actions: <Widget>[
                   // 分享网关:二维码图片、小程序链接、网页
                   TDButton(

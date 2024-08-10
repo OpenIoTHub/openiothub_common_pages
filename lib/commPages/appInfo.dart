@@ -167,7 +167,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
         context: context,
         builder: (_) => AlertDialog(
                 title: Text("分享"),
-                content: SizedBox.expand(child: Text("选择需方分享的位置")),
+                content: Text("选择需方分享的位置"),
                 actions: <Widget>[
                   Row(
                     children: [

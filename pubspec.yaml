@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.5+54
+version: 1.0.5+55
 homepage: https://github.com/OpenIoTHub
 
 environment:
