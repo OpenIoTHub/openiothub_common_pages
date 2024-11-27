@@ -1,3 +1,7 @@
+## [1.0.5+56]
+
+* remove wifi_info_flutter
+
 ## [1.0.5+55]
 
 * remove share SizedBox.expand

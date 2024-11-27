@@ -1,12 +1,14 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_oneshot/flutter_oneshot.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/wifiConfig/permission.dart';
-import 'package:wifi_info_flutter/wifi_info_flutter.dart';
+import 'package:network_info_plus/network_info_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Oneshot extends StatefulWidget {
   Oneshot({required Key key, required this.title}) : super(key: key);
@@ -19,19 +21,19 @@ class Oneshot extends StatefulWidget {
 
 class _OneshotState extends State<Oneshot> {
   bool _privilege_required = false;
-  final Connectivity _connectivity = Connectivity();
-  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
+  final NetworkInfo _networkInfo = NetworkInfo();
 
 //  New
-  final TextEditingController _bssidFilter = TextEditingController();
+  final TextEditingController _bssidFilter =
+      TextEditingController(text: "点击获取WiFi信息");
   final TextEditingController _ssidFilter = TextEditingController();
   final TextEditingController _passwordFilter = TextEditingController();
 
   bool _isLoading = false;
 
-  String _ssid = "";
-  String _bssid = "";
-  String _password = "";
+  String? _ssid;
+  String? _bssid;
+  String? _password;
   String _msg = "上面输入wifi密码开始设置设备联网";
 
   _OneshotState() {
@@ -71,29 +73,7 @@ class _OneshotState extends State<Oneshot> {
 
   @override
   void dispose() {
-    _connectivitySubscription?.cancel();
     super.dispose();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initConnectivity() async {
-    await requestPermission();
-    List<ConnectivityResult>? result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
-      print(e.toString());
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) {
-      return;
-    }
-
-    _updateConnectionStatus(result!);
   }
 
   @override
@@ -129,82 +109,43 @@ class _OneshotState extends State<Oneshot> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(height: 10),
-                        Container(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                              Text("设备配网"),
-                              TextField(
-                                controller: _ssidFilter,
-                                decoration: InputDecoration(labelText: 'ssid'),
-                              ),
-                              TextField(
-                                controller: _bssidFilter,
-                                decoration: InputDecoration(labelText: 'bssid'),
-                              ),
-                            ])),
+                        GestureDetector(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Text("设备配网"),
+                                TextField(
+                                  controller: _ssidFilter,
+                                  decoration:
+                                      InputDecoration(labelText: 'WiFi名称'),
+                                  readOnly: true,
+                                ),
+                                TextField(
+                                  controller: _bssidFilter,
+                                  decoration:
+                                      InputDecoration(labelText: 'BSSID'),
+                                  readOnly: true,
+                                ),
+                              ]),
+                          onTap: () async {
+                            await requestPermission();
+                            await _updateConnectionStatus();
+                          },
+                        ),
                         Container(
                           child: TextField(
                             controller: _passwordFilter,
-                            decoration: InputDecoration(labelText: 'Wifi密码'),
+                            decoration: InputDecoration(labelText: '输入WiFi密码'),
                             obscureText: true,
                           ),
                         ),
-                        // TextButton(
-                        //     child: Text('1.请求权限并获取网络信息'),
-                        //     onPressed: () async {
-                        //       initConnectivity();
-                        //       _connectivitySubscription =
-                        //           _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-                        //     }),
                         TextButton(
                           child: _privilege_required
                               ? Text('开始添加周围智能设备')
                               : Text('获取网络和位置权限以获取WiFi信息'),
                           onPressed: () async {
-                            if (!_privilege_required) {
-                              showDialog(
-                                  context: context,
-                                  builder: (_) => AlertDialog(
-                                          title: const Text("获取网络和位置权限提示！"),
-                                          scrollable: true,
-                                          content: SizedBox.expand(
-                                              child: ListView(
-                                            children: const <Widget>[
-                                              Text(
-                                                "请注意，点击下方 确定 我们将请求位置和网络权限以获取网络信息",
-                                                style: TextStyle(
-                                                    color: Colors.red),
-                                              ),
-                                            ],
-                                          )),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: const Text("取消",
-                                                  style: TextStyle(
-                                                      color: Colors.grey)),
-                                              onPressed: () async {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            TextButton(
-                                              child: const Text(
-                                                "确定",
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                                _privilege_required = true;
-                                                initConnectivity();
-                                                _connectivitySubscription =
-                                                    _connectivity
-                                                        .onConnectivityChanged
-                                                        .listen(
-                                                            _updateConnectionStatus);
-                                              },
-                                            ),
-                                          ]));
+                            if (_ssid == null || _password == null) {
+                              showToast("WiFi信息不能为空");
                               return;
                             }
                             setState(() {
@@ -212,7 +153,7 @@ class _OneshotState extends State<Oneshot> {
                               _msg = "正在发现设备，请耐心等待，大概需要一分钟";
                             });
                             //由于微信AirKiss配网和汉枫SmartLink都是使用本地的UDP端口10000进行监听所以，先进行AirKiss然后进行SmartLink
-                            await _configureOneShot();
+                            await _configureWiFi();
                           },
                         ),
                         Container(height: 10),
@@ -221,54 +162,53 @@ class _OneshotState extends State<Oneshot> {
                     ))));
   }
 
-  Future<void> _updateConnectionStatus(List<ConnectivityResult> results) async {
-    results.forEach((ConnectivityResult result) async {
-      switch (result) {
-        case ConnectivityResult.wifi:
-          String wifiName, wifiBSSID, wifiIP;
+  Future<void> _updateConnectionStatus() async {
+    String? wifiName, wifiBSSID;
 
-          try {
-            wifiName = (await WifiInfo().getWifiName())!;
-          } on PlatformException catch (e) {
-            print(e.toString());
-            wifiName = "Failed to get Wifi Name";
-          }
-
-          try {
-            wifiBSSID = (await WifiInfo().getWifiBSSID())!;
-          } on PlatformException catch (e) {
-            print(e.toString());
-            wifiBSSID = "Failed to get Wifi BSSID";
-          }
-
-          try {
-            wifiIP = (await WifiInfo().getWifiIP())!;
-          } on PlatformException catch (e) {
-            print(e.toString());
-            wifiIP = "Failed to get Wifi IP";
-          }
-
-          setState(() {
-            _ssidFilter.text = wifiName;
-            _bssidFilter.text = wifiBSSID;
-
-            _msg = "输入路由器WIFI(2.4G频率)密码后开始配网";
-          });
-          break;
-        case ConnectivityResult.mobile:
-        case ConnectivityResult.none:
-          showToast("请将手机连接到智能设备需要连接的wifi路由器上");
-          break;
-        default:
-          break;
+    try {
+      if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+        // Request permissions as recommended by the plugin documentation:
+        // https://github.com/fluttercommunity/plus_plugins/tree/main/packages/network_info_plus/network_info_plus
+        if (await Permission.locationWhenInUse.request().isGranted) {
+          wifiName = await _networkInfo.getWifiName();
+        } else {
+          wifiName = 'Unauthorized to get Wifi Name';
+        }
+      } else {
+        wifiName = await _networkInfo.getWifiName();
       }
+    } on PlatformException catch (e) {
+      wifiName = 'Failed to get Wifi Name';
+    }
+
+    try {
+      if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+        // Request permissions as recommended by the plugin documentation:
+        // https://github.com/fluttercommunity/plus_plugins/tree/main/packages/network_info_plus/network_info_plus
+        if (await Permission.locationWhenInUse.request().isGranted) {
+          wifiBSSID = await _networkInfo.getWifiBSSID();
+        } else {
+          wifiBSSID = 'Unauthorized to get Wifi BSSID';
+        }
+      } else {
+        wifiName = await _networkInfo.getWifiName();
+      }
+    } on PlatformException catch (e) {
+      wifiBSSID = 'Failed to get Wifi BSSID';
+    }
+
+    setState(() {
+      _ssidFilter.text = wifiName!;
+      _bssidFilter.text = wifiBSSID!;
+
+      _msg = "输入路由器WIFI(2.4G频率)密码后开始配网";
     });
   }
 
-  Future<void> _configureOneShot() async {
+  Future<void> _configureWiFi() async {
     String output = "Unknown";
     try {
-      await FlutterOneshot.start(_ssid, _password, 20).then((v) {
+      await FlutterOneshot.start(_ssid!, _password!, 20).then((v) {
         setState(() {
           _isLoading = false;
           _msg = "附近的OneShot设备配网任务完成";

@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.5+55
+version: 1.0.5+56
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -31,7 +31,8 @@ dependencies:
   # AirKiss
   airkiss_dart: ^1.0.0
   #  获取wifi名和bssid
-  wifi_info_flutter: ^2.0.2
+#  wifi_info_flutter: ^2.0.2
+  network_info_plus: ^6.1.1
   #  获取当前网络的连接状态
 #  connectivity: ^3.0.6
   #  动态请求权限，定位，存储等
