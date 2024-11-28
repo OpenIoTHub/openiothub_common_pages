@@ -1,3 +1,7 @@
+## [1.0.5+58]
+
+* remove some wifi config method
+
 ## [1.0.5+57]
 
 * remove some wifi config method

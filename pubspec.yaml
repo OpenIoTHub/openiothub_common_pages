@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.5+57
+version: 1.0.5+58
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -23,11 +23,11 @@ dependencies:
   #  esp配网
   #  smartconfig: ^0.0.1
   #  w60x的OneShot配网
-  flutter_oneshot: ^0.0.1
-  # 庆科easylink
-  flutter_easylink: ^0.0.1
-  ## 汉枫smartlink
-  flutter_smartlink: ^0.0.1
+#  flutter_oneshot: ^0.0.1
+#  # 庆科easylink
+#  flutter_easylink: ^0.0.1
+#  ## 汉枫smartlink
+#  flutter_smartlink: ^0.0.1
   # AirKiss
   airkiss_dart: ^1.0.0
   #  获取wifi名和bssid
