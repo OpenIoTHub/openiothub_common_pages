@@ -13,7 +13,3 @@ export 'user/RegisterPage.dart';
 export 'user/userInfoPage.dart';
 export 'utils/ThemeUtils.dart';
 export 'wifiConfig/airkiss.dart';
-export 'wifiConfig/easylink.dart';
-export 'wifiConfig/oneshot.dart';
-export 'wifiConfig/smartConfigTool.dart';
-export 'wifiConfig/smartlink.dart';
