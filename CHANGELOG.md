@@ -1,3 +1,7 @@
+## [1.0.5+59]
+
+* remove connectivity_plus
+
 ## [1.0.5+58]
 
 * remove some wifi config method
