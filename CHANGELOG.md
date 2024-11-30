@@ -1,3 +1,7 @@
+## [1.0.5+60]
+
+* remove tencent_kit
+
 ## [1.0.5+59]
 
 * remove connectivity_plus

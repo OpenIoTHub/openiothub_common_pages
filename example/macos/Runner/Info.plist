@@ -28,13 +28,5 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-
-	<key>NSLocalNetworkUsageDescription</key>
-    <string>Reasoning for the user why you need this permission goes here</string>
-    <key>NSBonjourServices</key>
-    <array>
-       <string>_http._tcp.</string>
-       <string>_openiothub-gateway._tcp.</string>
-    </array>
 </dict>
 </plist>

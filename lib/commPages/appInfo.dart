@@ -6,7 +6,7 @@ import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_common_pages/utils/goToUrl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
-import 'package:tencent_kit/tencent_kit.dart';
+// import 'package:tencent_kit/tencent_kit.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
 class AppInfoPage extends StatefulWidget {
@@ -33,8 +33,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
   late final StreamSubscription<WechatResp> _share;
 
   // QQ分享
-  late final StreamSubscription<TencentResp> _respSubs;
-  TencentLoginResp? _loginResp;
+  // late final StreamSubscription<TencentResp> _respSubs;
+  // TencentLoginResp? _loginResp;
 
   void _listenShareMsg(WechatResp resp) {
     // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
@@ -45,26 +45,26 @@ class _AppInfoPageState extends State<AppInfoPage> {
     }
   }
 
-  void _listenLogin(TencentResp resp) {
-    if (resp is TencentLoginResp) {
-      _loginResp = resp;
-      final String content = 'login: ${resp.openid} - ${resp.accessToken}';
-      showToast('登录:$content');
-    } else if (resp is TencentShareMsgResp) {
-      // final String content = 'share: ${resp.ret} - ${resp.msg}';
-      // showToast('分享:$content');
-      if (resp.ret == 0) {
-        showToast("分享成功！");
-      } else {
-        showToast("分享失败！");
-      }
-    }
-  }
+  // void _listenLogin(TencentResp resp) {
+  //   if (resp is TencentLoginResp) {
+  //     _loginResp = resp;
+  //     final String content = 'login: ${resp.openid} - ${resp.accessToken}';
+  //     showToast('登录:$content');
+  //   } else if (resp is TencentShareMsgResp) {
+  //     // final String content = 'share: ${resp.ret} - ${resp.msg}';
+  //     // showToast('分享:$content');
+  //     if (resp.ret == 0) {
+  //       showToast("分享成功！");
+  //     } else {
+  //       showToast("分享失败！");
+  //     }
+  //   }
+  // }
 
   @override
   void initState() {
     _share = WechatKitPlatform.instance.respStream().listen(_listenShareMsg);
-    _respSubs = TencentKitPlatform.instance.respStream().listen(_listenLogin);
+    // _respSubs = TencentKitPlatform.instance.respStream().listen(_listenLogin);
     super.initState();
     _getAppInfo();
   }
@@ -72,7 +72,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
   @override
   void dispose() {
     _share.cancel();
-    _respSubs.cancel();
+    // _respSubs.cancel();
     super.dispose();
   }
 
@@ -223,57 +223,57 @@ class _AppInfoPageState extends State<AppInfoPage> {
                   ),
                   Row(
                     children: [
-                      TDButton(
-                        icon: TDIcons.logo_qq,
-                        text: '分享到QQ',
-                        size: TDButtonSize.small,
-                        type: TDButtonType.outline,
-                        shape: TDButtonShape.rectangle,
-                        theme: TDButtonTheme.primary,
-                        onTap: () async {
-                          if (!await TencentKitPlatform.instance
-                                  .isQQInstalled() &&
-                              !await TencentKitPlatform.instance
-                                  .isTIMInstalled()) {
-                            showToast("QQ未安装！");
-                            return;
-                          }
-                          TencentKitPlatform.instance.shareWebpage(
-                            scene: TencentScene.kScene_QQ,
-                            title: title,
-                            summary: description,
-                            targetUrl: url,
-                          );
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0), // 设置左边距离
-                        child: TDButton(
-                          icon: TDIcons.logo_qq,
-                          text: '分享到QQ空间',
-                          size: TDButtonSize.small,
-                          type: TDButtonType.outline,
-                          shape: TDButtonShape.rectangle,
-                          theme: TDButtonTheme.primary,
-                          onTap: () async {
-                            if (!await TencentKitPlatform.instance
-                                    .isQQInstalled() &&
-                                !await TencentKitPlatform.instance
-                                    .isTIMInstalled()) {
-                              showToast("QQ未安装！");
-                              return;
-                            }
-                            TencentKitPlatform.instance.shareWebpage(
-                              scene: TencentScene.kScene_QZone,
-                              title: title,
-                              summary: description,
-                              targetUrl: url,
-                            );
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      )
+                      // TDButton(
+                      //   icon: TDIcons.logo_qq,
+                      //   text: '分享到QQ',
+                      //   size: TDButtonSize.small,
+                      //   type: TDButtonType.outline,
+                      //   shape: TDButtonShape.rectangle,
+                      //   theme: TDButtonTheme.primary,
+                      //   onTap: () async {
+                      //     if (!await TencentKitPlatform.instance
+                      //             .isQQInstalled() &&
+                      //         !await TencentKitPlatform.instance
+                      //             .isTIMInstalled()) {
+                      //       showToast("QQ未安装！");
+                      //       return;
+                      //     }
+                      //     TencentKitPlatform.instance.shareWebpage(
+                      //       scene: TencentScene.kScene_QQ,
+                      //       title: title,
+                      //       summary: description,
+                      //       targetUrl: url,
+                      //     );
+                      //     Navigator.of(context).pop();
+                      //   },
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(left: 10.0), // 设置左边距离
+                      //   child: TDButton(
+                      //     icon: TDIcons.logo_qq,
+                      //     text: '分享到QQ空间',
+                      //     size: TDButtonSize.small,
+                      //     type: TDButtonType.outline,
+                      //     shape: TDButtonShape.rectangle,
+                      //     theme: TDButtonTheme.primary,
+                      //     onTap: () async {
+                      //       if (!await TencentKitPlatform.instance
+                      //               .isQQInstalled() &&
+                      //           !await TencentKitPlatform.instance
+                      //               .isTIMInstalled()) {
+                      //         showToast("QQ未安装！");
+                      //         return;
+                      //       }
+                      //       TencentKitPlatform.instance.shareWebpage(
+                      //         scene: TencentScene.kScene_QZone,
+                      //         title: title,
+                      //         summary: description,
+                      //         targetUrl: url,
+                      //       );
+                      //       Navigator.of(context).pop();
+                      //     },
+                      //   ),
+                      // )
                     ],
                   )
                 ]));
