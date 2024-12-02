@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openiothub_common_pages/wifiConfig/airkiss.dart';
 
 void main() {
   runApp(const MyApp());
@@ -66,6 +67,16 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) {
+          // 写成独立的组件，支持刷新
+          return Airkiss(
+            key: UniqueKey(), title: '',
+          );
+        },
+      ),
+    );
   }
 
   @override

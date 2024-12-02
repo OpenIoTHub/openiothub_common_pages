@@ -515,7 +515,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.5+59"
+    version: "1.0.5+60"
   openiothub_constants:
     dependency: "direct main"
     description:
@@ -841,14 +841,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.7"
-  tencent_kit:
-    dependency: transitive
-    description:
-      name: tencent_kit
-      sha256: dd97b95e8b92cab5473d1f54a3210916e60b6b2d968bf6c47590a38fa831b5cf
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.0"
   term_glyph:
     dependency: transitive
     description:

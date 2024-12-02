@@ -162,7 +162,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
   _shareAction() async {
     var title = "云亿连内网穿透和智能家居管理";
     var description = "云亿连全平台管理您的所有智能设备和私有云";
-    var url = "https://iothub.cloud/download.html";
+    var url = "https://m.malink.cn/s/RNzqia";
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
