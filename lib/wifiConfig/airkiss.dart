@@ -24,9 +24,9 @@ class _AirkissState extends State<Airkiss> {
   final NetworkInfo _networkInfo = NetworkInfo();
 
 //  New
+  final TextEditingController _ssidFilter = TextEditingController(text: "点击获取WiFi信息");
   final TextEditingController _bssidFilter =
-      TextEditingController(text: "点击获取WiFi信息");
-  final TextEditingController _ssidFilter = TextEditingController();
+  TextEditingController();
   final TextEditingController _passwordFilter = TextEditingController();
 
   bool _isLoading = false;
@@ -38,8 +38,8 @@ class _AirkissState extends State<Airkiss> {
 
   _AirkissState() {
     _ssidFilter.addListener(_ssidListen);
-    _passwordFilter.addListener(_passwordListen);
     _bssidFilter.addListener(_bssidListen);
+    _passwordFilter.addListener(_passwordListen);
   }
 
   void _ssidListen() {
@@ -108,7 +108,7 @@ class _AirkissState extends State<Airkiss> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(height: 10),
+                        Container(height: 20),
                         GestureDetector(
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -119,15 +119,26 @@ class _AirkissState extends State<Airkiss> {
                                   decoration:
                                       InputDecoration(labelText: 'WiFi名称'),
                                   readOnly: true,
+                                  onTap: () async {
+                                    showToast("onTap");
+                                    await requestPermission();
+                                    await _updateConnectionStatus();
+                                  },
                                 ),
                                 TextField(
                                   controller: _bssidFilter,
                                   decoration:
                                       InputDecoration(labelText: 'BSSID'),
                                   readOnly: true,
+                                  onTap: () async {
+                                    showToast("onTap");
+                                    await requestPermission();
+                                    await _updateConnectionStatus();
+                                  },
                                 ),
                               ]),
                           onTap: () async {
+                            showToast("onTap");
                             await requestPermission();
                             await _updateConnectionStatus();
                           },
@@ -139,10 +150,9 @@ class _AirkissState extends State<Airkiss> {
                             obscureText: true,
                           ),
                         ),
-                        TextButton(
-                          child: _privilege_required
-                              ? Text('开始添加周围智能设备')
-                              : Text('获取网络和位置权限以获取WiFi信息'),
+                        Container(height: 20),
+                        ElevatedButton(
+                          child: Text('开始添加周围智能设备'),
                           onPressed: () async {
                             if (_ssid == null || _password == null) {
                               showToast("WiFi信息不能为空");
@@ -191,18 +201,19 @@ class _AirkissState extends State<Airkiss> {
           wifiBSSID = 'Unauthorized to get Wifi BSSID';
         }
       } else {
-        wifiName = await _networkInfo.getWifiName();
+        wifiBSSID = await _networkInfo.getWifiBSSID();
       }
     } on PlatformException catch (e) {
       wifiBSSID = 'Failed to get Wifi BSSID';
     }
 
     setState(() {
-      _ssidFilter.text = wifiName!;
+      _ssidFilter.text = wifiName!.replaceAll("\"", "");
       _bssidFilter.text = wifiBSSID!;
 
       _msg = "输入路由器WIFI(2.4G频率)密码后开始配网";
     });
+    showToast("ssid:${wifiName!},bssid:${wifiBSSID!}");
   }
 
   Future<bool> _configureWiFi() async {
