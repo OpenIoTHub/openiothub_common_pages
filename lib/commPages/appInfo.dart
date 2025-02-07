@@ -172,7 +172,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                   Row(
                     children: [
                       TDButton(
-                        icon: TDIcons.logo_wechat,
+                        icon: TDIcons.logo_wechat_stroke,
                         text: '分享到微信',
                         size: TDButtonSize.small,
                         type: TDButtonType.outline,
@@ -196,7 +196,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0), // 设置左边距离
                         child: TDButton(
-                          icon: TDIcons.logo_wechat,
+                          icon: TDIcons.logo_wechat_stroke,
                           text: '分享到朋友圈',
                           size: TDButtonSize.small,
                           type: TDButtonType.outline,

@@ -177,7 +177,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                 actions: <Widget>[
                   // 分享网关:二维码图片、小程序链接、网页
                   TDButton(
-                    icon: TDIcons.logo_wechat,
+                    icon: TDIcons.logo_wechat_stroke,
                     text: '分享到微信',
                     size: TDButtonSize.small,
                     type: TDButtonType.outline,

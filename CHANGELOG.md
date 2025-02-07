@@ -1,3 +1,7 @@
+## [1.0.5+62]
+
+* logo-wechat重命名为 logo-wechat-stroke-filled
+
 ## [1.0.5+61]
 
 * config wifi

@@ -197,7 +197,7 @@ class _State extends State<LoginPage> {
       // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
       _list.add(IconButton(
           icon: Icon(
-            TDIcons.logo_wechat,
+            TDIcons.logo_wechat_stroke,
             color: Colors.green,
             size: 45,
           ),
