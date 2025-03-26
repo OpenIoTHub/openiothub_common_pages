@@ -1,3 +1,7 @@
+## [1.0.5+63]
+
+* i18n
+
 ## [1.0.5+62]
 
 * logo-wechat重命名为 logo-wechat-stroke-filled

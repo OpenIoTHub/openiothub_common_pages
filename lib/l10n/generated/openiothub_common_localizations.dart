@@ -112,799 +112,799 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @click_to_get_wifi_info.
   ///
   /// In en, this message translates to:
-  /// **'点击获取WiFi信息'**
+  /// **'Click to get WiFi info'**
   String get click_to_get_wifi_info;
 
   /// No description provided for @input_wifi_password.
   ///
   /// In en, this message translates to:
-  /// **'上面输入wifi密码开始设置设备联网'**
+  /// **'Input WiFi password'**
   String get input_wifi_password;
 
   /// No description provided for @connecting_to_router.
   ///
   /// In en, this message translates to:
-  /// **'正在设置设备连接到路由器'**
+  /// **'Connecting_to_router'**
   String get connecting_to_router;
 
   /// No description provided for @device_wifi_config.
   ///
   /// In en, this message translates to:
-  /// **'设备配网'**
+  /// **'Device WiFi config'**
   String get device_wifi_config;
 
   /// No description provided for @wifi_ssid.
   ///
   /// In en, this message translates to:
-  /// **'WiFi名称'**
+  /// **'WiFi SSID'**
   String get wifi_ssid;
 
   /// No description provided for @start_adding_surrounding_smart_devices.
   ///
   /// In en, this message translates to:
-  /// **'开始添加周围智能设备'**
+  /// **'Start adding surrounding smart devices'**
   String get start_adding_surrounding_smart_devices;
 
   /// No description provided for @wifi_info_cant_be_empty.
   ///
   /// In en, this message translates to:
-  /// **'WiFi信息不能为空'**
+  /// **'WiFi info can\'t be empty'**
   String get wifi_info_cant_be_empty;
 
   /// No description provided for @discovering_device_please_wait.
   ///
   /// In en, this message translates to:
-  /// **'正在发现设备，请耐心等待，大概需要一分钟'**
+  /// **'Discovering device, please be patient and wait for approximately one minute'**
   String get discovering_device_please_wait;
 
   /// No description provided for @please_input_2p4g_wifi_password.
   ///
   /// In en, this message translates to:
-  /// **'输入路由器WIFI(2.4G频率)密码后开始配网'**
+  /// **'Enter the router WIFI (2.4G frequency) password to start network distribution'**
   String get please_input_2p4g_wifi_password;
 
   /// No description provided for @airkiss_device_wifi_config_success.
   ///
   /// In en, this message translates to:
-  /// **'附近的AirKiss设备配网任务完成'**
+  /// **'The nearby AirKiss equipment distribution task has been completed'**
   String get airkiss_device_wifi_config_success;
 
   /// No description provided for @bind_wechat_success.
   ///
   /// In en, this message translates to:
-  /// **'绑定微信成功！'**
+  /// **'WeChat binding successful!'**
   String get bind_wechat_success;
 
   /// No description provided for @bind_wechat_failed.
   ///
   /// In en, this message translates to:
-  /// **'绑定微信失败'**
+  /// **'Binding WeChat failed!'**
   String get bind_wechat_failed;
 
   /// No description provided for @get_wechat_login_info_failed.
   ///
   /// In en, this message translates to:
-  /// **'获取微信登录信息失败'**
+  /// **'Failed to obtain WeChat login information'**
   String get get_wechat_login_info_failed;
 
   /// No description provided for @account_and_safety.
   ///
   /// In en, this message translates to:
-  /// **'获取微信登录信息失败'**
+  /// **'Failed to obtain WeChat login information'**
   String get account_and_safety;
 
   /// No description provided for @mobile_number.
   ///
   /// In en, this message translates to:
-  /// **'获取微信登录信息失败'**
+  /// **'Failed to obtain WeChat login information'**
   String get mobile_number;
 
   /// No description provided for @username.
   ///
   /// In en, this message translates to:
-  /// **'用户名'**
+  /// **'Username'**
   String get username;
 
   /// No description provided for @user_mobile.
   ///
   /// In en, this message translates to:
-  /// **'手机号'**
+  /// **'User mobile'**
   String get user_mobile;
 
   /// No description provided for @user_email.
   ///
   /// In en, this message translates to:
-  /// **'邮箱'**
+  /// **'User email'**
   String get user_email;
 
   /// No description provided for @modify_password.
   ///
   /// In en, this message translates to:
-  /// **'修改密码'**
+  /// **'Modify password'**
   String get modify_password;
 
   /// No description provided for @password.
   ///
   /// In en, this message translates to:
-  /// **'密码'**
+  /// **'Password'**
   String get password;
 
   /// No description provided for @bind_wechat.
   ///
   /// In en, this message translates to:
-  /// **'绑定微信'**
+  /// **'Bind wechat'**
   String get bind_wechat;
 
   /// No description provided for @no_wechat_installed.
   ///
   /// In en, this message translates to:
-  /// **'只有安装了微信才能绑定微信'**
+  /// **'No wechat installed'**
   String get no_wechat_installed;
 
   /// No description provided for @unbind_wechat.
   ///
   /// In en, this message translates to:
-  /// **'解除微信绑定'**
+  /// **'Unbind wechat'**
   String get unbind_wechat;
 
   /// No description provided for @unbind_wechat_success.
   ///
   /// In en, this message translates to:
-  /// **'解绑微信成功！'**
+  /// **'Unbind wechat success!'**
   String get unbind_wechat_success;
 
   /// No description provided for @unbind_wechat_failed_reason.
   ///
   /// In en, this message translates to:
-  /// **'解绑微信失败！原因：'**
+  /// **'Unbind wechat failed,reason:'**
   String get unbind_wechat_failed_reason;
 
   /// No description provided for @cancel_account.
   ///
   /// In en, this message translates to:
-  /// **'注销账号'**
+  /// **'Cancel account'**
   String get cancel_account;
 
   /// No description provided for @modify.
   ///
   /// In en, this message translates to:
-  /// **'修改'**
+  /// **'Modify'**
   String get modify;
 
   /// No description provided for @please_input_new_value.
   ///
   /// In en, this message translates to:
-  /// **'请输入新的'**
+  /// **'Please input new value'**
   String get please_input_new_value;
 
   /// No description provided for @new_value.
   ///
   /// In en, this message translates to:
-  /// **'新值'**
+  /// **'New value'**
   String get new_value;
 
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
-  /// **'取消'**
+  /// **'Cancel'**
   String get cancel;
 
   /// No description provided for @cancel_my_account.
   ///
   /// In en, this message translates to:
-  /// **'删除我的账号'**
+  /// **'Cancel my account'**
   String get cancel_my_account;
 
   /// No description provided for @cancel_my_account_notify1.
   ///
   /// In en, this message translates to:
-  /// **'请注意，确认删除之后删除操作立马生效，且不可恢复！'**
+  /// **'Please note that after confirming the deletion, the deletion operation will take effect immediately and cannot be restored!'**
   String get cancel_my_account_notify1;
 
   /// No description provided for @operation_cannot_be_restored.
   ///
   /// In en, this message translates to:
-  /// **'操作不可恢复！'**
+  /// **'Operation cannot be restored!'**
   String get operation_cannot_be_restored;
 
   /// No description provided for @please_input_your_password.
   ///
   /// In en, this message translates to:
-  /// **'请输入你的密码'**
+  /// **'Please input your password'**
   String get please_input_your_password;
 
   /// No description provided for @current_account_password.
   ///
   /// In en, this message translates to:
-  /// **'当前账号的密码'**
+  /// **'Current account password'**
   String get current_account_password;
 
   /// No description provided for @confirm_cancel_account.
   ///
   /// In en, this message translates to:
-  /// **'确认删除账号?'**
+  /// **'Confirm cancel account?'**
   String get confirm_cancel_account;
 
   /// No description provided for @cancel_account_success.
   ///
   /// In en, this message translates to:
-  /// **'删除账号成功！'**
+  /// **'Cancel account success!'**
   String get cancel_account_success;
 
   /// No description provided for @cancel_account_failed.
   ///
   /// In en, this message translates to:
-  /// **'删除账号失败'**
+  /// **'Cancel account failed'**
   String get cancel_account_failed;
 
   /// No description provided for @wechat_login_failed.
   ///
   /// In en, this message translates to:
-  /// **'微信登录失败'**
+  /// **'Wechat login failed'**
   String get wechat_login_failed;
 
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
-  /// **'登录'**
+  /// **'login'**
   String get login;
 
   /// No description provided for @please_input_mobile.
   ///
   /// In en, this message translates to:
-  /// **'请输入手机号'**
+  /// **'Please input mobile'**
   String get please_input_mobile;
 
   /// No description provided for @please_input_password.
   ///
   /// In en, this message translates to:
-  /// **'请输入用户密码'**
+  /// **'Please input password'**
   String get please_input_password;
 
   /// No description provided for @agree_to_the_user_agreement1.
   ///
   /// In en, this message translates to:
-  /// **'请勾选'**
+  /// **'Please check the box'**
   String get agree_to_the_user_agreement1;
 
   /// No description provided for @agree_to_the_user_agreement2.
   ///
   /// In en, this message translates to:
-  /// **'下述同意隐私政策才可以进行下一步'**
+  /// **'Only by agreeing to the privacy policy below can we proceed to the next step'**
   String get agree_to_the_user_agreement2;
 
   /// No description provided for @username_and_password_cant_be_empty.
   ///
   /// In en, this message translates to:
-  /// **'用户名与密码不能为空'**
+  /// **'Username and password cannot be empty'**
   String get username_and_password_cant_be_empty;
 
   /// No description provided for @user_registration.
   ///
   /// In en, this message translates to:
-  /// **'用户注册'**
+  /// **'User registration'**
   String get user_registration;
 
   /// No description provided for @agree.
   ///
   /// In en, this message translates to:
-  /// **'同意'**
+  /// **'Agree'**
   String get agree;
 
   /// No description provided for @privacy_policy.
   ///
   /// In en, this message translates to:
-  /// **'隐私政策'**
+  /// **'Privacy policy'**
   String get privacy_policy;
 
   /// No description provided for @feedback_channels.
   ///
   /// In en, this message translates to:
-  /// **'反馈渠道'**
+  /// **'Feedback channels'**
   String get feedback_channels;
 
   /// No description provided for @get_wechat_qr_code_failed.
   ///
   /// In en, this message translates to:
-  /// **'获取微信登陆二维码失败！'**
+  /// **'Get wechat qr code failed！'**
   String get get_wechat_qr_code_failed;
 
   /// No description provided for @wechat_scan_qr_code_to_login.
   ///
   /// In en, this message translates to:
-  /// **'微信扫码登录！'**
+  /// **'Wechat scan qr code to login!'**
   String get wechat_scan_qr_code_to_login;
 
   /// No description provided for @exit.
   ///
   /// In en, this message translates to:
-  /// **'退出'**
+  /// **'exit'**
   String get exit;
 
   /// No description provided for @login_failed.
   ///
   /// In en, this message translates to:
-  /// **'登录失败'**
+  /// **'Login failed'**
   String get login_failed;
 
   /// No description provided for @login_after_wechat_bind.
   ///
   /// In en, this message translates to:
-  /// **'请现将本微信绑定一个账号再使用微信快捷登录'**
+  /// **'Please bind this WeChat account and use WeChat Quick Login now'**
   String get login_after_wechat_bind;
 
   /// No description provided for @wechat_fast_login_failed.
   ///
   /// In en, this message translates to:
-  /// **'微信快捷登录失败'**
+  /// **'WeChat quick login failed'**
   String get wechat_fast_login_failed;
 
   /// No description provided for @register.
   ///
   /// In en, this message translates to:
-  /// **'注册'**
+  /// **'register'**
   String get register;
 
   /// No description provided for @register_success.
   ///
   /// In en, this message translates to:
-  /// **'注册成功!请使用注册信息登录!'**
+  /// **'registered successfully Please log in with your registration information!'**
   String get register_success;
 
   /// No description provided for @register_failed.
   ///
   /// In en, this message translates to:
-  /// **'注册失败!请重新注册'**
+  /// **'Registration failed! Please register again'**
   String get register_failed;
 
   /// No description provided for @user_info.
   ///
   /// In en, this message translates to:
-  /// **'用户信息'**
+  /// **'User info'**
   String get user_info;
 
   /// No description provided for @logout.
   ///
   /// In en, this message translates to:
-  /// **'退出登录'**
+  /// **'Logout'**
   String get logout;
 
   /// No description provided for @share_success.
   ///
   /// In en, this message translates to:
-  /// **'分享成功！'**
+  /// **'Share success!'**
   String get share_success;
 
   /// No description provided for @share_failed.
   ///
   /// In en, this message translates to:
-  /// **'分享失败！'**
+  /// **'Share failed!'**
   String get share_failed;
 
   /// No description provided for @as_a_gateway.
   ///
   /// In en, this message translates to:
-  /// **'本机作为网关'**
+  /// **'As a gateway'**
   String get as_a_gateway;
 
   /// No description provided for @as_a_gateway_description1.
   ///
   /// In en, this message translates to:
-  /// **'使用云亿连APP扫描上述二维码添加本网关以访问本网络'**
+  /// **'Scan the QR code above using the OpenIoTHub APP to add this gateway and access this network'**
   String get as_a_gateway_description1;
 
   /// No description provided for @change_gateway_id.
   ///
   /// In en, this message translates to:
-  /// **'更换网关ID'**
+  /// **'Change gateway id'**
   String get change_gateway_id;
 
   /// No description provided for @go_to_main_menu.
   ///
   /// In en, this message translates to:
-  /// **'返回主界面'**
+  /// **'Return to the main interface'**
   String get go_to_main_menu;
 
   /// No description provided for @share_to_wechat.
   ///
   /// In en, this message translates to:
-  /// **'分享到微信'**
+  /// **'Share on WeChat'**
   String get share_to_wechat;
 
   /// No description provided for @select_where_to_share.
   ///
   /// In en, this message translates to:
-  /// **'选择需方分享的位置'**
+  /// **'Choose the location for the demander to share'**
   String get select_where_to_share;
 
   /// No description provided for @openiothub_gateway_share.
   ///
   /// In en, this message translates to:
-  /// **'云亿连网关分享'**
+  /// **'OpenIoTHub Gateway Sharing'**
   String get openiothub_gateway_share;
 
   /// No description provided for @openiothub_gateway_share_description.
   ///
   /// In en, this message translates to:
-  /// **'使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云'**
+  /// **'Use OpenIoTHub to scan the QR code and add a gateway to manage all your smart devices and private clouds'**
   String get openiothub_gateway_share_description;
 
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
-  /// **'使App名称:'**
+  /// **'App name:'**
   String get app_name;
 
   /// No description provided for @package_name.
   ///
   /// In en, this message translates to:
-  /// **'包名:'**
+  /// **'Package name:'**
   String get package_name;
 
   /// No description provided for @version.
   ///
   /// In en, this message translates to:
-  /// **'版本:'**
+  /// **'Version:'**
   String get version;
 
   /// No description provided for @version_sn.
   ///
   /// In en, this message translates to:
-  /// **'版本号:'**
+  /// **'Version sn:'**
   String get version_sn;
 
   /// No description provided for @icp_number.
   ///
   /// In en, this message translates to:
-  /// **'APP备案号:'**
+  /// **'APP ICP number:'**
   String get icp_number;
 
   /// No description provided for @online_feedback.
   ///
   /// In en, this message translates to:
-  /// **'在线反馈'**
+  /// **'Online feedback'**
   String get online_feedback;
 
   /// No description provided for @app_info.
   ///
   /// In en, this message translates to:
-  /// **'APP信息'**
+  /// **'App info'**
   String get app_info;
 
   /// No description provided for @share_app_title.
   ///
   /// In en, this message translates to:
-  /// **'云亿连内网穿透和智能家居管理'**
+  /// **'OpenIoTHub\'s internal network penetration and smart home management'**
   String get share_app_title;
 
   /// No description provided for @share_app_description.
   ///
   /// In en, this message translates to:
-  /// **'云亿连全平台管理您的所有智能设备和私有云'**
+  /// **'OpenIoTHub manages all your smart devices and private clouds across the entire platform'**
   String get share_app_description;
 
   /// No description provided for @share.
   ///
   /// In en, this message translates to:
-  /// **'分享'**
+  /// **'share'**
   String get share;
 
   /// No description provided for @share_to_where.
   ///
   /// In en, this message translates to:
-  /// **'选择需方分享的位置'**
+  /// **'Choose the location for the demander to share'**
   String get share_to_where;
 
   /// No description provided for @wechat_not_installed.
   ///
   /// In en, this message translates to:
-  /// **'微信未安装'**
+  /// **'WeChat not installed'**
   String get wechat_not_installed;
 
   /// No description provided for @share_on_moments.
   ///
   /// In en, this message translates to:
-  /// **'分享到朋友圈'**
+  /// **'Share on Moments'**
   String get share_on_moments;
 
   /// No description provided for @find_local_gateway_list.
   ///
   /// In en, this message translates to:
-  /// **'发现本地网关列表'**
+  /// **'Discover local gateway list'**
   String get find_local_gateway_list;
 
   /// No description provided for @manually_create_a_gateway.
   ///
   /// In en, this message translates to:
-  /// **'手动创建一个网关？'**
+  /// **'Manually creating a gateway?'**
   String get manually_create_a_gateway;
 
   /// No description provided for @manually_create_a_gateway_description1.
   ///
   /// In en, this message translates to:
-  /// **'安装的网关可以本页面发现'**
+  /// **'The installed gateway can be found on this page'**
   String get manually_create_a_gateway_description1;
 
   /// No description provided for @manually_create_a_gateway_description2.
   ///
   /// In en, this message translates to:
-  /// **'自动生成一个网关信息，回头拿着token填写到网关配置文件即可，适合于手机无法同局域网发现网关的情况'**
+  /// **'Automatically generate a gateway information and fill it into the gateway configuration file with the token, suitable for situations where the mobile phone cannot discover the gateway on the local area network'**
   String get manually_create_a_gateway_description2;
 
   /// No description provided for @manually_create_a_gateway_description3.
   ///
   /// In en, this message translates to:
-  /// **'从下面选择网关需要连接的服务器:'**
+  /// **'Select the server that the gateway needs to connect to from below:'**
   String get manually_create_a_gateway_description3;
 
   /// No description provided for @add.
   ///
   /// In en, this message translates to:
-  /// **'添加'**
+  /// **'add'**
   String get add;
 
   /// No description provided for @paste_info.
   ///
   /// In en, this message translates to:
-  /// **'网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中'**
+  /// **'The ID and token of the gateway have been copied to the clipboard. Please fill in the configuration of the clipboard in the gateway\'s configuration file'**
   String get paste_info;
 
   /// No description provided for @add_gateway_success.
   ///
   /// In en, this message translates to:
-  /// **'网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中'**
+  /// **'The ID and token of the gateway have been copied to the clipboard. Please fill in the configuration of the clipboard in the gateway\'s configuration file'**
   String get add_gateway_success;
 
   /// No description provided for @gateway_install_guide.
   ///
   /// In en, this message translates to:
-  /// **'网关安装指南'**
+  /// **'Gateway Installation Guide'**
   String get gateway_install_guide;
 
   /// No description provided for @gateway_install_guide_content1.
   ///
   /// In en, this message translates to:
-  /// **'这里介绍怎样安装一个自己的网关'**
+  /// **'Here\'s how to install your own gateway'**
   String get gateway_install_guide_content1;
 
   /// No description provided for @gateway_install_guide_content2.
   ///
   /// In en, this message translates to:
-  /// **'首先，你需要将网关安装到你需要访问的局域网持续运行'**
+  /// **'Firstly, you need to install the gateway to the local area network you need to access and keep it running continuously'**
   String get gateway_install_guide_content2;
 
   /// No description provided for @gateway_install_guide_content3.
   ///
   /// In en, this message translates to:
-  /// **'第一次的时候，将本APP也接入网关所在的局域网'**
+  /// **'On the first attempt, connect this app to the local area network where the gateway is located'**
   String get gateway_install_guide_content3;
 
   /// No description provided for @gateway_install_guide_content4.
   ///
   /// In en, this message translates to:
-  /// **'APP在局域网搜索并配置添加网关一次后'**
+  /// **'After searching and configuring the gateway on the local area network, the APP adds it once'**
   String get gateway_install_guide_content4;
 
   /// No description provided for @gateway_install_guide_content5.
   ///
   /// In en, this message translates to:
-  /// **'以后只要网关在线手机客户端都可以访问'**
+  /// **'In the future, as long as the gateway is online, the mobile client can access it'**
   String get gateway_install_guide_content5;
 
   /// No description provided for @gateway_install_guide_content6.
   ///
   /// In en, this message translates to:
-  /// **'这里介绍如何在你所需要访问的网络安装网关'**
+  /// **'Here is an introduction on how to install a gateway on the network you need to access'**
   String get gateway_install_guide_content6;
 
   /// No description provided for @gateway_install_guide_content7.
   ///
   /// In en, this message translates to:
-  /// **'查看网关的开源地址'**
+  /// **'View the open source address of the gateway'**
   String get gateway_install_guide_content7;
 
   /// No description provided for @gateway_install_guide_content8.
   ///
   /// In en, this message translates to:
-  /// **'openwrt路由器snapshot源安装：opkg install gateway-go'**
+  /// **'OpenWRT router snapshot source installation: opkg install gateway-go'**
   String get gateway_install_guide_content8;
 
   /// No description provided for @gateway_install_guide_content9.
   ///
   /// In en, this message translates to:
-  /// **'MacOS使用homebrew安装：brew install gateway-go'**
+  /// **'MacOS installation using homebrew: brew install gateway-go'**
   String get gateway_install_guide_content9;
 
   /// No description provided for @gateway_install_guide_content10.
   ///
   /// In en, this message translates to:
-  /// **'Linux使用snapcraft安装：sudo snap install gateway-go'**
+  /// **'Linux installation using Snapcraft: sudo snap install gateway-go'**
   String get gateway_install_guide_content10;
 
   /// No description provided for @name.
   ///
   /// In en, this message translates to:
-  /// **'名称'**
+  /// **'name'**
   String get name;
 
   /// No description provided for @define_server_name.
   ///
   /// In en, this message translates to:
-  /// **'自定义服务器名称'**
+  /// **'Customize server name'**
   String get define_server_name;
 
   /// No description provided for @define_server_ip_or_domain.
   ///
   /// In en, this message translates to:
-  /// **'服务器ip地址或者域名'**
+  /// **'Server IP address or domain name'**
   String get define_server_ip_or_domain;
 
   /// No description provided for @define_server_addr.
   ///
   /// In en, this message translates to:
-  /// **'公网server-go服务器的地址'**
+  /// **'The address of the public server go server'**
   String get define_server_addr;
 
   /// No description provided for @define_server_key.
   ///
   /// In en, this message translates to:
-  /// **'秘钥'**
+  /// **'key'**
   String get define_server_key;
 
   /// No description provided for @define_server_tcp_port.
   ///
   /// In en, this message translates to:
-  /// **'tcp端口'**
+  /// **'tcp port'**
   String get define_server_tcp_port;
 
   /// No description provided for @define_server_kcp_port.
   ///
   /// In en, this message translates to:
-  /// **'kcp端口'**
+  /// **'kcp port'**
   String get define_server_kcp_port;
 
   /// No description provided for @port.
   ///
   /// In en, this message translates to:
-  /// **'端口'**
+  /// **'port'**
   String get port;
 
   /// No description provided for @description.
   ///
   /// In en, this message translates to:
-  /// **'描述'**
+  /// **'description'**
   String get description;
 
   /// No description provided for @define_description.
   ///
   /// In en, this message translates to:
-  /// **'自定义描述信息'**
+  /// **'Customize description information'**
   String get define_description;
 
   /// No description provided for @for_everyone_to_use.
   ///
   /// In en, this message translates to:
-  /// **'提供给APP所有人使用:'**
+  /// **'Provided to all users of the app for use:'**
   String get for_everyone_to_use;
 
   /// No description provided for @update_success.
   ///
   /// In en, this message translates to:
-  /// **'更新成功！'**
+  /// **'Update successful!'**
   String get update_success;
 
   /// No description provided for @confirm_modify.
   ///
   /// In en, this message translates to:
-  /// **'确认修改'**
+  /// **'Confirm modification'**
   String get confirm_modify;
 
   /// No description provided for @server_info.
   ///
   /// In en, this message translates to:
-  /// **'服务器信息'**
+  /// **'Server information'**
   String get server_info;
 
   /// No description provided for @delete_success.
   ///
   /// In en, this message translates to:
-  /// **'删除成功！'**
+  /// **'Delete successfully！'**
   String get delete_success;
 
   /// No description provided for @grpc_server_addr.
   ///
   /// In en, this message translates to:
-  /// **'grpc服务的地址'**
+  /// **'Address of grpc service'**
   String get grpc_server_addr;
 
   /// No description provided for @grpc_server_ip_or_domain.
   ///
   /// In en, this message translates to:
-  /// **'请输入grpc服务的IP或者域名'**
+  /// **'Please enter the IP or domain name of the grpc service'**
   String get grpc_server_ip_or_domain;
 
   /// No description provided for @grpc_service_port.
   ///
   /// In en, this message translates to:
-  /// **'grpc服务的端口'**
+  /// **'Port for grpc service'**
   String get grpc_service_port;
 
   /// No description provided for @input_grpc_service_port.
   ///
   /// In en, this message translates to:
-  /// **'请输入grpc服务的端口'**
+  /// **'Please enter the port of the grpc service'**
   String get input_grpc_service_port;
 
   /// No description provided for @iot_manager_addr.
   ///
   /// In en, this message translates to:
-  /// **'iot-manager地址'**
+  /// **'iot-manager addr'**
   String get iot_manager_addr;
 
   /// No description provided for @input_iot_manager_addr.
   ///
   /// In en, this message translates to:
-  /// **'请输入iot-manager grpc服务地址'**
+  /// **'Please enter the iot_manager GRPC service address'**
   String get input_iot_manager_addr;
 
   /// No description provided for @activate_front_desk_service.
   ///
   /// In en, this message translates to:
-  /// **'开启前台服务'**
+  /// **'Activate front desk service'**
   String get activate_front_desk_service;
 
   /// No description provided for @my_server_description_example.
   ///
   /// In en, this message translates to:
-  /// **'我自己的server-go服务器'**
+  /// **'My own server-go server'**
   String get my_server_description_example;
 
   /// No description provided for @server_go_addr_example.
   ///
   /// In en, this message translates to:
-  /// **'guonei.servers.iothub.cloud'**
+  /// **'usa.servers.iothub.cloud'**
   String get server_go_addr_example;
 
   /// No description provided for @my_server_description.
   ///
   /// In en, this message translates to:
-  /// **'我的服务器的描述'**
+  /// **'Description of my server'**
   String get my_server_description;
 
   /// No description provided for @add_self_hosted_server.
   ///
   /// In en, this message translates to:
-  /// **'添加自建服务器：'**
+  /// **'Add self built server:'**
   String get add_self_hosted_server;
 
   /// No description provided for @server_uuid.
   ///
   /// In en, this message translates to:
-  /// **'服务器uuid'**
+  /// **'server uuid'**
   String get server_uuid;
 
   /// No description provided for @as_config_file.
   ///
   /// In en, this message translates to:
-  /// **'跟server-go服务器里面的配置文件一致'**
+  /// **'Consistent with the configuration files in the server-go server'**
   String get as_config_file;
 
   /// No description provided for @add_to_server.
   ///
   /// In en, this message translates to:
-  /// **'添加到服务器'**
+  /// **'Add to server'**
   String get add_to_server;
 
   /// No description provided for @add_server.
   ///
   /// In en, this message translates to:
-  /// **'添加服务器'**
+  /// **'Add server'**
   String get add_server;
 
   /// No description provided for @success.
   ///
   /// In en, this message translates to:
-  /// **'成功!'**
+  /// **'Success!'**
   String get success;
 }
 

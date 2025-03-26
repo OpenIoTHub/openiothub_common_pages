@@ -12,406 +12,435 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get app_title => 'OpenIoTHub';
 
   @override
-  String get click_to_get_wifi_info => '点击获取WiFi信息';
+  String get click_to_get_wifi_info => 'Click to get WiFi info';
 
   @override
-  String get input_wifi_password => '上面输入wifi密码开始设置设备联网';
+  String get input_wifi_password => 'Input WiFi password';
 
   @override
-  String get connecting_to_router => '正在设置设备连接到路由器';
+  String get connecting_to_router => 'Connecting_to_router';
 
   @override
-  String get device_wifi_config => '设备配网';
+  String get device_wifi_config => 'Device WiFi config';
 
   @override
-  String get wifi_ssid => 'WiFi名称';
+  String get wifi_ssid => 'WiFi SSID';
 
   @override
-  String get start_adding_surrounding_smart_devices => '开始添加周围智能设备';
+  String get start_adding_surrounding_smart_devices =>
+      'Start adding surrounding smart devices';
 
   @override
-  String get wifi_info_cant_be_empty => 'WiFi信息不能为空';
+  String get wifi_info_cant_be_empty => 'WiFi info can\'t be empty';
 
   @override
-  String get discovering_device_please_wait => '正在发现设备，请耐心等待，大概需要一分钟';
+  String get discovering_device_please_wait =>
+      'Discovering device, please be patient and wait for approximately one minute';
 
   @override
-  String get please_input_2p4g_wifi_password => '输入路由器WIFI(2.4G频率)密码后开始配网';
+  String get please_input_2p4g_wifi_password =>
+      'Enter the router WIFI (2.4G frequency) password to start network distribution';
 
   @override
-  String get airkiss_device_wifi_config_success => '附近的AirKiss设备配网任务完成';
+  String get airkiss_device_wifi_config_success =>
+      'The nearby AirKiss equipment distribution task has been completed';
 
   @override
-  String get bind_wechat_success => '绑定微信成功！';
+  String get bind_wechat_success => 'WeChat binding successful!';
 
   @override
-  String get bind_wechat_failed => '绑定微信失败';
+  String get bind_wechat_failed => 'Binding WeChat failed!';
 
   @override
-  String get get_wechat_login_info_failed => '获取微信登录信息失败';
+  String get get_wechat_login_info_failed =>
+      'Failed to obtain WeChat login information';
 
   @override
-  String get account_and_safety => '获取微信登录信息失败';
+  String get account_and_safety => 'Failed to obtain WeChat login information';
 
   @override
-  String get mobile_number => '获取微信登录信息失败';
+  String get mobile_number => 'Failed to obtain WeChat login information';
 
   @override
-  String get username => '用户名';
+  String get username => 'Username';
 
   @override
-  String get user_mobile => '手机号';
+  String get user_mobile => 'User mobile';
 
   @override
-  String get user_email => '邮箱';
+  String get user_email => 'User email';
 
   @override
-  String get modify_password => '修改密码';
+  String get modify_password => 'Modify password';
 
   @override
-  String get password => '密码';
+  String get password => 'Password';
 
   @override
-  String get bind_wechat => '绑定微信';
+  String get bind_wechat => 'Bind wechat';
 
   @override
-  String get no_wechat_installed => '只有安装了微信才能绑定微信';
+  String get no_wechat_installed => 'No wechat installed';
 
   @override
-  String get unbind_wechat => '解除微信绑定';
+  String get unbind_wechat => 'Unbind wechat';
 
   @override
-  String get unbind_wechat_success => '解绑微信成功！';
+  String get unbind_wechat_success => 'Unbind wechat success!';
 
   @override
-  String get unbind_wechat_failed_reason => '解绑微信失败！原因：';
+  String get unbind_wechat_failed_reason => 'Unbind wechat failed,reason:';
 
   @override
-  String get cancel_account => '注销账号';
+  String get cancel_account => 'Cancel account';
 
   @override
-  String get modify => '修改';
+  String get modify => 'Modify';
 
   @override
-  String get please_input_new_value => '请输入新的';
+  String get please_input_new_value => 'Please input new value';
 
   @override
-  String get new_value => '新值';
+  String get new_value => 'New value';
 
   @override
-  String get cancel => '取消';
+  String get cancel => 'Cancel';
 
   @override
-  String get cancel_my_account => '删除我的账号';
+  String get cancel_my_account => 'Cancel my account';
 
   @override
-  String get cancel_my_account_notify1 => '请注意，确认删除之后删除操作立马生效，且不可恢复！';
+  String get cancel_my_account_notify1 =>
+      'Please note that after confirming the deletion, the deletion operation will take effect immediately and cannot be restored!';
 
   @override
-  String get operation_cannot_be_restored => '操作不可恢复！';
+  String get operation_cannot_be_restored => 'Operation cannot be restored!';
 
   @override
-  String get please_input_your_password => '请输入你的密码';
+  String get please_input_your_password => 'Please input your password';
 
   @override
-  String get current_account_password => '当前账号的密码';
+  String get current_account_password => 'Current account password';
 
   @override
-  String get confirm_cancel_account => '确认删除账号?';
+  String get confirm_cancel_account => 'Confirm cancel account?';
 
   @override
-  String get cancel_account_success => '删除账号成功！';
+  String get cancel_account_success => 'Cancel account success!';
 
   @override
-  String get cancel_account_failed => '删除账号失败';
+  String get cancel_account_failed => 'Cancel account failed';
 
   @override
-  String get wechat_login_failed => '微信登录失败';
+  String get wechat_login_failed => 'Wechat login failed';
 
   @override
-  String get login => '登录';
+  String get login => 'login';
 
   @override
-  String get please_input_mobile => '请输入手机号';
+  String get please_input_mobile => 'Please input mobile';
 
   @override
-  String get please_input_password => '请输入用户密码';
+  String get please_input_password => 'Please input password';
 
   @override
-  String get agree_to_the_user_agreement1 => '请勾选';
+  String get agree_to_the_user_agreement1 => 'Please check the box';
 
   @override
-  String get agree_to_the_user_agreement2 => '下述同意隐私政策才可以进行下一步';
+  String get agree_to_the_user_agreement2 =>
+      'Only by agreeing to the privacy policy below can we proceed to the next step';
 
   @override
-  String get username_and_password_cant_be_empty => '用户名与密码不能为空';
+  String get username_and_password_cant_be_empty =>
+      'Username and password cannot be empty';
 
   @override
-  String get user_registration => '用户注册';
+  String get user_registration => 'User registration';
 
   @override
-  String get agree => '同意';
+  String get agree => 'Agree';
 
   @override
-  String get privacy_policy => '隐私政策';
+  String get privacy_policy => 'Privacy policy';
 
   @override
-  String get feedback_channels => '反馈渠道';
+  String get feedback_channels => 'Feedback channels';
 
   @override
-  String get get_wechat_qr_code_failed => '获取微信登陆二维码失败！';
+  String get get_wechat_qr_code_failed => 'Get wechat qr code failed！';
 
   @override
-  String get wechat_scan_qr_code_to_login => '微信扫码登录！';
+  String get wechat_scan_qr_code_to_login => 'Wechat scan qr code to login!';
 
   @override
-  String get exit => '退出';
+  String get exit => 'exit';
 
   @override
-  String get login_failed => '登录失败';
+  String get login_failed => 'Login failed';
 
   @override
-  String get login_after_wechat_bind => '请现将本微信绑定一个账号再使用微信快捷登录';
+  String get login_after_wechat_bind =>
+      'Please bind this WeChat account and use WeChat Quick Login now';
 
   @override
-  String get wechat_fast_login_failed => '微信快捷登录失败';
+  String get wechat_fast_login_failed => 'WeChat quick login failed';
 
   @override
-  String get register => '注册';
+  String get register => 'register';
 
   @override
-  String get register_success => '注册成功!请使用注册信息登录!';
+  String get register_success =>
+      'registered successfully Please log in with your registration information!';
 
   @override
-  String get register_failed => '注册失败!请重新注册';
+  String get register_failed => 'Registration failed! Please register again';
 
   @override
-  String get user_info => '用户信息';
+  String get user_info => 'User info';
 
   @override
-  String get logout => '退出登录';
+  String get logout => 'Logout';
 
   @override
-  String get share_success => '分享成功！';
+  String get share_success => 'Share success!';
 
   @override
-  String get share_failed => '分享失败！';
+  String get share_failed => 'Share failed!';
 
   @override
-  String get as_a_gateway => '本机作为网关';
+  String get as_a_gateway => 'As a gateway';
 
   @override
-  String get as_a_gateway_description1 => '使用云亿连APP扫描上述二维码添加本网关以访问本网络';
+  String get as_a_gateway_description1 =>
+      'Scan the QR code above using the OpenIoTHub APP to add this gateway and access this network';
 
   @override
-  String get change_gateway_id => '更换网关ID';
+  String get change_gateway_id => 'Change gateway id';
 
   @override
-  String get go_to_main_menu => '返回主界面';
+  String get go_to_main_menu => 'Return to the main interface';
 
   @override
-  String get share_to_wechat => '分享到微信';
+  String get share_to_wechat => 'Share on WeChat';
 
   @override
-  String get select_where_to_share => '选择需方分享的位置';
+  String get select_where_to_share =>
+      'Choose the location for the demander to share';
 
   @override
-  String get openiothub_gateway_share => '云亿连网关分享';
+  String get openiothub_gateway_share => 'OpenIoTHub Gateway Sharing';
 
   @override
   String get openiothub_gateway_share_description =>
-      '使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云';
+      'Use OpenIoTHub to scan the QR code and add a gateway to manage all your smart devices and private clouds';
 
   @override
-  String get app_name => '使App名称:';
+  String get app_name => 'App name:';
 
   @override
-  String get package_name => '包名:';
+  String get package_name => 'Package name:';
 
   @override
-  String get version => '版本:';
+  String get version => 'Version:';
 
   @override
-  String get version_sn => '版本号:';
+  String get version_sn => 'Version sn:';
 
   @override
-  String get icp_number => 'APP备案号:';
+  String get icp_number => 'APP ICP number:';
 
   @override
-  String get online_feedback => '在线反馈';
+  String get online_feedback => 'Online feedback';
 
   @override
-  String get app_info => 'APP信息';
+  String get app_info => 'App info';
 
   @override
-  String get share_app_title => '云亿连内网穿透和智能家居管理';
+  String get share_app_title =>
+      'OpenIoTHub\'s internal network penetration and smart home management';
 
   @override
-  String get share_app_description => '云亿连全平台管理您的所有智能设备和私有云';
+  String get share_app_description =>
+      'OpenIoTHub manages all your smart devices and private clouds across the entire platform';
 
   @override
-  String get share => '分享';
+  String get share => 'share';
 
   @override
-  String get share_to_where => '选择需方分享的位置';
+  String get share_to_where => 'Choose the location for the demander to share';
 
   @override
-  String get wechat_not_installed => '微信未安装';
+  String get wechat_not_installed => 'WeChat not installed';
 
   @override
-  String get share_on_moments => '分享到朋友圈';
+  String get share_on_moments => 'Share on Moments';
 
   @override
-  String get find_local_gateway_list => '发现本地网关列表';
+  String get find_local_gateway_list => 'Discover local gateway list';
 
   @override
-  String get manually_create_a_gateway => '手动创建一个网关？';
+  String get manually_create_a_gateway => 'Manually creating a gateway?';
 
   @override
-  String get manually_create_a_gateway_description1 => '安装的网关可以本页面发现';
+  String get manually_create_a_gateway_description1 =>
+      'The installed gateway can be found on this page';
 
   @override
   String get manually_create_a_gateway_description2 =>
-      '自动生成一个网关信息，回头拿着token填写到网关配置文件即可，适合于手机无法同局域网发现网关的情况';
+      'Automatically generate a gateway information and fill it into the gateway configuration file with the token, suitable for situations where the mobile phone cannot discover the gateway on the local area network';
 
   @override
-  String get manually_create_a_gateway_description3 => '从下面选择网关需要连接的服务器:';
+  String get manually_create_a_gateway_description3 =>
+      'Select the server that the gateway needs to connect to from below:';
 
   @override
-  String get add => '添加';
+  String get add => 'add';
 
   @override
-  String get paste_info => '网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中';
+  String get paste_info =>
+      'The ID and token of the gateway have been copied to the clipboard. Please fill in the configuration of the clipboard in the gateway\'s configuration file';
 
   @override
-  String get add_gateway_success => '网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中';
+  String get add_gateway_success =>
+      'The ID and token of the gateway have been copied to the clipboard. Please fill in the configuration of the clipboard in the gateway\'s configuration file';
 
   @override
-  String get gateway_install_guide => '网关安装指南';
+  String get gateway_install_guide => 'Gateway Installation Guide';
 
   @override
-  String get gateway_install_guide_content1 => '这里介绍怎样安装一个自己的网关';
+  String get gateway_install_guide_content1 =>
+      'Here\'s how to install your own gateway';
 
   @override
-  String get gateway_install_guide_content2 => '首先，你需要将网关安装到你需要访问的局域网持续运行';
+  String get gateway_install_guide_content2 =>
+      'Firstly, you need to install the gateway to the local area network you need to access and keep it running continuously';
 
   @override
-  String get gateway_install_guide_content3 => '第一次的时候，将本APP也接入网关所在的局域网';
+  String get gateway_install_guide_content3 =>
+      'On the first attempt, connect this app to the local area network where the gateway is located';
 
   @override
-  String get gateway_install_guide_content4 => 'APP在局域网搜索并配置添加网关一次后';
+  String get gateway_install_guide_content4 =>
+      'After searching and configuring the gateway on the local area network, the APP adds it once';
 
   @override
-  String get gateway_install_guide_content5 => '以后只要网关在线手机客户端都可以访问';
+  String get gateway_install_guide_content5 =>
+      'In the future, as long as the gateway is online, the mobile client can access it';
 
   @override
-  String get gateway_install_guide_content6 => '这里介绍如何在你所需要访问的网络安装网关';
+  String get gateway_install_guide_content6 =>
+      'Here is an introduction on how to install a gateway on the network you need to access';
 
   @override
-  String get gateway_install_guide_content7 => '查看网关的开源地址';
+  String get gateway_install_guide_content7 =>
+      'View the open source address of the gateway';
 
   @override
   String get gateway_install_guide_content8 =>
-      'openwrt路由器snapshot源安装：opkg install gateway-go';
+      'OpenWRT router snapshot source installation: opkg install gateway-go';
 
   @override
   String get gateway_install_guide_content9 =>
-      'MacOS使用homebrew安装：brew install gateway-go';
+      'MacOS installation using homebrew: brew install gateway-go';
 
   @override
   String get gateway_install_guide_content10 =>
-      'Linux使用snapcraft安装：sudo snap install gateway-go';
+      'Linux installation using Snapcraft: sudo snap install gateway-go';
 
   @override
-  String get name => '名称';
+  String get name => 'name';
 
   @override
-  String get define_server_name => '自定义服务器名称';
+  String get define_server_name => 'Customize server name';
 
   @override
-  String get define_server_ip_or_domain => '服务器ip地址或者域名';
+  String get define_server_ip_or_domain => 'Server IP address or domain name';
 
   @override
-  String get define_server_addr => '公网server-go服务器的地址';
+  String get define_server_addr => 'The address of the public server go server';
 
   @override
-  String get define_server_key => '秘钥';
+  String get define_server_key => 'key';
 
   @override
-  String get define_server_tcp_port => 'tcp端口';
+  String get define_server_tcp_port => 'tcp port';
 
   @override
-  String get define_server_kcp_port => 'kcp端口';
+  String get define_server_kcp_port => 'kcp port';
 
   @override
-  String get port => '端口';
+  String get port => 'port';
 
   @override
-  String get description => '描述';
+  String get description => 'description';
 
   @override
-  String get define_description => '自定义描述信息';
+  String get define_description => 'Customize description information';
 
   @override
-  String get for_everyone_to_use => '提供给APP所有人使用:';
+  String get for_everyone_to_use => 'Provided to all users of the app for use:';
 
   @override
-  String get update_success => '更新成功！';
+  String get update_success => 'Update successful!';
 
   @override
-  String get confirm_modify => '确认修改';
+  String get confirm_modify => 'Confirm modification';
 
   @override
-  String get server_info => '服务器信息';
+  String get server_info => 'Server information';
 
   @override
-  String get delete_success => '删除成功！';
+  String get delete_success => 'Delete successfully！';
 
   @override
-  String get grpc_server_addr => 'grpc服务的地址';
+  String get grpc_server_addr => 'Address of grpc service';
 
   @override
-  String get grpc_server_ip_or_domain => '请输入grpc服务的IP或者域名';
+  String get grpc_server_ip_or_domain =>
+      'Please enter the IP or domain name of the grpc service';
 
   @override
-  String get grpc_service_port => 'grpc服务的端口';
+  String get grpc_service_port => 'Port for grpc service';
 
   @override
-  String get input_grpc_service_port => '请输入grpc服务的端口';
+  String get input_grpc_service_port =>
+      'Please enter the port of the grpc service';
 
   @override
-  String get iot_manager_addr => 'iot-manager地址';
+  String get iot_manager_addr => 'iot-manager addr';
 
   @override
-  String get input_iot_manager_addr => '请输入iot-manager grpc服务地址';
+  String get input_iot_manager_addr =>
+      'Please enter the iot_manager GRPC service address';
 
   @override
-  String get activate_front_desk_service => '开启前台服务';
+  String get activate_front_desk_service => 'Activate front desk service';
 
   @override
-  String get my_server_description_example => '我自己的server-go服务器';
+  String get my_server_description_example => 'My own server-go server';
 
   @override
-  String get server_go_addr_example => 'guonei.servers.iothub.cloud';
+  String get server_go_addr_example => 'usa.servers.iothub.cloud';
 
   @override
-  String get my_server_description => '我的服务器的描述';
+  String get my_server_description => 'Description of my server';
 
   @override
-  String get add_self_hosted_server => '添加自建服务器：';
+  String get add_self_hosted_server => 'Add self built server:';
 
   @override
-  String get server_uuid => '服务器uuid';
+  String get server_uuid => 'server uuid';
 
   @override
-  String get as_config_file => '跟server-go服务器里面的配置文件一致';
+  String get as_config_file =>
+      'Consistent with the configuration files in the server-go server';
 
   @override
-  String get add_to_server => '添加到服务器';
+  String get add_to_server => 'Add to server';
 
   @override
-  String get add_server => '添加服务器';
+  String get add_server => 'Add server';
 
   @override
-  String get success => '成功!';
+  String get success => 'Success!';
 }
