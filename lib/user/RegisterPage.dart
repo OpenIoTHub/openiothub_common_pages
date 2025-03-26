@@ -6,7 +6,7 @@ import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
-import '../utils/goToUrl.dart';
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -25,7 +25,7 @@ class _State extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("注册"),
+          title: Text(OpenIoTHubCommonLocalizations.of(context).register),
         ),
         body: Center(
           child: Container(
@@ -36,33 +36,33 @@ class _State extends State<RegisterPage> {
                 TDInput(
                   controller: _usermobile,
                   backgroundColor: Colors.white,
-                  leftLabel: "手机号",
-                  hintText: '请输入手机号',
+                  leftLabel: OpenIoTHubCommonLocalizations.of(context).mobile_number,
+                  hintText: OpenIoTHubCommonLocalizations.of(context).please_input_mobile,
                   onChanged: (String v) {},
                 ),
                 TDInput(
                   controller: _userpassword,
                   backgroundColor: Colors.white,
-                  leftLabel: "用户密码",
-                  hintText: '请输入用户密码',
+                  leftLabel: OpenIoTHubCommonLocalizations.of(context).password,
+                  hintText: OpenIoTHubCommonLocalizations.of(context).please_input_password,
                   obscureText: true,
                   onChanged: (String v) {},
                 ),
                 TDButton(
                     icon: TDIcons.login,
-                    text: '注册',
+                    text: OpenIoTHubCommonLocalizations.of(context).register,
                     size: TDButtonSize.large,
                     type: TDButtonType.outline,
                     shape: TDButtonShape.rectangle,
                     theme: TDButtonTheme.primary,
                     onTap: () async {
                       if (!_isChecked) {
-                        showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                        showToast("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}");
                         return;
                       }
                       if (_usermobile.text.isEmpty ||
                           _userpassword.text.isEmpty) {
-                        showToast("用户名与密码不能为空");
+                        showToast(OpenIoTHubCommonLocalizations.of(context).username_and_password_cant_be_empty);
                         return;
                       }
                       LoginInfo loginInfo = LoginInfo();
@@ -71,12 +71,12 @@ class _State extends State<RegisterPage> {
                       OperationResponse operationResponse =
                           await UserManager.RegisterUserWithUserInfo(loginInfo);
                       if (operationResponse.code == 0) {
-                        showToast("注册成功!请使用注册信息登录!${operationResponse.msg}");
+                        showToast("${OpenIoTHubCommonLocalizations.of(context).register_success}${operationResponse.msg}");
                         if (Navigator.of(context).canPop()) {
                           Navigator.of(context).pop();
                         } else {}
                       } else {
-                        showToast("注册失败!请重新注册:${operationResponse.msg}");
+                        showToast("${OpenIoTHubCommonLocalizations.of(context).register_failed}:${operationResponse.msg}");
                       }
                     }),
                 Row(
@@ -91,21 +91,21 @@ class _State extends State<RegisterPage> {
                       activeColor: Colors.green, // 选中时的颜色
                       checkColor: Colors.white, // 选中标记的颜色
                     ),
-                    Text("同意"),
+                    Text(OpenIoTHubCommonLocalizations.of(context).agree),
                     TextButton(
                         child: Text(
-                          '隐私政策',
+                          OpenIoTHubCommonLocalizations.of(context).privacy_policy,
                           style: TextStyle(color: Colors.red),
                         ),
                         onPressed: () async {
                           goToURL(
                               context,
                               "https://docs.iothub.cloud/privacyPolicy/index.html",
-                              "隐私政策");
+                              OpenIoTHubCommonLocalizations.of(context).privacy_policy);
                         }),
                     TextButton(
                         child: Text(
-                          '反馈渠道',
+                          OpenIoTHubCommonLocalizations.of(context).feedback_channels,
                           style: TextStyle(color: Colors.green),
                         ),
                         onPressed: () async {

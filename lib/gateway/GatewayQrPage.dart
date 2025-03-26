@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 class GatewayQrPage extends StatefulWidget {
   const GatewayQrPage({super.key});
 
@@ -23,12 +25,15 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
 
   StreamSubscription<WechatResp>? _share;
 
+  String share_success = "share success";
+  String share_failed = "share failed";
+
   void _listenShareMsg(WechatResp resp) {
     // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
-      showToast("分享成功！");
+      showToast(share_success);
     } else {
-      showToast("分享失败！");
+      showToast(share_failed);
     }
   }
 
@@ -51,6 +56,8 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
 
   @override
   Widget build(BuildContext context) {
+    share_success = OpenIoTHubCommonLocalizations.of(context).share_success;
+    share_failed = OpenIoTHubCommonLocalizations.of(context).share_failed;
     // return Text("data");
     // return QrImageView(
     //   data: jwtQRCodePair != null ? jwtQRCodePair!.qRCodeForMobileAdd : "https://iothub.cloud",
@@ -59,7 +66,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
     // );
     return Scaffold(
         appBar: AppBar(
-          title: Text("本机作为网关"),
+          title: Text(OpenIoTHubCommonLocalizations.of(context).as_a_gateway),
           actions: <Widget>[
             //   TODO 以图片或者小程序方式分享给其他人
             IconButton(
@@ -92,13 +99,13 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
             Center(
                 child: Padding(
               padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
-              child: Text("使用云亿连APP扫描上述二维码添加本网关以访问本网络"),
+              child: Text(OpenIoTHubCommonLocalizations.of(context).as_a_gateway_description1),
             )),
             Center(
                 child: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
               child: TextButton(
-                child: Text("更换网关ID"),
+                child: Text(OpenIoTHubCommonLocalizations.of(context).change_gateway_id),
                 onPressed: () {
                   _generateJwtQRCodePair(true);
                 },
@@ -110,7 +117,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
               padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
               child: TDButton(
                 icon: TDIcons.backward,
-                text: '返回主界面',
+                text: OpenIoTHubCommonLocalizations.of(context).go_to_main_menu,
                 size: TDButtonSize.small,
                 type: TDButtonType.outline,
                 shape: TDButtonShape.rectangle,
@@ -165,6 +172,7 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
 
   // 分享网关
   _shareAction() async {
+    // TODO 国外的带host
     Uri? uri = Uri.tryParse(qRCodeForMobileAdd);
     String id = uri!.queryParameters["id"]!;
     String url =
@@ -172,13 +180,13 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-                title: Text("分享到微信"),
-                content: Text("选择需方分享的位置"),
+                title: Text(OpenIoTHubCommonLocalizations.of(context).share_to_wechat),
+                content: Text(OpenIoTHubCommonLocalizations.of(context).select_where_to_share),
                 actions: <Widget>[
                   // 分享网关:二维码图片、小程序链接、网页
                   TDButton(
                     icon: TDIcons.logo_wechat_stroke,
-                    text: '分享到微信',
+                    text: OpenIoTHubCommonLocalizations.of(context).share_to_wechat,
                     size: TDButtonSize.small,
                     type: TDButtonType.outline,
                     shape: TDButtonShape.rectangle,
@@ -186,8 +194,8 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                     onTap: () {
                       WechatKitPlatform.instance.shareWebpage(
                         scene: WechatScene.kSession,
-                        title: "云亿连网关分享",
-                        description: "使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云",
+                        title: OpenIoTHubCommonLocalizations.of(context).openiothub_gateway_share,
+                        description: OpenIoTHubCommonLocalizations.of(context).openiothub_gateway_share_description,
                         // thumbData:,
                         webpageUrl: url,
                       );

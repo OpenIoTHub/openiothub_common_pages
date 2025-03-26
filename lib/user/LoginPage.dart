@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
-import '../utils/goToUrl.dart';
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -30,6 +30,8 @@ class _State extends State<LoginPage> {
   String? loginFlag;
   late Timer _timer;
 
+  String wechat_login_failed = "wechat login failed";
+
 //  New
   final TextEditingController _usermobile = TextEditingController(text: "");
   final TextEditingController _userpassword = TextEditingController(text: "");
@@ -40,7 +42,7 @@ class _State extends State<LoginPage> {
           await UserManager.LoginWithWechatCode(resp.code!);
       await _handleLoginResp(userLoginResponse);
     } else {
-      showToast("微信登录失败:${resp.errorMsg}");
+      showToast("$wechat_login_failed:${resp.errorMsg}");
     }
   }
 
@@ -62,9 +64,10 @@ class _State extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    wechat_login_failed = OpenIoTHubCommonLocalizations.of(context).wechat_login_failed;
     return Scaffold(
         appBar: AppBar(
-          title: Text("登录"),
+          title: Text(OpenIoTHubCommonLocalizations.of(context).login),
         ),
         body: Center(
           child: Container(
@@ -85,16 +88,16 @@ class _State extends State<LoginPage> {
           child: TDInput(
             controller: _usermobile,
             backgroundColor: Colors.white,
-            leftLabel: "手机号",
-            hintText: '请输入手机号',
+            leftLabel: OpenIoTHubCommonLocalizations.of(context).user_mobile,
+            hintText: OpenIoTHubCommonLocalizations.of(context).please_input_mobile,
             onChanged: (String v) {},
           ),
         ),
         TDInput(
           controller: _userpassword,
           backgroundColor: Colors.white,
-          leftLabel: "用户密码",
-          hintText: '请输入用户密码',
+          leftLabel: OpenIoTHubCommonLocalizations.of(context).password,
+          hintText: OpenIoTHubCommonLocalizations.of(context).please_input_password,
           obscureText: true,
           onChanged: (String v) {},
         ),
@@ -105,7 +108,7 @@ class _State extends State<LoginPage> {
             children: [
               TDButton(
                   icon: TDIcons.login,
-                  text: '登陆',
+                  text: OpenIoTHubCommonLocalizations.of(context).login,
                   size: TDButtonSize.medium,
                   type: TDButtonType.outline,
                   shape: TDButtonShape.rectangle,
@@ -113,12 +116,12 @@ class _State extends State<LoginPage> {
                   onTap: () async {
                     // 只有同意隐私政策才可以进行下一步
                     if (!_isChecked) {
-                      showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+                      showToast("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}");
                       return;
                     }
                     if (_usermobile.text.isEmpty ||
                         _userpassword.text.isEmpty) {
-                      showToast("用户名与密码不能为空");
+                      showToast(OpenIoTHubCommonLocalizations.of(context).username_and_password_cant_be_empty);
                       return;
                     }
                     LoginInfo loginInfo = LoginInfo();
@@ -132,7 +135,7 @@ class _State extends State<LoginPage> {
                 padding: const EdgeInsets.only(left: 20.0), // 设置顶部距离
                 child: TDButton(
                     icon: TDIcons.user,
-                    text: '注册用户',
+                    text: OpenIoTHubCommonLocalizations.of(context).user_registration,
                     size: TDButtonSize.medium,
                     type: TDButtonType.outline,
                     shape: TDButtonShape.rectangle,
@@ -160,22 +163,22 @@ class _State extends State<LoginPage> {
                 activeColor: Colors.green, // 选中时的颜色
                 checkColor: Colors.white, // 选中标记的颜色
               ),
-              Text("同意"),
+              Text(OpenIoTHubCommonLocalizations.of(context).agree),
               TextButton(
                   // TODO 勾选才可以下一步
                   child: Text(
-                    '隐私政策',
+                    OpenIoTHubCommonLocalizations.of(context).privacy_policy,
                     style: TextStyle(color: Colors.red),
                   ),
                   onPressed: () async {
                     goToURL(
                         context,
                         "https://docs.iothub.cloud/privacyPolicy/index.html",
-                        "隐私政策");
+                        OpenIoTHubCommonLocalizations.of(context).privacy_policy);
                   }),
               TextButton(
                   child: Text(
-                    '反馈渠道',
+                    OpenIoTHubCommonLocalizations.of(context).feedback_channels,
                     style: TextStyle(color: Colors.green),
                   ),
                   onPressed: () async {
@@ -207,7 +210,7 @@ class _State extends State<LoginPage> {
           onPressed: () async {
             // 只有同意隐私政策才可以进行下一步
             if (!_isChecked) {
-              showToast("请勾选☑️下述同意隐私政策才可以进行下一步");
+              showToast("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}");
               return;
             }
             // 判断是否安装了微信，安装了微信则打开微信进行登录，否则显示二维码由手机扫描登录
@@ -227,20 +230,20 @@ class _State extends State<LoginPage> {
               loginFlag = generateRandomString(12);
               String qrUrl = await getPicUrl(loginFlag!);
               if (qrUrl == "") {
-                showToast("获取微信登陆二维码失败！");
+                showToast(OpenIoTHubCommonLocalizations.of(context).get_wechat_qr_code_failed);
                 return;
               }
               // 循环获取登录结果
               showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
-                          title: Text("微信扫码登录"),
+                          title: Text(OpenIoTHubCommonLocalizations.of(context).wechat_scan_qr_code_to_login),
                           content: SizedBox.expand(child: Image.network(qrUrl)),
                           actions: <Widget>[
                             // 分享网关:二维码图片、小程序链接、网页
                             TDButton(
                               icon: TDIcons.fullscreen_exit,
-                              text: '退出',
+                              text: OpenIoTHubCommonLocalizations.of(context).exit,
                               size: TDButtonSize.small,
                               type: TDButtonType.outline,
                               shape: TDButtonShape.rectangle,
@@ -274,7 +277,7 @@ class _State extends State<LoginPage> {
       Navigator.of(context).pop();
     } else {
       showToast(
-          "登录失败:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
+          "${OpenIoTHubCommonLocalizations.of(context).login_failed}:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
     }
   }
 
@@ -311,13 +314,13 @@ class _State extends State<LoginPage> {
         } else if ((response.data["data"] as Map<String, dynamic>)
                 .containsKey("scan") &&
             (response.data["data"] as Map<String, dynamic>)["scan"] == true) {
-          showToast("请现将本微信绑定一个账号再使用微信快捷登录");
+          showToast(OpenIoTHubCommonLocalizations.of(context).login_after_wechat_bind);
         } else if ((response.data["data"] as Map<String, dynamic>)
                 .containsKey("scan") &&
             (response.data["data"] as Map<String, dynamic>)["scan"] == false) {
           // showToast("请扫码！");
         } else {
-          showToast("微信快捷登录失败：${response.data["msg"]}");
+          showToast("${OpenIoTHubCommonLocalizations.of(context).wechat_fast_login_failed}：${response.data["msg"]}");
         }
       }
     });

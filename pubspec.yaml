@@ -57,8 +57,14 @@ dependencies:
 
 dev_dependencies:
   intl_utils: ^2.8.3
+  build_runner:
+  flutter_gen_runner:
   flutter_test:
     sdk: flutter
+
+flutter_gen:
+  assets:
+    - lib/l10n/*.arb
 
 flutter:
   uses-material-design: true
@@ -67,5 +73,5 @@ flutter:
    - assets/images/
    - assets/images/feedback/
 
-flutter_intl:
-  enabled: true
+#flutter_intl:
+#  enabled: true

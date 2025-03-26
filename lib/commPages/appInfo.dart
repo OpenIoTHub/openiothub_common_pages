@@ -9,6 +9,8 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 // import 'package:tencent_kit/tencent_kit.dart';
 import 'package:wechat_kit/wechat_kit.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 class AppInfoPage extends StatefulWidget {
   AppInfoPage({required Key key}) : super(key: key);
 
@@ -32,6 +34,8 @@ class _AppInfoPageState extends State<AppInfoPage> {
   // 微信分享
   late final StreamSubscription<WechatResp> _share;
 
+  String share_success = "share success";
+  String share_failed = "share failed";
   // QQ分享
   // late final StreamSubscription<TencentResp> _respSubs;
   // TencentLoginResp? _loginResp;
@@ -39,9 +43,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
   void _listenShareMsg(WechatResp resp) {
     // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
-      showToast("分享成功！");
+      showToast(share_success);
     } else {
-      showToast("分享失败！");
+      showToast(share_failed);
     }
   }
 
@@ -79,11 +83,11 @@ class _AppInfoPageState extends State<AppInfoPage> {
   @override
   Widget build(BuildContext context) {
     final List _result = [];
-    _result.add("App名称:$appName");
-    _result.add("包名:$packageName");
-    _result.add("版本:$version");
-    _result.add("版本号:$buildNumber");
-    _result.add("APP备案号:皖ICP备2022013511号-2A");
+    _result.add("${OpenIoTHubCommonLocalizations.of(context).app_name}$appName");
+    _result.add("${OpenIoTHubCommonLocalizations.of(context).package_name}$packageName");
+    _result.add("${OpenIoTHubCommonLocalizations.of(context).version}$version");
+    _result.add("${OpenIoTHubCommonLocalizations.of(context).version_sn}$buildNumber");
+    _result.add("${OpenIoTHubCommonLocalizations.of(context).icp_number}皖ICP备2022013511号-2A");
 
     final tiles = _result.map(
       (pair) {
@@ -97,7 +101,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
     List<ListTile> tilesList = tiles.toList();
     tilesList.add(ListTile(
       title: Text(
-        "反馈渠道",
+        OpenIoTHubCommonLocalizations.of(context).feedback_channels,
         style: TextStyle(color: Colors.green),
       ),
       onTap: () {
@@ -111,7 +115,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
     ));
     tilesList.add(ListTile(
       title: Text(
-        "在线反馈",
+          OpenIoTHubCommonLocalizations.of(context).online_feedback,
         style: TextStyle(color: Colors.green),
       ),
       onTap: () {
@@ -120,12 +124,12 @@ class _AppInfoPageState extends State<AppInfoPage> {
     ));
     tilesList.add(ListTile(
       title: Text(
-        "隐私政策",
+        OpenIoTHubCommonLocalizations.of(context).privacy_policy,
         style: TextStyle(color: Colors.green),
       ),
       onTap: () {
         goToURL(context, "https://docs.iothub.cloud/privacyPolicy/index.html",
-            "隐私政策");
+            OpenIoTHubCommonLocalizations.of(context).privacy_policy);
       },
     ));
     final divided = ListTile.divideTiles(
@@ -134,7 +138,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
     ).toList();
 
     return Scaffold(
-      appBar: AppBar(title: Text("App信息"), actions: <Widget>[
+      appBar: AppBar(title: Text(OpenIoTHubCommonLocalizations.of(context).app_info), actions: <Widget>[
         IconButton(
             icon: Icon(
               Icons.share,
@@ -160,27 +164,27 @@ class _AppInfoPageState extends State<AppInfoPage> {
   }
 
   _shareAction() async {
-    var title = "云亿连内网穿透和智能家居管理";
-    var description = "云亿连全平台管理您的所有智能设备和私有云";
+    var title = OpenIoTHubCommonLocalizations.of(context).share_app_title;
+    var description = OpenIoTHubCommonLocalizations.of(context).share_app_description;
     var url = "https://m.malink.cn/s/RNzqia";
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-                title: Text("分享"),
-                content: Text("选择需方分享的位置"),
+                title: Text(OpenIoTHubCommonLocalizations.of(context).share),
+                content: Text(OpenIoTHubCommonLocalizations.of(context).share_to_where),
                 actions: <Widget>[
                   Row(
                     children: [
                       TDButton(
                         icon: TDIcons.logo_wechat_stroke,
-                        text: '分享到微信',
+                        text: OpenIoTHubCommonLocalizations.of(context).share_to_wechat,
                         size: TDButtonSize.small,
                         type: TDButtonType.outline,
                         shape: TDButtonShape.rectangle,
                         theme: TDButtonTheme.primary,
                         onTap: () async {
                           if (!await WechatKitPlatform.instance.isInstalled()) {
-                            showToast("微信未安装！");
+                            showToast(OpenIoTHubCommonLocalizations.of(context).wechat_not_installed);
                             return;
                           }
                           WechatKitPlatform.instance.shareWebpage(
@@ -197,7 +201,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                         padding: const EdgeInsets.only(left: 10.0), // 设置左边距离
                         child: TDButton(
                           icon: TDIcons.logo_wechat_stroke,
-                          text: '分享到朋友圈',
+                          text: OpenIoTHubCommonLocalizations.of(context).share_on_moments,
                           size: TDButtonSize.small,
                           type: TDButtonType.outline,
                           shape: TDButtonShape.rectangle,
@@ -205,7 +209,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           onTap: () async {
                             if (!await WechatKitPlatform.instance
                                 .isInstalled()) {
-                              showToast("微信未安装！");
+                              showToast(OpenIoTHubCommonLocalizations.of(context).wechat_not_installed);
                               return;
                             }
                             WechatKitPlatform.instance.shareWebpage(

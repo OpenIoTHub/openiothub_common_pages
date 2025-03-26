@@ -5,6 +5,8 @@ import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 class SettingsPage extends StatefulWidget {
   SettingsPage({
     required Key key,
@@ -34,8 +36,8 @@ class _SettingsPageState extends State<SettingsPage> {
       TDInput(
         controller: _grpcServiceHost,
         backgroundColor: Colors.white,
-        leftLabel: "grpc服务的地址",
-        hintText: '请输入grpc服务的IP或者域名',
+        leftLabel: OpenIoTHubCommonLocalizations.of(context).grpc_server_addr,
+        hintText: OpenIoTHubCommonLocalizations.of(context).grpc_server_ip_or_domain,
         onChanged: (String v) {
           Config.webgRpcIp = v;
         },
@@ -43,8 +45,8 @@ class _SettingsPageState extends State<SettingsPage> {
       TDInput(
         controller: _grpcServicePort,
         backgroundColor: Colors.white,
-        leftLabel: "grpc服务的端口",
-        hintText: '请输入grpc服务的端口',
+        leftLabel: OpenIoTHubCommonLocalizations.of(context).grpc_service_port,
+        hintText: OpenIoTHubCommonLocalizations.of(context).input_grpc_service_port,
         onChanged: (String v) {
           Config.webgRpcPort = int.parse(v);
         },
@@ -52,8 +54,8 @@ class _SettingsPageState extends State<SettingsPage> {
       TDInput(
         controller: _iotManagerGrpcServiceHost,
         backgroundColor: Colors.white,
-        leftLabel: "iot-manager地址",
-        hintText: '请输入iot-manager grpc服务地址',
+        leftLabel: OpenIoTHubCommonLocalizations.of(context).iot_manager_addr,
+        hintText: OpenIoTHubCommonLocalizations.of(context).input_iot_manager_addr,
         onChanged: (String v) {
           Config.iotManagerGrpcIp = v;
         },
@@ -64,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text("开启前台服务", style: Constants.titleTextStyle),
+            Text(OpenIoTHubCommonLocalizations.of(context).activate_front_desk_service, style: Constants.titleTextStyle),
           ],
         ),
         trailing: Switch(

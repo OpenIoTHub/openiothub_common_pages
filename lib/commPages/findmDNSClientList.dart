@@ -14,6 +14,8 @@ import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 const utf8encoder = Utf8Encoder();
 
 class FindmDNSClientListPage extends StatefulWidget {
@@ -150,7 +152,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     ).toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text("发现本地网关列表"),
+        title: Text(OpenIoTHubCommonLocalizations.of(context).find_local_gateway_list),
         actions: <Widget>[
           // IconButton(
           //     icon: Icon(
@@ -198,17 +200,17 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
         builder: (context) {
           return StatefulBuilder(builder: (context, state) {
             return AlertDialog(
-                title: Text("手动创建一个网关？"),
+                title: Text(OpenIoTHubCommonLocalizations.of(context).manually_create_a_gateway),
                 content: SizedBox.expand(
                     child: ListView(
                   children: ListTile.divideTiles(
                     context: context,
                     tiles: [
-                      Text("安装的网关可以本页面发现"),
+                      Text(OpenIoTHubCommonLocalizations.of(context).manually_create_a_gateway_description1),
                       Text(
-                          "自动生成一个网关信息，回头拿着token填写到网关配置文件即可，适合于手机无法同局域网发现网关的情况"),
+                          OpenIoTHubCommonLocalizations.of(context).manually_create_a_gateway_description2),
                       Text(
-                        "从下面选择网关需要连接的服务器:",
+                        OpenIoTHubCommonLocalizations.of(context).manually_create_a_gateway_description3,
                         style: TextStyle(
                           color: Colors.amber,
                         ),
@@ -227,13 +229,13 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
                 )),
                 actions: <Widget>[
                   TextButton(
-                    child: Text("取消"),
+                    child: Text(OpenIoTHubCommonLocalizations.of(context).cancel),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                   TextButton(
-                    child: Text("添加"),
+                    child: Text(OpenIoTHubCommonLocalizations.of(context).add),
                     onPressed: () async {
                       // 从服务器自动生成一个网关
                       // TODO 选择服务器
@@ -253,7 +255,7 @@ loginwithtokenmap:
   $uuid: $gatewayJwt
 ''';
                       Clipboard.setData(ClipboardData(text: data));
-                      showToast("网关的id与token已经复制到剪切板，请将剪切板的配置填写到网关的配置文件中");
+                      showToast(OpenIoTHubCommonLocalizations.of(context).paste_info);
                       Navigator.of(context).pop();
                     },
                   )
@@ -269,9 +271,9 @@ loginwithtokenmap:
     config.description = description;
     try {
       await SessionApi.createOneSession(config);
-      showToast("添加网关成功！");
+      showToast(OpenIoTHubCommonLocalizations.of(context).add_gateway_success);
     } catch (exception) {
-      showToast("登录失败：${exception}");
+      showToast("${OpenIoTHubCommonLocalizations.of(context).login_failed}：${exception}");
     }
   }
 

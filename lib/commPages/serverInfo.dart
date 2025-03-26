@@ -3,6 +3,8 @@ import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 class ServerInfoPage extends StatefulWidget {
   ServerInfoPage({required Key key, required this.serverInfo})
       : super(key: key);
@@ -78,16 +80,16 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         controller: _name_controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
-          labelText: '名称',
-          helperText: '自定义服务器名称',
+          labelText: OpenIoTHubCommonLocalizations.of(context).name,
+          helperText: OpenIoTHubCommonLocalizations.of(context).define_server_name,
         ),
       ),
       TextFormField(
         controller: _server_host_controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
-          labelText: '服务器ip地址或者域名',
-          helperText: '公网server-go服务器的地址',
+          labelText: OpenIoTHubCommonLocalizations.of(context).define_server_ip_or_domain,
+          helperText: OpenIoTHubCommonLocalizations.of(context).define_server_addr,
         ),
       ),
       TextFormField(
@@ -95,7 +97,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'login_key',
-          helperText: '秘钥',
+          helperText: OpenIoTHubCommonLocalizations.of(context).define_server_key,
         ),
       ),
       TextFormField(
@@ -103,7 +105,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'tcp_port',
-          helperText: 'tcp端口',
+          helperText: OpenIoTHubCommonLocalizations.of(context).define_server_tcp_port,
         ),
       ),
       TextFormField(
@@ -111,7 +113,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'kcp_port',
-          helperText: 'kcp端口',
+          helperText: OpenIoTHubCommonLocalizations.of(context).define_server_kcp_port,
         ),
       ),
       TextFormField(
@@ -119,7 +121,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'udp_api_port',
-          helperText: '端口',
+          helperText: OpenIoTHubCommonLocalizations.of(context).port,
         ),
       ),
       TextFormField(
@@ -127,7 +129,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'kcp_api_port',
-          helperText: '端口',
+          helperText: OpenIoTHubCommonLocalizations.of(context).port,
         ),
       ),
       TextFormField(
@@ -135,7 +137,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'tls_port',
-          helperText: '端口',
+          helperText: OpenIoTHubCommonLocalizations.of(context).port,
         ),
       ),
       TextFormField(
@@ -143,20 +145,20 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
           labelText: 'grpc_port',
-          helperText: '端口',
+          helperText: OpenIoTHubCommonLocalizations.of(context).port,
         ),
       ),
       TextFormField(
         controller: _description_controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10.0),
-          labelText: '描述',
-          helperText: '自定义描述信息',
+          labelText: OpenIoTHubCommonLocalizations.of(context).description,
+          helperText: OpenIoTHubCommonLocalizations.of(context).define_description,
         ),
       ),
       Row(
         children: [
-          Text("提供给APP所有人使用:"),
+          Text(OpenIoTHubCommonLocalizations.of(context).for_everyone_to_use),
           Switch(
               value: _is_public,
               onChanged: (bool newVal) {
@@ -182,9 +184,9 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
             serverInfo.description = _description_controller.text;
             serverInfo.isPublic = _is_public;
             ServerManager.UpdateServer(serverInfo)
-                .then((value) => showToast("更新成功！"));
+                .then((value) => showToast(OpenIoTHubCommonLocalizations.of(context).update_success));
           },
-          child: Text("确认修改")),
+          child: Text(OpenIoTHubCommonLocalizations.of(context).confirm_modify)),
     ];
     final divided = ListTile.divideTiles(
       context: context,
@@ -192,7 +194,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
     ).toList();
 
     return Scaffold(
-      appBar: AppBar(title: Text("服务器信息"), actions: <Widget>[
+      appBar: AppBar(title: Text(OpenIoTHubCommonLocalizations.of(context).server_info), actions: <Widget>[
         IconButton(
             icon: Icon(
               Icons.delete,
@@ -200,7 +202,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
             ),
             onPressed: () {
               ServerManager.DelServer(widget.serverInfo)
-                  .then((value) => showToast("删除成功！"))
+                  .then((value) => showToast(OpenIoTHubCommonLocalizations.of(context).delete_success))
                   .then((value) => Navigator.of(context).pop());
             }),
       ]),

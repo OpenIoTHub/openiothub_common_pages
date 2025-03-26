@@ -10,6 +10,8 @@ import 'package:openiothub_common_pages/wifiConfig/permission.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 class Airkiss extends StatefulWidget {
   Airkiss({required Key key, required this.title}) : super(key: key);
 
@@ -20,11 +22,11 @@ class Airkiss extends StatefulWidget {
 }
 
 class _AirkissState extends State<Airkiss> {
-  bool _privilege_required = false;
+  OpenIoTHubCommonLocalizations? localizations;
   final NetworkInfo _networkInfo = NetworkInfo();
 
 //  New
-  final TextEditingController _ssidFilter = TextEditingController(text: "点击获取WiFi信息");
+  final TextEditingController _ssidFilter = TextEditingController(text: "click to get wifi info");
   final TextEditingController _bssidFilter =
   TextEditingController();
   final TextEditingController _passwordFilter = TextEditingController();
@@ -34,7 +36,7 @@ class _AirkissState extends State<Airkiss> {
   String? _ssid;
   String? _bssid;
   String? _password;
-  String _msg = "上面输入wifi密码开始设置设备联网";
+  String? _msg;
 
   _AirkissState() {
     _ssidFilter.addListener(_ssidListen);
@@ -78,6 +80,9 @@ class _AirkissState extends State<Airkiss> {
 
   @override
   Widget build(BuildContext context) {
+    localizations = OpenIoTHubCommonLocalizations.of(context);
+    _ssidFilter.text = localizations!.click_to_get_wifi_info;
+    _msg = localizations!.input_wifi_password;
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -98,7 +103,7 @@ class _AirkissState extends State<Airkiss> {
                               height: 60.0,
                             ),
                             Text(
-                                "正在设置设备连接到路由器：\n\n${_ssid}(BSSID:${_bssid})\n\n$_msg"),
+                                "${localizations!.connecting_to_router}：\n\n${_ssid}(BSSID:${_bssid})\n\n$_msg"),
                           ]),
                     ),
                     color: Colors.white.withOpacity(0.8),
@@ -113,11 +118,11 @@ class _AirkissState extends State<Airkiss> {
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                Text("设备配网"),
+                                Text(localizations!.device_wifi_config),
                                 TextField(
                                   controller: _ssidFilter,
                                   decoration:
-                                      InputDecoration(labelText: 'WiFi名称'),
+                                      InputDecoration(labelText: localizations!.wifi_ssid),
                                   readOnly: true,
                                   onTap: () async {
                                     showToast("onTap");
@@ -146,28 +151,28 @@ class _AirkissState extends State<Airkiss> {
                         Container(
                           child: TextField(
                             controller: _passwordFilter,
-                            decoration: InputDecoration(labelText: '输入WiFi密码'),
+                            decoration: InputDecoration(labelText: localizations!.input_wifi_password),
                             obscureText: true,
                           ),
                         ),
                         Container(height: 20),
                         ElevatedButton(
-                          child: Text('开始添加周围智能设备'),
+                          child: Text(localizations!.start_adding_surrounding_smart_devices),
                           onPressed: () async {
                             if (_ssid == null || _password == null) {
-                              showToast("WiFi信息不能为空");
+                              showToast(localizations!.wifi_info_cant_be_empty);
                               return;
                             }
                             setState(() {
                               _isLoading = true;
-                              _msg = "正在发现设备，请耐心等待，大概需要一分钟";
+                              _msg = localizations!.discovering_device_please_wait;
                             });
                             //由于微信AirKiss配网和汉枫SmartLink都是使用本地的UDP端口10000进行监听所以，先进行AirKiss然后进行SmartLink
                             await _configureWiFi();
                           },
                         ),
                         Container(height: 10),
-                        Text(_msg),
+                        Text(_msg!),
                       ],
                     ))));
   }
@@ -211,7 +216,7 @@ class _AirkissState extends State<Airkiss> {
       _ssidFilter.text = wifiName!.replaceAll("\"", "");
       _bssidFilter.text = wifiBSSID!;
 
-      _msg = "输入路由器WIFI(2.4G频率)密码后开始配网";
+      _msg = localizations!.please_input_2p4g_wifi_password;
     });
     showToast("ssid:${wifiName!},bssid:${wifiBSSID!}");
   }
@@ -226,7 +231,7 @@ class _AirkissState extends State<Airkiss> {
       AirkissResult v = await ac.config(_ssid!, _password!);
       setState(() {
         _isLoading = false;
-        _msg = "附近的AirKiss设备配网任务完成";
+        _msg = localizations!.airkiss_device_wifi_config_success;
       });
       if (v.deviceAddress != null) {
         return true;

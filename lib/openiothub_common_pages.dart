@@ -13,3 +13,5 @@ export 'user/RegisterPage.dart';
 export 'user/userInfoPage.dart';
 export 'utils/ThemeUtils.dart';
 export 'wifiConfig/airkiss.dart';
+export 'l10n/generated/openiothub_common_localizations.dart';
+export 'utils/goToUrl.dart';

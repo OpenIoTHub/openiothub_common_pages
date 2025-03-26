@@ -5,6 +5,8 @@ import 'package:openiothub_common_pages/commPages/serverInfo.dart';
 import 'package:openiothub_constants/constants/Constants.dart';
 import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 
+import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+
 class ServerPages extends StatefulWidget {
   ServerPages({required Key key, required this.title}) : super(key: key);
 
@@ -81,7 +83,7 @@ class ServerPagesState extends State<ServerPages> {
                 ),
                 onPressed: () {
                   //刷新端口列表
-                  _addMyServer();
+                  _addMyServer(context);
                 }),
           ],
         ),
@@ -97,17 +99,17 @@ class ServerPagesState extends State<ServerPages> {
             }));
   }
 
-  Future<void> _addMyServer() async {
+  Future<void> _addMyServer(BuildContext context) async {
     // string Uuid = 1;
     TextEditingController _uuid_controller =
         TextEditingController.fromValue(TextEditingValue(text: getOneUUID()));
     // string Name = 2;
     TextEditingController _name_controller = TextEditingController.fromValue(
-        TextEditingValue(text: "我自己的server-go服务器"));
+        TextEditingValue(text: OpenIoTHubCommonLocalizations.of(context).my_server_description_example));
     // string ServerHost = 3;
     TextEditingController _server_host_controller =
         TextEditingController.fromValue(
-            TextEditingValue(text: "guonei.nat-cloud.com"));
+            TextEditingValue(text: OpenIoTHubCommonLocalizations.of(context).server_go_addr_example));
     // string LoginKey = 4;
     TextEditingController _login_key_controller =
         TextEditingController.fromValue(TextEditingValue(text: getOneUUID()));
@@ -131,7 +133,7 @@ class ServerPagesState extends State<ServerPages> {
         TextEditingController.fromValue(TextEditingValue(text: "34322"));
     // string Description = 11;
     TextEditingController _description_controller =
-        TextEditingController.fromValue(TextEditingValue(text: "我的服务器的描述"));
+        TextEditingController.fromValue(TextEditingValue(text: OpenIoTHubCommonLocalizations.of(context).my_server_description));
     // bool IsPublic = 12;
     bool _is_public = false;
     return showDialog(
@@ -140,7 +142,7 @@ class ServerPagesState extends State<ServerPages> {
           return StatefulBuilder(
             builder: (context, state) {
               return AlertDialog(
-                  title: Text("添加自建服务器："),
+                  title: Text(OpenIoTHubCommonLocalizations.of(context).add_self_hosted_server),
                   content: SizedBox.expand(
                     child: ListView(
                       children: <Widget>[
@@ -148,24 +150,24 @@ class ServerPagesState extends State<ServerPages> {
                           controller: _uuid_controller,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
-                            labelText: '服务器uuid',
-                            helperText: '跟server-go服务器里面的配置文件一致',
+                            labelText: OpenIoTHubCommonLocalizations.of(context).server_uuid,
+                            helperText: OpenIoTHubCommonLocalizations.of(context).as_config_file,
                           ),
                         ),
                         TextFormField(
                           controller: _name_controller,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
-                            labelText: '名称',
-                            helperText: '自定义服务器名称',
+                            labelText: OpenIoTHubCommonLocalizations.of(context).name,
+                            helperText: OpenIoTHubCommonLocalizations.of(context).define_server_name,
                           ),
                         ),
                         TextFormField(
                           controller: _server_host_controller,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
-                            labelText: '服务器ip地址或者域名',
-                            helperText: '公网server-go服务器的地址',
+                            labelText: OpenIoTHubCommonLocalizations.of(context).define_server_ip_or_domain,
+                            helperText: OpenIoTHubCommonLocalizations.of(context).define_server_addr,
                           ),
                         ),
                         TextFormField(
@@ -173,7 +175,7 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'login_key',
-                            helperText: '秘钥',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).define_server_key,
                           ),
                         ),
                         TextFormField(
@@ -181,7 +183,7 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'tcp_port',
-                            helperText: 'tcp端口',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).define_server_tcp_port,
                           ),
                         ),
                         TextFormField(
@@ -189,7 +191,7 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'kcp_port',
-                            helperText: 'kcp端口',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).define_server_kcp_port,
                           ),
                         ),
                         TextFormField(
@@ -197,7 +199,7 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'udp_api_port',
-                            helperText: '端口',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).port,
                           ),
                         ),
                         TextFormField(
@@ -205,7 +207,7 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'kcp_api_port',
-                            helperText: '端口',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).port,
                           ),
                         ),
                         TextFormField(
@@ -213,7 +215,7 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'tls_port',
-                            helperText: '端口',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).port,
                           ),
                         ),
                         TextFormField(
@@ -221,20 +223,20 @@ class ServerPagesState extends State<ServerPages> {
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
                             labelText: 'grpc_port',
-                            helperText: '端口',
+                            helperText: OpenIoTHubCommonLocalizations.of(context).port,
                           ),
                         ),
                         TextFormField(
                           controller: _description_controller,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(10.0),
-                            labelText: '描述',
-                            helperText: '自定义描述信息',
+                            labelText: OpenIoTHubCommonLocalizations.of(context).description,
+                            helperText: OpenIoTHubCommonLocalizations.of(context).define_description,
                           ),
                         ),
                         Row(
                           children: [
-                            Text("提供给APP所有人使用:"),
+                            Text(OpenIoTHubCommonLocalizations.of(context).for_everyone_to_use),
                             Switch(
                                 value: _is_public,
                                 onChanged: (bool newVal) {
@@ -249,13 +251,13 @@ class ServerPagesState extends State<ServerPages> {
                   ),
                   actions: <Widget>[
                     TextButton(
-                      child: Text("取消"),
+                      child: Text(OpenIoTHubCommonLocalizations.of(context).cancel),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
                     TextButton(
-                      child: Text("添加到服务器"),
+                      child: Text(OpenIoTHubCommonLocalizations.of(context).add_to_server),
                       onPressed: () {
                         ServerInfo serverInfo = ServerInfo();
                         serverInfo.uuid = _uuid_controller.text;
@@ -278,7 +280,7 @@ class ServerPagesState extends State<ServerPages> {
                         serverInfo.isPublic = _is_public;
                         ServerManager.AddServer(serverInfo)
                             .then((value) =>
-                                showToast("添加服务器(${_name_controller.text})成功!"))
+                                showToast("${OpenIoTHubCommonLocalizations.of(context).add_server}(${_name_controller.text})${OpenIoTHubCommonLocalizations.of(context).success}"))
                             .then((value) => Navigator.of(context).pop())
                             .then((value) => _listMyServers());
                       },
