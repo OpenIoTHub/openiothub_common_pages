@@ -190,13 +190,13 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @account_and_safety.
   ///
   /// In en, this message translates to:
-  /// **'Failed to obtain WeChat login information'**
+  /// **'Account and safety'**
   String get account_and_safety;
 
   /// No description provided for @mobile_number.
   ///
   /// In en, this message translates to:
-  /// **'Failed to obtain WeChat login information'**
+  /// **'Mobile number'**
   String get mobile_number;
 
   /// No description provided for @username.

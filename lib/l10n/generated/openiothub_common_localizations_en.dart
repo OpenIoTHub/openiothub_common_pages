@@ -56,10 +56,10 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
       'Failed to obtain WeChat login information';
 
   @override
-  String get account_and_safety => 'Failed to obtain WeChat login information';
+  String get account_and_safety => 'Account and safety';
 
   @override
-  String get mobile_number => 'Failed to obtain WeChat login information';
+  String get mobile_number => 'Mobile number';
 
   @override
   String get username => 'Username';

@@ -51,10 +51,10 @@ class OpenIoTHubCommonLocalizationsZh extends OpenIoTHubCommonLocalizations {
   String get get_wechat_login_info_failed => '获取微信登录信息失败';
 
   @override
-  String get account_and_safety => '获取微信登录信息失败';
+  String get account_and_safety => '账号及安全';
 
   @override
-  String get mobile_number => '获取微信登录信息失败';
+  String get mobile_number => '电话号码';
 
   @override
   String get username => '用户名';
@@ -464,10 +464,10 @@ class OpenIoTHubCommonLocalizationsZhCn
   String get get_wechat_login_info_failed => '获取微信登录信息失败';
 
   @override
-  String get account_and_safety => '获取微信登录信息失败';
+  String get account_and_safety => '账号及安全';
 
   @override
-  String get mobile_number => '获取微信登录信息失败';
+  String get mobile_number => '电话号码';
 
   @override
   String get username => '用户名';
@@ -877,10 +877,10 @@ class OpenIoTHubCommonLocalizationsZhHans
   String get get_wechat_login_info_failed => '获取微信登录信息失败';
 
   @override
-  String get account_and_safety => '获取微信登录信息失败';
+  String get account_and_safety => '账号及安全';
 
   @override
-  String get mobile_number => '获取微信登录信息失败';
+  String get mobile_number => '电话号码';
 
   @override
   String get username => '用户名';
@@ -1290,10 +1290,10 @@ class OpenIoTHubCommonLocalizationsZhHant
   String get get_wechat_login_info_failed => '獲取微信登錄信息失敗';
 
   @override
-  String get account_and_safety => '獲取微信登錄信息失敗';
+  String get account_and_safety => '賬號及安全';
 
   @override
-  String get mobile_number => '獲取微信登錄信息失敗';
+  String get mobile_number => '電話號碼';
 
   @override
   String get username => '用戶名';
@@ -1703,10 +1703,10 @@ class OpenIoTHubCommonLocalizationsZhTw
   String get get_wechat_login_info_failed => '獲取微信登錄信息失敗';
 
   @override
-  String get account_and_safety => '獲取微信登錄信息失敗';
+  String get account_and_safety => '賬號及安全';
 
   @override
-  String get mobile_number => '獲取微信登錄信息失敗';
+  String get mobile_number => '電話號碼';
 
   @override
   String get username => '用戶名';

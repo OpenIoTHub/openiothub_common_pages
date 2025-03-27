@@ -16,8 +16,8 @@
   "bind_wechat_failed": "Binding WeChat failed!",
   "get_wechat_login_info_failed": "Failed to obtain WeChat login information",
 
-  "account_and_safety": "Failed to obtain WeChat login information",
-  "mobile_number": "Failed to obtain WeChat login information",
+  "account_and_safety": "Account and safety",
+  "mobile_number": "Mobile number",
   "username": "Username",
   "user_mobile": "User mobile",
   "user_email": "User email",

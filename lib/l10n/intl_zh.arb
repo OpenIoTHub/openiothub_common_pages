@@ -16,8 +16,8 @@
   "bind_wechat_failed": "绑定微信失败",
   "get_wechat_login_info_failed": "获取微信登录信息失败",
 
-  "account_and_safety": "获取微信登录信息失败",
-  "mobile_number": "获取微信登录信息失败",
+  "account_and_safety": "账号及安全",
+  "mobile_number": "电话号码",
   "username": "用户名",
   "user_mobile": "手机号",
   "user_email": "邮箱",

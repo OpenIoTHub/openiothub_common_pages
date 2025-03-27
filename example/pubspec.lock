@@ -619,7 +619,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.5+63"
+    version: "1.0.5+64"
   openiothub_constants:
     dependency: "direct main"
     description:
