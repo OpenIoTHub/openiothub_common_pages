@@ -135,7 +135,7 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get wechat_login_failed => 'Wechat login failed';
 
   @override
-  String get login => 'login';
+  String get login => 'Login';
 
   @override
   String get please_input_mobile => 'Please input mobile';
@@ -173,7 +173,7 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get wechat_scan_qr_code_to_login => 'Wechat scan qr code to login!';
 
   @override
-  String get exit => 'exit';
+  String get exit => 'Exit';
 
   @override
   String get login_failed => 'Login failed';
@@ -186,11 +186,11 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get wechat_fast_login_failed => 'WeChat quick login failed';
 
   @override
-  String get register => 'register';
+  String get register => 'Register';
 
   @override
   String get register_success =>
-      'registered successfully Please log in with your registration information!';
+      'Registered successfully Please log in with your registration information!';
 
   @override
   String get register_failed => 'Registration failed! Please register again';
@@ -264,7 +264,7 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
       'OpenIoTHub manages all your smart devices and private clouds across the entire platform';
 
   @override
-  String get share => 'share';
+  String get share => 'Share';
 
   @override
   String get share_to_where => 'Choose the location for the demander to share';
@@ -294,7 +294,7 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
       'Select the server that the gateway needs to connect to from below:';
 
   @override
-  String get add => 'add';
+  String get add => 'Add';
 
   @override
   String get paste_info =>
@@ -348,7 +348,7 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
       'Linux installation using Snapcraft: sudo snap install gateway-go';
 
   @override
-  String get name => 'name';
+  String get name => 'Name';
 
   @override
   String get define_server_name => 'Customize server name';
@@ -360,19 +360,19 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get define_server_addr => 'The address of the public server go server';
 
   @override
-  String get define_server_key => 'key';
+  String get define_server_key => 'Key';
 
   @override
-  String get define_server_tcp_port => 'tcp port';
+  String get define_server_tcp_port => 'Tcp port';
 
   @override
-  String get define_server_kcp_port => 'kcp port';
+  String get define_server_kcp_port => 'Kcp port';
 
   @override
-  String get port => 'port';
+  String get port => 'Port';
 
   @override
-  String get description => 'description';
+  String get description => 'Description';
 
   @override
   String get define_description => 'Customize description information';
@@ -429,7 +429,7 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get add_self_hosted_server => 'Add self built server:';
 
   @override
-  String get server_uuid => 'server uuid';
+  String get server_uuid => 'Server uuid';
 
   @override
   String get as_config_file =>

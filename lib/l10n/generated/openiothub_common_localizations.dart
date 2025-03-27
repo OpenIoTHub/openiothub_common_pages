@@ -346,7 +346,7 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
-  /// **'login'**
+  /// **'Login'**
   String get login;
 
   /// No description provided for @please_input_mobile.
@@ -418,7 +418,7 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @exit.
   ///
   /// In en, this message translates to:
-  /// **'exit'**
+  /// **'Exit'**
   String get exit;
 
   /// No description provided for @login_failed.
@@ -442,13 +442,13 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @register.
   ///
   /// In en, this message translates to:
-  /// **'register'**
+  /// **'Register'**
   String get register;
 
   /// No description provided for @register_success.
   ///
   /// In en, this message translates to:
-  /// **'registered successfully Please log in with your registration information!'**
+  /// **'Registered successfully Please log in with your registration information!'**
   String get register_success;
 
   /// No description provided for @register_failed.
@@ -586,7 +586,7 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @share.
   ///
   /// In en, this message translates to:
-  /// **'share'**
+  /// **'Share'**
   String get share;
 
   /// No description provided for @share_to_where.
@@ -640,7 +640,7 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @add.
   ///
   /// In en, this message translates to:
-  /// **'add'**
+  /// **'Add'**
   String get add;
 
   /// No description provided for @paste_info.
@@ -724,7 +724,7 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @name.
   ///
   /// In en, this message translates to:
-  /// **'name'**
+  /// **'Name'**
   String get name;
 
   /// No description provided for @define_server_name.
@@ -748,31 +748,31 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @define_server_key.
   ///
   /// In en, this message translates to:
-  /// **'key'**
+  /// **'Key'**
   String get define_server_key;
 
   /// No description provided for @define_server_tcp_port.
   ///
   /// In en, this message translates to:
-  /// **'tcp port'**
+  /// **'Tcp port'**
   String get define_server_tcp_port;
 
   /// No description provided for @define_server_kcp_port.
   ///
   /// In en, this message translates to:
-  /// **'kcp port'**
+  /// **'Kcp port'**
   String get define_server_kcp_port;
 
   /// No description provided for @port.
   ///
   /// In en, this message translates to:
-  /// **'port'**
+  /// **'Port'**
   String get port;
 
   /// No description provided for @description.
   ///
   /// In en, this message translates to:
-  /// **'description'**
+  /// **'Description'**
   String get description;
 
   /// No description provided for @define_description.
@@ -880,7 +880,7 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @server_uuid.
   ///
   /// In en, this message translates to:
-  /// **'server uuid'**
+  /// **'Server uuid'**
   String get server_uuid;
 
   /// No description provided for @as_config_file.
