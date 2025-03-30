@@ -87,14 +87,15 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
                     data: qRCodeForMobileAdd,
                     version: QrVersions.auto,
                     size: 320,
+                    backgroundColor: Colors.white,
                     // backgroundColor: Colors.orangeAccent,
                     eyeStyle: const QrEyeStyle(
                       eyeShape: QrEyeShape.square,
-                      color: Colors.yellow,
+                      color: Colors.deepOrangeAccent,
                     ),
                     dataModuleStyle: const QrDataModuleStyle(
                       dataModuleShape: QrDataModuleShape.square,
-                      color: Colors.orange,
+                      color: Colors.black,
                     ))),
             Center(
                 child: Padding(
