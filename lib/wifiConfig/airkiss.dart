@@ -182,7 +182,7 @@ class _AirkissState extends State<Airkiss> {
           Animation<double> secondaryAnimation) {
         return TDAlertDialog(
           title: OpenIoTHubCommonLocalizations.of(context).location_req_name,
-            // 说明权限申请的使用目的，包括但不限于申请权限的名称、服务的具体功能、用途
+            // Note 说明权限申请的使用目的，包括但不限于申请权限的名称、服务的具体功能、用途
           content: OpenIoTHubCommonLocalizations.of(context).location_req_desc,
           titleColor: Colors.black,
           contentColor: Colors.redAccent,
