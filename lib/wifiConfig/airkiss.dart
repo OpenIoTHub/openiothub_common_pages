@@ -11,6 +11,7 @@ import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 class Airkiss extends StatefulWidget {
   Airkiss({required Key key, required this.title}) : super(key: key);
@@ -126,8 +127,7 @@ class _AirkissState extends State<Airkiss> {
                                   readOnly: true,
                                   onTap: () async {
                                     showToast("onTap");
-                                    await requestPermission();
-                                    await _updateConnectionStatus();
+                                    await _reqWiFiInfo();
                                   },
                                 ),
                                 TextField(
@@ -137,15 +137,13 @@ class _AirkissState extends State<Airkiss> {
                                   readOnly: true,
                                   onTap: () async {
                                     showToast("onTap");
-                                    await requestPermission();
-                                    await _updateConnectionStatus();
+                                    await _reqWiFiInfo();
                                   },
                                 ),
                               ]),
                           onTap: () async {
                             showToast("onTap");
-                            await requestPermission();
-                            await _updateConnectionStatus();
+                            await _reqWiFiInfo();
                           },
                         ),
                         Container(
@@ -175,6 +173,47 @@ class _AirkissState extends State<Airkiss> {
                         Text(_msg!),
                       ],
                     ))));
+  }
+
+  Future<void> _reqWiFiInfo() async {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (BuildContext buildContext, Animation<double> animation,
+          Animation<double> secondaryAnimation) {
+        return TDAlertDialog(
+          title: OpenIoTHubCommonLocalizations.of(context).location_req_name,
+            // 说明权限申请的使用目的，包括但不限于申请权限的名称、服务的具体功能、用途
+          content: OpenIoTHubCommonLocalizations.of(context).location_req_desc,
+          titleColor: Colors.black,
+          contentColor: Colors.redAccent,
+          // backgroundColor: AppTheme.blockBgColor,
+          leftBtn: TDDialogButtonOptions(
+            title: OpenIoTHubCommonLocalizations.of(context).cancel,
+            // titleColor: AppTheme.color999,
+            style: TDButtonStyle(
+              backgroundColor: Colors.grey,
+            ),
+            action: (){
+              Navigator.of(context).pop();
+            },
+          ),
+          rightBtn: TDDialogButtonOptions(
+            title: OpenIoTHubCommonLocalizations.of(context).ok,
+            style: TDButtonStyle(
+              backgroundColor: Colors.blue,
+            ),
+            action: (){
+              Navigator.of(context).pop();
+              requestPermission().then((ret){_updateConnectionStatus();});
+            },
+          ),
+          rightBtnAction: (){
+            Navigator.of(context).pop();
+            requestPermission().then((ret){_updateConnectionStatus();});
+          },
+        );
+      },
+    );
   }
 
   Future<void> _updateConnectionStatus() async {

@@ -34,6 +34,7 @@
   "please_input_new_value": "請輸入新的",
   "new_value": "新值",
   "cancel": "取消",
+  "ok": "確定",
 
   "cancel_my_account": "刪除我的賬號",
   "cancel_my_account_notify1": "請注意，確認刪除之後刪除操作立馬生效，且不可恢復！",
@@ -144,5 +145,7 @@
   "as_config_file": "跟server-go服務器裏面的配置文件一致",
   "add_to_server": "添加到服務器",
   "add_server": "添加服務器",
-  "success": "成功!"
+  "success": "成功!",
+  "location_req_name": "申請位置權限說明",
+  "location_req_desc": "申請位置權限，以獲取WiFi信息用於智能設備配網"
 }

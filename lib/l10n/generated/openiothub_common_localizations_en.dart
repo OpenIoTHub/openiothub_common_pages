@@ -107,6 +107,9 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get ok => 'OK';
+
+  @override
   String get cancel_my_account => 'Cancel my account';
 
   @override
@@ -443,4 +446,10 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
 
   @override
   String get success => 'Success!';
+
+  @override
+  String get location_req_name => '申請位置權限說明';
+
+  @override
+  String get location_req_desc => '申請位置權限，以獲取WiFi信息用於智能設備配網';
 }

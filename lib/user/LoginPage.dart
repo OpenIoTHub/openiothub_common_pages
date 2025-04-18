@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
@@ -196,6 +197,10 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _checkWechat() async {
+    if (Platform.isIOS) {
+      // TODO iOS支持第三方登录就得支持苹果登录
+      return;
+    }
     setState(() {
       // TODO 在pc上使用二维码扫码登录，可以使用网页一套Api
       _list.add(IconButton(
@@ -225,7 +230,9 @@ class _State extends State<LoginPage> {
                 scope: <String>[WechatScope.kSNSApiUserInfo],
                 state: 'auth',
               );
-            } else {
+            } else if (!Platform.isIOS) {
+              // 由于iOS审核，可能需要在iOS上屏蔽二维码登录
+              https://pub.dev/packages/sign_in_with_apple
               //显示二维码扫描登录
               loginFlag = generateRandomString(12);
               String qrUrl = await getPicUrl(loginFlag!);

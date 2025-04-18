@@ -102,6 +102,9 @@ class OpenIoTHubCommonLocalizationsZh extends OpenIoTHubCommonLocalizations {
   String get cancel => '取消';
 
   @override
+  String get ok => '确定';
+
+  @override
   String get cancel_my_account => '删除我的账号';
 
   @override
@@ -414,6 +417,14 @@ class OpenIoTHubCommonLocalizationsZh extends OpenIoTHubCommonLocalizations {
 
   @override
   String get success => '成功!';
+
+  @override
+  String get location_req_name =>
+      'Explanation of Location Permission Application';
+
+  @override
+  String get location_req_desc =>
+      'Apply for location permission to obtain WiFi information for smart device distribution network';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -515,6 +526,9 @@ class OpenIoTHubCommonLocalizationsZhCn
   String get cancel => '取消';
 
   @override
+  String get ok => '确定';
+
+  @override
   String get cancel_my_account => '删除我的账号';
 
   @override
@@ -827,6 +841,12 @@ class OpenIoTHubCommonLocalizationsZhCn
 
   @override
   String get success => '成功!';
+
+  @override
+  String get location_req_name => '申请位置权限说明';
+
+  @override
+  String get location_req_desc => '申请位置权限，以获取WiFi信息用于智能设备配网';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -928,6 +948,9 @@ class OpenIoTHubCommonLocalizationsZhHans
   String get cancel => '取消';
 
   @override
+  String get ok => '确定';
+
+  @override
   String get cancel_my_account => '删除我的账号';
 
   @override
@@ -1240,6 +1263,12 @@ class OpenIoTHubCommonLocalizationsZhHans
 
   @override
   String get success => '成功!';
+
+  @override
+  String get location_req_name => '申请位置权限说明';
+
+  @override
+  String get location_req_desc => '申请位置权限，以获取WiFi信息用于智能设备配网';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1341,6 +1370,9 @@ class OpenIoTHubCommonLocalizationsZhHant
   String get cancel => '取消';
 
   @override
+  String get ok => '確定';
+
+  @override
   String get cancel_my_account => '刪除我的賬號';
 
   @override
@@ -1653,6 +1685,12 @@ class OpenIoTHubCommonLocalizationsZhHant
 
   @override
   String get success => '成功!';
+
+  @override
+  String get location_req_name => '申請位置權限說明';
+
+  @override
+  String get location_req_desc => '申請位置權限，以獲取WiFi信息用於智能設備配網';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -1754,6 +1792,9 @@ class OpenIoTHubCommonLocalizationsZhTw
   String get cancel => '取消';
 
   @override
+  String get ok => '確定';
+
+  @override
   String get cancel_my_account => '刪除我的賬號';
 
   @override
@@ -2066,4 +2107,10 @@ class OpenIoTHubCommonLocalizationsZhTw
 
   @override
   String get success => '成功!';
+
+  @override
+  String get location_req_name => '申請位置權限說明';
+
+  @override
+  String get location_req_desc => '申請位置權限，以獲取WiFi信息用於智能設備配網';
 }

@@ -34,6 +34,7 @@
   "please_input_new_value": "Please input new value",
   "new_value": "New value",
   "cancel": "Cancel",
+  "ok": "OK",
 
   "cancel_my_account": "Cancel my account",
   "cancel_my_account_notify1": "Please note that after confirming the deletion, the deletion operation will take effect immediately and cannot be restored!",
@@ -144,5 +145,7 @@
   "as_config_file": "Consistent with the configuration files in the server-go server",
   "add_to_server": "Add to server",
   "add_server": "Add server",
-  "success": "Success!"
+  "success": "Success!",
+  "location_req_name": "申請位置權限說明",
+  "location_req_desc": "申請位置權限，以獲取WiFi信息用於智能設備配網"
 }

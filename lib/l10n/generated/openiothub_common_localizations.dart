@@ -289,6 +289,12 @@ abstract class OpenIoTHubCommonLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
   /// No description provided for @cancel_my_account.
   ///
   /// In en, this message translates to:
@@ -906,6 +912,18 @@ abstract class OpenIoTHubCommonLocalizations {
   /// In en, this message translates to:
   /// **'Success!'**
   String get success;
+
+  /// No description provided for @location_req_name.
+  ///
+  /// In en, this message translates to:
+  /// **'申請位置權限說明'**
+  String get location_req_name;
+
+  /// No description provided for @location_req_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'申請位置權限，以獲取WiFi信息用於智能設備配網'**
+  String get location_req_desc;
 }
 
 class _OpenIoTHubCommonLocalizationsDelegate
