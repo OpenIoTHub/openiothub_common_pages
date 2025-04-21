@@ -118,7 +118,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-                child: Icon(Icons.devices),
+                child: Icon(Icons.devices, color: Colors.green,),
               ),
               Expanded(
                   child: Text(

@@ -1,3 +1,7 @@
+## [1.0.5+69]
+
+* new mdns lib
+
 ## [1.0.5+68]
 
 * new mdns lib
