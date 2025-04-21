@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:openiothub_common_pages/commPages/findmDNSClientList.dart';
+import 'package:openiothub_common_pages/l10n/generated/openiothub_common_localizations.dart';
 import 'package:openiothub_common_pages/wifiConfig/airkiss.dart';
 
 void main() {
   runApp(const MyApp());
+  // runApp(const FindmDNSClientListPage());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,6 +21,17 @@ class MyApp extends StatelessWidget {
     return OKToast(
         child:MaterialApp(
       title: 'Flutter Demo',
+          localizationsDelegates: const [
+            OpenIoTHubCommonLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          supportedLocales: OpenIoTHubCommonLocalizations.supportedLocales,
+          localeListResolutionCallback: (locales, supportedLocales) {
+            print("locales:$locales");
+            return;
+          },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -34,7 +51,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: FindmDNSClientListPage(),
     ));
   }
 }

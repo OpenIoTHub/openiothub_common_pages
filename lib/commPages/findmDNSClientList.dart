@@ -51,22 +51,28 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
     await action!.ready;
     action!.eventStream?.listen(onEventOccurred);
     await action!.start();
+    print("stared");
   }
 
   void onEventOccurred(BonsoirDiscoveryEvent event) {
     if (event.service == null) {
       return;
     }
-
+    // print("onEventOccurred");
+    // print(event.type);
     BonsoirService oneMdnsService = event.service!;
     if (event.type == BonsoirDiscoveryEventType.discoveryServiceFound) {
       // services.add(service);
+      // print(oneMdnsService);
+      oneMdnsService.resolve(action!.serviceResolver);
     } else if (event.type == BonsoirDiscoveryEventType.discoveryServiceResolved) {
+      // print(oneMdnsService);
       // services.removeWhere((foundService) => foundService.name == service.name);
       // services.add(service);
       setState(() {
         PortService _portService = PortService.create();
-        _portService.ip = (oneMdnsService as ResolvedBonsoirService).host!;
+        _portService.ip = (oneMdnsService as ResolvedBonsoirService).host!.replaceAll(RegExp(r'local.local.'), "local.");
+        print(_portService.ip);
         _portService.port = oneMdnsService.port;
         _portService.isLocal = true;
         _portService.info.addAll({
