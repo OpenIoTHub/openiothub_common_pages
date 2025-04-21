@@ -82,7 +82,9 @@ class _AirkissState extends State<Airkiss> {
   @override
   Widget build(BuildContext context) {
     localizations = OpenIoTHubCommonLocalizations.of(context);
-    _ssidFilter.text = localizations!.click_to_get_wifi_info;
+    if (_ssidFilter.text.isEmpty) {
+      _ssidFilter.text = localizations!.click_to_get_wifi_info;
+    }
     _msg = localizations!.input_wifi_password;
     return Scaffold(
         appBar: AppBar(
