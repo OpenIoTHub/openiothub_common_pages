@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_nsd/flutter_nsd.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
@@ -14,7 +13,7 @@ import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
 
-import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+import 'package:bonsoir/bonsoir.dart';
 
 const utf8encoder = Utf8Encoder();
 
@@ -26,8 +25,9 @@ class FindmDNSClientListPage extends StatefulWidget {
 }
 
 class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
+  BonsoirDiscovery? action;
   final Map<String, PortService> _ServiceMap = {};
-  final flutterNsd = FlutterNsd();
+  // final flutterNsd = FlutterNsd();
   bool initialStart = true;
   bool _scanning = false;
 
@@ -36,57 +36,6 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
   @override
   void initState() {
     super.initState();
-
-    flutterNsd.stream.listen(
-      (NsdServiceInfo oneMdnsService) {
-        setState(() {
-          PortService _portService = PortService.create();
-          _portService.ip = oneMdnsService.hostname!
-              .replaceAll(RegExp(r'local.local.'), "local.");
-          _portService.port = oneMdnsService.port!;
-          _portService.isLocal = true;
-          _portService.info.addAll({
-            "name": oneMdnsService.name == null
-                ? oneMdnsService.hostname! +
-                    ":" +
-                    oneMdnsService.port!.toString()
-                : oneMdnsService.name!,
-            "model": Gateway.modelName,
-            "mac": "mac",
-            "id": oneMdnsService.hostname! +
-                ":" +
-                oneMdnsService.port!.toString(),
-            "author": "Farry",
-            "email": "newfarry@126.com",
-            "home-page": "https://github.com/OpenIoTHub",
-            "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
-            "firmware-version": "version",
-          });
-
-          oneMdnsService.txt!.forEach((String key, Uint8List value) {
-            _portService.info[key] = Utf8Decoder().convert(value);
-          });
-          print("print _portService:$_portService");
-          if (!_ServiceMap.containsKey(_portService.info["id"])) {
-            setState(() {
-              _ServiceMap[_portService.info["id"]!] = _portService;
-            });
-          }
-        });
-      },
-      onError: (e) async {
-        if (e is NsdError) {
-          if (e.errorCode == NsdErrorCode.startDiscoveryFailed &&
-              initialStart) {
-            await stopDiscovery();
-          } else if (e.errorCode == NsdErrorCode.discoveryStopped &&
-              initialStart) {
-            initialStart = false;
-            await startDiscovery();
-          }
-        }
-      },
-    );
     startDiscovery();
   }
 
@@ -97,7 +46,56 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
       _ServiceMap.clear();
       _scanning = true;
     });
-    await flutterNsd.discoverServices(Config.mdnsGatewayService + ".");
+
+    action = BonsoirDiscovery(type: Config.mdnsGatewayService);
+    await action!.ready;
+    action!.eventStream?.listen(onEventOccurred);
+    await action!.start();
+  }
+
+  void onEventOccurred(BonsoirDiscoveryEvent event) {
+    if (event.service == null) {
+      return;
+    }
+
+    BonsoirService oneMdnsService = event.service!;
+    if (event.type == BonsoirDiscoveryEventType.discoveryServiceFound) {
+      // services.add(service);
+    } else if (event.type == BonsoirDiscoveryEventType.discoveryServiceResolved) {
+      // services.removeWhere((foundService) => foundService.name == service.name);
+      // services.add(service);
+      setState(() {
+        PortService _portService = PortService.create();
+        _portService.ip = (oneMdnsService as ResolvedBonsoirService).host!;
+        _portService.port = oneMdnsService.port;
+        _portService.isLocal = true;
+        _portService.info.addAll({
+          "name": "${oneMdnsService.name}(${_portService.ip}:${oneMdnsService.port})",
+          "model": Gateway.modelName,
+          "mac": "mac",
+          "id": _portService.ip +
+              ":" +
+              _portService.port.toString(),
+          "author": "Farry",
+          "email": "newfarry@126.com",
+          "home-page": "https://github.com/OpenIoTHub",
+          "firmware-respository": "https://github.com/OpenIoTHub/gateway-go",
+          "firmware-version": "version",
+        });
+
+        oneMdnsService.attributes.forEach((String key, String value) {
+          _portService.info[key] = value;
+        });
+        print("print _portService:$_portService");
+        if (!_ServiceMap.containsKey(_portService.info["id"])) {
+          setState(() {
+            _ServiceMap[_portService.info["id"]!] = _portService;
+          });
+        }
+      });
+    } else if (event.type == BonsoirDiscoveryEventType.discoveryServiceLost) {
+      // services.removeWhere((foundService) => foundService.name == service.name);
+    }
   }
 
   Future<void> stopDiscovery() async {
@@ -107,7 +105,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
       _ServiceMap.clear();
       _scanning = false;
     });
-    flutterNsd.stopDiscovery();
+    action!.stop();
   }
 
   @override
