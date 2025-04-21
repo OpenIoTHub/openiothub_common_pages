@@ -27,7 +27,7 @@ class _AirkissState extends State<Airkiss> {
   final NetworkInfo _networkInfo = NetworkInfo();
 
 //  New
-  final TextEditingController _ssidFilter = TextEditingController(text: "click to get wifi info");
+  final TextEditingController _ssidFilter = TextEditingController();
   final TextEditingController _bssidFilter =
   TextEditingController();
   final TextEditingController _passwordFilter = TextEditingController();
@@ -126,7 +126,7 @@ class _AirkissState extends State<Airkiss> {
                                       InputDecoration(labelText: localizations!.wifi_ssid),
                                   readOnly: true,
                                   onTap: () async {
-                                    showToast("onTap");
+                                    // showToast("onTap");
                                     await _reqWiFiInfo();
                                   },
                                 ),
@@ -136,13 +136,13 @@ class _AirkissState extends State<Airkiss> {
                                       InputDecoration(labelText: 'BSSID'),
                                   readOnly: true,
                                   onTap: () async {
-                                    showToast("onTap");
+                                    // showToast("onTap");
                                     await _reqWiFiInfo();
                                   },
                                 ),
                               ]),
                           onTap: () async {
-                            showToast("onTap");
+                            // showToast("onTap");
                             await _reqWiFiInfo();
                           },
                         ),
