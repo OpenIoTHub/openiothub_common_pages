@@ -71,7 +71,7 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
       // services.add(service);
       setState(() {
         PortService _portService = PortService.create();
-        _portService.ip = (oneMdnsService as ResolvedBonsoirService).host!.replaceAll(RegExp(r'local.local.'), "local.");
+        _portService.ip = (oneMdnsService as ResolvedBonsoirService).host!.replaceAll(RegExp(r'.local.'), ".local");
         print(_portService.ip);
         _portService.port = oneMdnsService.port;
         _portService.isLocal = true;
