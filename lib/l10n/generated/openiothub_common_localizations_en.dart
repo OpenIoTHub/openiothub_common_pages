@@ -448,8 +448,12 @@ class OpenIoTHubCommonLocalizationsEn extends OpenIoTHubCommonLocalizations {
   String get success => 'Success!';
 
   @override
-  String get location_req_name => '申請位置權限說明';
+  String get location_req_name => 'Request location permission';
 
   @override
-  String get location_req_desc => '申請位置權限，以獲取WiFi信息用於智能設備配網';
+  String get location_req_desc =>
+      'Apply for location permission to obtain WiFi information for smart device distribution network';
+
+  @override
+  String get confirm_add_gateway => 'Are you sure to add a gateway?';
 }

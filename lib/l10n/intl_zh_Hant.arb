@@ -79,7 +79,7 @@
   "openiothub_gateway_share": "雲億連網關分享",
   "openiothub_gateway_share_description": "使用雲億連掃碼二維碼添加網關，管理您的所有智能設備和私有雲",
 
-  "app_name": "使App名稱:",
+  "app_name": "App名稱:",
   "package_name": "包名:",
   "version": "版本:",
   "version_sn": "版本號:",
@@ -147,5 +147,6 @@
   "add_server": "添加服務器",
   "success": "成功!",
   "location_req_name": "申請位置權限說明",
-  "location_req_desc": "申請位置權限，以獲取WiFi信息用於智能設備配網"
+  "location_req_desc": "申請位置權限，以獲取WiFi信息用於智能設備配網",
+  "confirm_add_gateway": "確認添加網關到本賬號？"
 }

@@ -16,6 +16,7 @@ import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
 
 import 'package:bonsoir/bonsoir.dart';
+import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 const utf8encoder = Utf8Encoder();
 
@@ -141,7 +142,40 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
           onTap: () {
             // 对于mdns含有添加信息的，直接在本页面使用api添加
             if (pair.info.containsKey("run_id") && !pair.info["run_id"]!.isEmpty) {
-              _addToMyAccount(pair.info["run_id"]!, pair.info["server_host"]);
+              // TODO 确认添加
+              showGeneralDialog(
+                context: context,
+                pageBuilder: (BuildContext buildContext, Animation<double> animation,
+                    Animation<double> secondaryAnimation) {
+                  return TDAlertDialog(
+                    title: OpenIoTHubCommonLocalizations.of(context).confirm_add_gateway,
+                    content: "",
+                    titleColor: Colors.black,
+                    contentColor: Colors.redAccent,
+                    // backgroundColor: AppTheme.blockBgColor,
+                    leftBtn: TDDialogButtonOptions(
+                      title: OpenIoTHubCommonLocalizations.of(context).cancel,
+                      // titleColor: AppTheme.color999,
+                      style: TDButtonStyle(
+                        backgroundColor: Colors.grey,
+                      ),
+                      action: (){
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    rightBtn: TDDialogButtonOptions(
+                      title: OpenIoTHubCommonLocalizations.of(context).ok,
+                      style: TDButtonStyle(
+                        backgroundColor: Colors.blue,
+                      ),
+                      action: (){
+                        Navigator.of(context).pop();
+                        _addToMyAccount(pair.info["run_id"]!, pair.info["server_host"]);
+                      },
+                    ),
+                  );
+                },
+              );
               return;
             }
             //直接打开内置web浏览器浏览页面

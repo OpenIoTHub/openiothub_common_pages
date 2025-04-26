@@ -226,7 +226,7 @@ class OpenIoTHubCommonLocalizationsZh extends OpenIoTHubCommonLocalizations {
       '使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云';
 
   @override
-  String get app_name => '使App名称:';
+  String get app_name => 'App名称:';
 
   @override
   String get package_name => '包名:';
@@ -419,12 +419,13 @@ class OpenIoTHubCommonLocalizationsZh extends OpenIoTHubCommonLocalizations {
   String get success => '成功!';
 
   @override
-  String get location_req_name =>
-      'Explanation of Location Permission Application';
+  String get location_req_name => '申请位置权限说明';
 
   @override
-  String get location_req_desc =>
-      'Apply for location permission to obtain WiFi information for smart device distribution network';
+  String get location_req_desc => '申请位置权限，以获取WiFi信息用于智能设备配';
+
+  @override
+  String get confirm_add_gateway => '确认添加次网关到账户？';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -650,7 +651,7 @@ class OpenIoTHubCommonLocalizationsZhCn
       '使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云';
 
   @override
-  String get app_name => '使App名称:';
+  String get app_name => 'App名称:';
 
   @override
   String get package_name => '包名:';
@@ -847,6 +848,9 @@ class OpenIoTHubCommonLocalizationsZhCn
 
   @override
   String get location_req_desc => '申请位置权限，以获取WiFi信息用于智能设备配网';
+
+  @override
+  String get confirm_add_gateway => '确认添加次网关到账户？';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -1072,7 +1076,7 @@ class OpenIoTHubCommonLocalizationsZhHans
       '使用云亿连扫码二维码添加网关，管理您的所有智能设备和私有云';
 
   @override
-  String get app_name => '使App名称:';
+  String get app_name => 'App名称:';
 
   @override
   String get package_name => '包名:';
@@ -1269,6 +1273,9 @@ class OpenIoTHubCommonLocalizationsZhHans
 
   @override
   String get location_req_desc => '申请位置权限，以获取WiFi信息用于智能设备配网';
+
+  @override
+  String get confirm_add_gateway => '确认添加次网关到账户？';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1494,7 +1501,7 @@ class OpenIoTHubCommonLocalizationsZhHant
       '使用雲億連掃碼二維碼添加網關，管理您的所有智能設備和私有雲';
 
   @override
-  String get app_name => '使App名稱:';
+  String get app_name => 'App名稱:';
 
   @override
   String get package_name => '包名:';
@@ -1691,6 +1698,9 @@ class OpenIoTHubCommonLocalizationsZhHant
 
   @override
   String get location_req_desc => '申請位置權限，以獲取WiFi信息用於智能設備配網';
+
+  @override
+  String get confirm_add_gateway => '確認添加網關到本賬號？';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -1916,7 +1926,7 @@ class OpenIoTHubCommonLocalizationsZhTw
       '使用雲億連掃碼二維碼添加網關，管理您的所有智能設備和私有雲';
 
   @override
-  String get app_name => '使App名稱:';
+  String get app_name => 'App名稱:';
 
   @override
   String get package_name => '包名:';
@@ -2113,4 +2123,7 @@ class OpenIoTHubCommonLocalizationsZhTw
 
   @override
   String get location_req_desc => '申請位置權限，以獲取WiFi信息用於智能設備配網';
+
+  @override
+  String get confirm_add_gateway => '確認添加網關到本賬號？';
 }

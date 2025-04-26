@@ -1,3 +1,7 @@
+## [1.0.5+74]
+
+* Add gateway by mdns TXT
+
 ## [1.0.5+73]
 
 * Add gateway by mdns TXT

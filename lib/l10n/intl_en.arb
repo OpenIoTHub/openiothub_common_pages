@@ -146,6 +146,7 @@
   "add_to_server": "Add to server",
   "add_server": "Add server",
   "success": "Success!",
-  "location_req_name": "申請位置權限說明",
-  "location_req_desc": "申請位置權限，以獲取WiFi信息用於智能設備配網"
+  "location_req_name": "Request location permission",
+  "location_req_desc": "Apply for location permission to obtain WiFi information for smart device distribution network",
+  "confirm_add_gateway": "Are you sure to add a gateway?"
 }

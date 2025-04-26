@@ -916,14 +916,20 @@ abstract class OpenIoTHubCommonLocalizations {
   /// No description provided for @location_req_name.
   ///
   /// In en, this message translates to:
-  /// **'申請位置權限說明'**
+  /// **'Request location permission'**
   String get location_req_name;
 
   /// No description provided for @location_req_desc.
   ///
   /// In en, this message translates to:
-  /// **'申請位置權限，以獲取WiFi信息用於智能設備配網'**
+  /// **'Apply for location permission to obtain WiFi information for smart device distribution network'**
   String get location_req_desc;
+
+  /// No description provided for @confirm_add_gateway.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure to add a gateway?'**
+  String get confirm_add_gateway;
 }
 
 class _OpenIoTHubCommonLocalizationsDelegate
