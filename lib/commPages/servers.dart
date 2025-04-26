@@ -239,11 +239,14 @@ class ServerPagesState extends State<ServerPages> {
                             Text(OpenIoTHubCommonLocalizations.of(context).for_everyone_to_use),
                             Switch(
                                 value: _is_public,
-                                onChanged: (bool newVal) {
-                                  state(() {
-                                    _is_public = newVal;
-                                  });
-                                })
+                                onChanged: null,
+                                // TODO 服务器不可公开
+                                // onChanged: (bool newVal) {
+                                //   state(() {
+                                //     _is_public = newVal;
+                                //   });
+                                // }
+                                )
                           ],
                         ),
                       ],

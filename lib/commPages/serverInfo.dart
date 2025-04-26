@@ -161,11 +161,13 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
           Text(OpenIoTHubCommonLocalizations.of(context).for_everyone_to_use),
           Switch(
               value: _is_public,
-              onChanged: (bool newVal) {
-                setState(() {
-                  _is_public = newVal;
-                });
-              })
+              onChanged: null,
+              // TODO 服务器不可公开
+              // onChanged: (bool newVal) {
+              //   setState(() {
+              //     _is_public = newVal;
+              //   });}
+          )
         ],
       ),
       TextButton(

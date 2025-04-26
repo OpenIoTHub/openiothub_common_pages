@@ -186,7 +186,8 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
         builder: (_) => AlertDialog(
                 title: Text("${OpenIoTHubCommonLocalizations.of(context).modify}：$type"),
                 scrollable: true,
-                content: SizedBox.expand(
+                content: SizedBox(
+                    height: 100,
                     child: ListView(
                   children: <Widget>[
                     TextField(

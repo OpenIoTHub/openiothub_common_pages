@@ -7,6 +7,8 @@ import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
+import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
+import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/gatewayManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
@@ -137,6 +139,11 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
         );
         return InkWell(
           onTap: () {
+            // 对于mdns含有添加信息的，直接在本页面使用api添加
+            if (pair.info.containsKey("run_id") && !pair.info["run_id"]!.isEmpty) {
+              _addToMyAccount(pair.info["run_id"]!, pair.info["server_host"]);
+              return;
+            }
             //直接打开内置web浏览器浏览页面
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 //              return Text("${pair.iP}:${pair.port}");
@@ -194,6 +201,38 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
         key: UniqueKey(),
       );
     }));
+  }
+
+  //已经确认过可以添加，添加到我的账号
+  void _addToMyAccount(String gatewayId, String? host) async {
+    try {
+      // TODO 可以搞一个确认步骤，确认后添加
+      // 使用扫描的Gateway ID构建一个GatewayInfo用于服务器添加
+      GatewayInfo gatewayInfo = GatewayInfo(
+          gatewayUuid: gatewayId,
+          // 服务器的UUID变主机地址，或者都可以
+          serverUuid: host,
+          name: "Gateway-${DateTime.now().minute}",
+          description: "Gateway-${DateTime.now()}");
+      OperationResponse operationResponse =
+      await GatewayManager.AddGateway(gatewayInfo);
+      //将网关映射到本机
+      if (operationResponse.code == 0) {
+        // TODO 从服务器获取连接JWT
+        StringValue openIoTHubJwt =
+        await GatewayManager.GetOpenIoTHubJwtByGatewayUuid(gatewayId);
+        await _addToMySessionList(
+            openIoTHubJwt.value,
+            "Gateway-${DateTime.now()}",
+            "Gateway-${DateTime.now()} form scan QR code");
+      } else {
+        showToast(
+            "Response: ${operationResponse.msg}");
+      }
+    } catch (exception) {
+      showToast(
+          "Failed: ${exception}");
+    }
   }
 
   Future<void> _addGateway() async {
