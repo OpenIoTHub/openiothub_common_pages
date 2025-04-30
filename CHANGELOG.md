@@ -1,3 +1,7 @@
+## [1.0.5+76]
+
+* Add gateway name description config；auto add host and gateway port
+
 ## [1.0.5+75]
 
 * FindGatewayGoListPage
