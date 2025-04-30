@@ -20,21 +20,21 @@ import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 const utf8encoder = Utf8Encoder();
 
-class FindmDNSClientListPage extends StatefulWidget {
-  const FindmDNSClientListPage({Key? key}) : super(key: key);
+class FindGatewayGoListPage extends StatefulWidget {
+  const FindGatewayGoListPage({Key? key}) : super(key: key);
 
   @override
-  State createState() => _FindmDNSClientListPageState();
+  State createState() => _FindGatewayGoListPageState();
 }
 
-class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
+class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
   BonsoirDiscovery? action;
   final Map<String, PortService> _ServiceMap = {};
   // final flutterNsd = FlutterNsd();
   bool initialStart = true;
   bool _scanning = false;
 
-  _FindmDNSClientListPageState();
+  _FindGatewayGoListPageState();
 
   @override
   void initState() {
@@ -121,22 +121,25 @@ class _FindmDNSClientListPageState extends State<FindmDNSClientListPage> {
   Widget build(BuildContext context) {
     final tiles = _ServiceMap.values.map(
       (pair) {
-        var listItemContent = Padding(
-          padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
-          child: Row(
+        var listItemContent = ListTile(
+          leading: Icon(Icons.devices,
+              color: Colors.green),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-                child: Icon(Icons.devices, color: Colors.green,),
-              ),
-              Expanded(
-                  child: Text(
-                '${pair.ip}:${pair.port}',
-                style: Constants.titleTextStyle,
-              )),
-              Constants.rightArrowIcon
+              Text(
+                  '${pair.ip}:${pair.port}',
+                  style: Constants.titleTextStyle),
             ],
           ),
+          subtitle: TDTag(
+            "${pair.info["version"]!=null?pair.info["version"]:pair.info["firmware-version"]}",
+            theme: TDTagTheme.success,
+            // isOutline: true,
+            isLight: true,
+            fixedWidth: 100,
+          ),
+          trailing: Constants.rightArrowIcon,
         );
         return InkWell(
           onTap: () {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:openiothub_common_pages/commPages/findmDNSClientList.dart';
+import 'package:openiothub_common_pages/commPages/findGatewayGoList.dart';
 import 'package:openiothub_common_pages/l10n/generated/openiothub_common_localizations.dart';
 import 'package:openiothub_common_pages/wifiConfig/airkiss.dart';
 
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: FindmDNSClientListPage(),
+      home: FindGatewayGoListPage(),
     ));
   }
 }

@@ -1,3 +1,7 @@
+## [1.0.5+75]
+
+* FindGatewayGoListPage
+
 ## [1.0.5+74]
 
 * Add gateway by mdns TXT
