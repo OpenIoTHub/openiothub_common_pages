@@ -314,7 +314,7 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
       }
       //自动 添加网关主机
       var device = Device();
-      device.runId = getOneUUID();
+      device.runId = gatewayId;
       device.uuid = getOneUUID();
       device.name = name;
       device.description = description;
@@ -324,12 +324,12 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
       var tcpConfig = PortConfig();
       tcpConfig.device = device;
       tcpConfig.name = "$name Gateway";
-      tcpConfig.description = "$name Gateway";
+      tcpConfig.description = "$description Gateway";
       tcpConfig.remotePort = 34323;
       tcpConfig.localProt = 0;
       tcpConfig.networkProtocol = "tcp";
       tcpConfig.applicationProtocol = "http";
-      CommonDeviceApi.createOneUDP(tcpConfig);
+      await CommonDeviceApi.createOneTCP(tcpConfig);
     } catch (exception) {
       TDToast.showText("Failed: ${exception}", context: context);
     }
