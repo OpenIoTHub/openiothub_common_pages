@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_common_pages/wifiConfig/permission.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -160,7 +161,7 @@ class _AirkissState extends State<Airkiss> {
                           child: Text(localizations!.start_adding_surrounding_smart_devices),
                           onPressed: () async {
                             if (_ssid == null || _password == null) {
-                              showToast(localizations!.wifi_info_cant_be_empty);
+                              show_failed(localizations!.wifi_info_cant_be_empty, context);
                               return;
                             }
                             setState(() {
@@ -259,7 +260,7 @@ class _AirkissState extends State<Airkiss> {
 
       _msg = localizations!.please_input_2p4g_wifi_password;
     });
-    showToast("ssid:${wifiName!},bssid:${wifiBSSID!}");
+    show_success("ssid:${wifiName!},bssid:${wifiBSSID!}", context);
   }
 
   Future<bool> _configureWiFi() async {

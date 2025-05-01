@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/user/LoginPage.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
@@ -34,12 +35,12 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
       OperationResponse operationResponse =
           await UserManager.BindWithWechatCode(resp.code!);
       if (operationResponse.code == 0) {
-        showToast(bind_wechat_success);
+        show_success(bind_wechat_success, context);
       } else {
-        showToast("${bind_wechat_failed}:${operationResponse.msg}");
+        show_failed("${bind_wechat_failed}:${operationResponse.msg}", context);
       }
     } else {
-      showToast("${get_wechat_login_info_failed}:${resp.errorMsg}");
+      show_failed("${get_wechat_login_info_failed}:${resp.errorMsg}", context);
     }
   }
 
@@ -101,7 +102,7 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                     state: 'auth',
                   );
                 } else {
-                  showToast(OpenIoTHubCommonLocalizations.of(context).no_wechat_installed);
+                  show_failed(OpenIoTHubCommonLocalizations.of(context).no_wechat_installed, context);
                 }
               }),
           ListTile(
@@ -112,9 +113,9 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                 UserManager.UnbindWechat()
                     .then((OperationResponse operationResponse) {
                   if (operationResponse.code == 0) {
-                    showToast(OpenIoTHubCommonLocalizations.of(context).unbind_wechat_success);
+                    show_success(OpenIoTHubCommonLocalizations.of(context).unbind_wechat_success, context);
                   } else {
-                    showToast("${OpenIoTHubCommonLocalizations.of(context).unbind_wechat_failed_reason}${operationResponse.msg}");
+                    show_failed("${OpenIoTHubCommonLocalizations.of(context).unbind_wechat_failed_reason}${operationResponse.msg}", context);
                   }
                 });
               }),
@@ -277,10 +278,10 @@ class _AccountSecurityPageState extends State<AccountSecurityPage> {
                           await UserManager.DeleteMyAccount(login_info);
                       if (operationResponse.code == 0) {
                         //删除账号成功
-                        showToast(OpenIoTHubCommonLocalizations.of(context).cancel_account_success);
+                        show_success(OpenIoTHubCommonLocalizations.of(context).cancel_account_success, context);
                         Navigator.of(context).pop();
                       } else {
-                        showToast("${OpenIoTHubCommonLocalizations.of(context).cancel_account_failed}:${operationResponse.msg}");
+                        show_failed("${OpenIoTHubCommonLocalizations.of(context).cancel_account_failed}:${operationResponse.msg}", context);
                       }
                     },
                   ),

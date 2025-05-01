@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
@@ -186,7 +187,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
             serverInfo.description = _description_controller.text;
             serverInfo.isPublic = _is_public;
             ServerManager.UpdateServer(serverInfo)
-                .then((value) => showToast(OpenIoTHubCommonLocalizations.of(context).update_success));
+                .then((value) => show_success(OpenIoTHubCommonLocalizations.of(context).update_success, context));
           },
           child: Text(OpenIoTHubCommonLocalizations.of(context).confirm_modify)),
     ];
@@ -204,7 +205,7 @@ class _ServerInfoPageState extends State<ServerInfoPage> {
             ),
             onPressed: () {
               ServerManager.DelServer(widget.serverInfo)
-                  .then((value) => showToast(OpenIoTHubCommonLocalizations.of(context).delete_success))
+                  .then((value) => show_success(OpenIoTHubCommonLocalizations.of(context).delete_success, context))
                   .then((value) => Navigator.of(context).pop());
             }),
       ]),

@@ -1,3 +1,7 @@
+## [1.0.5+79]
+
+* toast
+
 ## [1.0.5+78]
 
 * Please login before Add Gateway

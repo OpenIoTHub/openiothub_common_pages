@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/commPages/serverInfo.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_constants/constants/Constants.dart';
 import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 
@@ -283,7 +284,7 @@ class ServerPagesState extends State<ServerPages> {
                         serverInfo.isPublic = _is_public;
                         ServerManager.AddServer(serverInfo)
                             .then((value) =>
-                                showToast("${OpenIoTHubCommonLocalizations.of(context).add_server}(${_name_controller.text})${OpenIoTHubCommonLocalizations.of(context).success}"))
+                                show_success("${OpenIoTHubCommonLocalizations.of(context).add_server}(${_name_controller.text})${OpenIoTHubCommonLocalizations.of(context).success}", context))
                             .then((value) => Navigator.of(context).pop())
                             .then((value) => _listMyServers());
                       },

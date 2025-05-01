@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 import 'package:openiothub_common_pages/utils/goToUrl.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 // import 'package:tencent_kit/tencent_kit.dart';
@@ -43,9 +44,9 @@ class _AppInfoPageState extends State<AppInfoPage> {
   void _listenShareMsg(WechatResp resp) {
     // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
-      showToast(share_success);
+      show_success(share_success,context);
     } else {
-      showToast(share_failed);
+      show_failed(share_failed,context);
     }
   }
 
@@ -184,7 +185,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                         theme: TDButtonTheme.primary,
                         onTap: () async {
                           if (!await WechatKitPlatform.instance.isInstalled()) {
-                            showToast(OpenIoTHubCommonLocalizations.of(context).wechat_not_installed);
+                            show_failed(OpenIoTHubCommonLocalizations.of(context).wechat_not_installed, context);
                             return;
                           }
                           WechatKitPlatform.instance.shareWebpage(
@@ -209,7 +210,7 @@ class _AppInfoPageState extends State<AppInfoPage> {
                           onTap: () async {
                             if (!await WechatKitPlatform.instance
                                 .isInstalled()) {
-                              showToast(OpenIoTHubCommonLocalizations.of(context).wechat_not_installed);
+                              show_failed(OpenIoTHubCommonLocalizations.of(context).wechat_not_installed, context);
                               return;
                             }
                             WechatKitPlatform.instance.shareWebpage(

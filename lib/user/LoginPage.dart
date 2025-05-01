@@ -16,6 +16,8 @@ import 'package:wechat_kit/wechat_kit.dart';
 
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
 
+import '../utils/toast.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _State createState() => _State();
@@ -43,7 +45,7 @@ class _State extends State<LoginPage> {
           await UserManager.LoginWithWechatCode(resp.code!);
       await _handleLoginResp(userLoginResponse);
     } else {
-      showToast("$wechat_login_failed:${resp.errorMsg}");
+      show_failed("$wechat_login_failed:${resp.errorMsg}", context);
     }
   }
 
@@ -117,12 +119,12 @@ class _State extends State<LoginPage> {
                   onTap: () async {
                     // 只有同意隐私政策才可以进行下一步
                     if (!_isChecked) {
-                      showToast("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}");
+                      show_failed("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}", context);
                       return;
                     }
                     if (_usermobile.text.isEmpty ||
                         _userpassword.text.isEmpty) {
-                      showToast(OpenIoTHubCommonLocalizations.of(context).username_and_password_cant_be_empty);
+                      show_failed(OpenIoTHubCommonLocalizations.of(context).username_and_password_cant_be_empty, context);
                       return;
                     }
                     LoginInfo loginInfo = LoginInfo();
@@ -215,7 +217,7 @@ class _State extends State<LoginPage> {
           onPressed: () async {
             // 只有同意隐私政策才可以进行下一步
             if (!_isChecked) {
-              showToast("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}");
+              show_failed("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}", context);
               return;
             }
             // 判断是否安装了微信，安装了微信则打开微信进行登录，否则显示二维码由手机扫描登录
@@ -237,7 +239,7 @@ class _State extends State<LoginPage> {
               loginFlag = generateRandomString(12);
               String qrUrl = await getPicUrl(loginFlag!);
               if (qrUrl == "") {
-                showToast(OpenIoTHubCommonLocalizations.of(context).get_wechat_qr_code_failed);
+                show_failed(OpenIoTHubCommonLocalizations.of(context).get_wechat_qr_code_failed, context);
                 return;
               }
               // 循环获取登录结果
@@ -283,8 +285,8 @@ class _State extends State<LoginPage> {
       });
       Navigator.of(context).pop();
     } else {
-      showToast(
-          "${OpenIoTHubCommonLocalizations.of(context).login_failed}:code:${userLoginResponse.code},message:${userLoginResponse.msg}");
+      show_failed(
+          "${OpenIoTHubCommonLocalizations.of(context).login_failed}:code:${userLoginResponse.code},message:${userLoginResponse.msg}", context);
     }
   }
 
@@ -321,13 +323,13 @@ class _State extends State<LoginPage> {
         } else if ((response.data["data"] as Map<String, dynamic>)
                 .containsKey("scan") &&
             (response.data["data"] as Map<String, dynamic>)["scan"] == true) {
-          showToast(OpenIoTHubCommonLocalizations.of(context).login_after_wechat_bind);
+          show_success(OpenIoTHubCommonLocalizations.of(context).login_after_wechat_bind, context);
         } else if ((response.data["data"] as Map<String, dynamic>)
                 .containsKey("scan") &&
             (response.data["data"] as Map<String, dynamic>)["scan"] == false) {
           // showToast("请扫码！");
         } else {
-          showToast("${OpenIoTHubCommonLocalizations.of(context).wechat_fast_login_failed}：${response.data["msg"]}");
+          show_failed("${OpenIoTHubCommonLocalizations.of(context).wechat_fast_login_failed}：${response.data["msg"]}", context);
         }
       }
     });

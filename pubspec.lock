@@ -1017,10 +1017,10 @@ packages:
     dependency: "direct main"
     description:
       name: openiothub_plugin
-      sha256: c4d9875788253b625e01a3a8a28b4bfff3dd178668800745df6ab3ee6078c0e7
+      sha256: "0d33019297b97b099905371b5f95e3796d7afaf8951b87e75e3d0f934c826a87"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.2+46"
+    version: "1.0.2+47"
   package_config:
     dependency: transitive
     description:

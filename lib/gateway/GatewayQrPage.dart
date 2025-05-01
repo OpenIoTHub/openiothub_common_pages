@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/proto/manager/publicApi.pb.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -31,9 +32,9 @@ class _GatewayQrPageState extends State<GatewayQrPage> {
   void _listenShareMsg(WechatResp resp) {
     // final String content = 'share: ${resp.errorCode} ${resp.errorMsg}';
     if (resp.errorCode == 0) {
-      showToast(share_success);
+      show_success(share_success, context);
     } else {
-      showToast(share_failed);
+      show_failed(share_failed, context);
     }
   }
 

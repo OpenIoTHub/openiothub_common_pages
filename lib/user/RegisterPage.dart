@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/userManager.pb.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
@@ -57,12 +58,12 @@ class _State extends State<RegisterPage> {
                     theme: TDButtonTheme.primary,
                     onTap: () async {
                       if (!_isChecked) {
-                        showToast("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}");
+                        show_failed("${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement1}☑️${OpenIoTHubCommonLocalizations.of(context).agree_to_the_user_agreement2}", context);
                         return;
                       }
                       if (_usermobile.text.isEmpty ||
                           _userpassword.text.isEmpty) {
-                        showToast(OpenIoTHubCommonLocalizations.of(context).username_and_password_cant_be_empty);
+                        show_failed(OpenIoTHubCommonLocalizations.of(context).username_and_password_cant_be_empty, context);
                         return;
                       }
                       LoginInfo loginInfo = LoginInfo();
@@ -71,12 +72,12 @@ class _State extends State<RegisterPage> {
                       OperationResponse operationResponse =
                           await UserManager.RegisterUserWithUserInfo(loginInfo);
                       if (operationResponse.code == 0) {
-                        showToast("${OpenIoTHubCommonLocalizations.of(context).register_success}${operationResponse.msg}");
+                        show_success("${OpenIoTHubCommonLocalizations.of(context).register_success}${operationResponse.msg}", context);
                         if (Navigator.of(context).canPop()) {
                           Navigator.of(context).pop();
                         } else {}
                       } else {
-                        showToast("${OpenIoTHubCommonLocalizations.of(context).register_failed}:${operationResponse.msg}");
+                        show_failed("${OpenIoTHubCommonLocalizations.of(context).register_failed}:${operationResponse.msg}", context);
                       }
                     }),
                 Row(
