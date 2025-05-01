@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:openiothub_api/openiothub_api.dart';
 import 'package:openiothub_common_pages/openiothub_common_pages.dart';
+import 'package:openiothub_common_pages/utils/toast.dart';
 import 'package:openiothub_constants/openiothub_constants.dart';
 import 'package:openiothub_grpc_api/google/protobuf/wrappers.pb.dart';
 import 'package:openiothub_grpc_api/proto/manager/common.pb.dart';
@@ -145,7 +146,14 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
             fixedWidth: 100,
           ),
           trailing: Constants.rightArrowIcon,
-          onTap: () {
+          onTap: () async {
+            if (!(await userSignedIn())) {
+              show_failed("Please login before Add Gateway", context);
+              if (!(await userSignedIn())) {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => LoginPage()));
+              }
+            }
             TextEditingController nameController =
                 TextEditingController.fromValue(
                     TextEditingValue(text: "Gateway-${DateTime.now().minute}"));
@@ -309,8 +317,7 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
         await _addToMySessionList(
             openIoTHubJwt.value, gatewayInfo.name, gatewayInfo.description);
       } else {
-        TDToast.showText("Response: ${operationResponse.msg}",
-            context: context);
+        show_failed("Response: ${operationResponse.msg}",context);
       }
       //自动 添加网关主机
       var device = Device();
@@ -331,7 +338,7 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
       tcpConfig.applicationProtocol = "http";
       await CommonDeviceApi.createOneTCP(tcpConfig);
     } catch (exception) {
-      TDToast.showText("Failed: ${exception}", context: context);
+      show_failed("Failed: ${exception}", context);
     }
   }
 
@@ -402,9 +409,8 @@ loginwithtokenmap:
   $uuid: $gatewayJwt
 ''';
                       Clipboard.setData(ClipboardData(text: data));
-                      TDToast.showText(
-                          OpenIoTHubCommonLocalizations.of(context).paste_info,
-                          context: context);
+                      show_success(
+                          OpenIoTHubCommonLocalizations.of(context).paste_info, context);
                       Navigator.of(context).pop();
                     },
                   )
@@ -420,13 +426,13 @@ loginwithtokenmap:
     config.description = description;
     try {
       await SessionApi.createOneSession(config);
-      TDToast.showText(
+      show_success(
           OpenIoTHubCommonLocalizations.of(context).add_gateway_success,
-          context: context);
+          context);
     } catch (exception) {
-      TDToast.showText(
+      show_failed(
           "${OpenIoTHubCommonLocalizations.of(context).login_failed}：${exception}",
-          context: context);
+          context);
     }
     // TODO 添加网关主机及网关软件的端口
   }

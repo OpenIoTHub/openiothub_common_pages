@@ -1,3 +1,7 @@
+## [1.0.5+78]
+
+* Please login before Add Gateway
+
 ## [1.0.5+77]
 
 * Fix TCP
