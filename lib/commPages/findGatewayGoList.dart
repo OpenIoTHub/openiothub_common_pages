@@ -15,6 +15,7 @@ import 'package:openiothub_grpc_api/proto/manager/serverManager.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pb.dart';
 import 'package:openiothub_grpc_api/proto/mobile/mobile.pbgrpc.dart';
 import 'package:openiothub_plugin/plugins/mdnsService/components.dart';
+import 'package:openiothub_plugin/utils/portConfig2portService.dart';
 import 'package:tdesign_flutter/tdesign_flutter.dart';
 
 const utf8encoder = Utf8Encoder();
@@ -237,7 +238,7 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 //              return Text("${pair.iP}:${pair.port}");
               return Gateway(
-                device: pair,
+                device: portService2PortServiceInfo(pair),
                 key: UniqueKey(),
               );
             }));
