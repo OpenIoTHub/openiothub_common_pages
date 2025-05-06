@@ -1,3 +1,7 @@
+## [1.0.5+81]
+
+* remove macos wechat
+
 ## [1.0.5+80]
 
 * portService2PortServiceInfo

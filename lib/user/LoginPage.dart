@@ -199,7 +199,7 @@ class _State extends State<LoginPage> {
   }
 
   Future<void> _checkWechat() async {
-    if (Platform.isIOS) {
+    if (Platform.isIOS || Platform.isMacOS) {
       // TODO iOS支持第三方登录就得支持苹果登录
       return;
     }
