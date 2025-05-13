@@ -1,3 +1,7 @@
+## [1.0.5+82]
+
+* gateway
+
 ## [1.0.5+81]
 
 * remove macos wechat

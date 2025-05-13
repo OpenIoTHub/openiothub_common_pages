@@ -151,8 +151,8 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
             if (!(await userSignedIn())) {
               show_failed("Please login before Add Gateway", context);
               if (!(await userSignedIn())) {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LoginPage()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginPage()));
               }
             }
             TextEditingController nameController =
@@ -318,7 +318,7 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
         await _addToMySessionList(
             openIoTHubJwt.value, gatewayInfo.name, gatewayInfo.description);
       } else {
-        show_failed("Response: ${operationResponse.msg}",context);
+        show_failed("Response: ${operationResponse.msg}", context);
       }
       //自动 添加网关主机
       var device = Device();
@@ -353,34 +353,36 @@ class _FindGatewayGoListPageState extends State<FindGatewayGoListPage> {
             return AlertDialog(
                 title: Text(OpenIoTHubCommonLocalizations.of(context)
                     .manually_create_a_gateway),
-                content: SizedBox.expand(
+                content: SizedBox(
+                    width: 250,
+                    height: 400,
                     child: ListView(
-                  children: ListTile.divideTiles(
-                    context: context,
-                    tiles: [
-                      Text(OpenIoTHubCommonLocalizations.of(context)
-                          .manually_create_a_gateway_description1),
-                      Text(OpenIoTHubCommonLocalizations.of(context)
-                          .manually_create_a_gateway_description2),
-                      Text(
-                        OpenIoTHubCommonLocalizations.of(context)
-                            .manually_create_a_gateway_description3,
-                        style: TextStyle(
-                          color: Colors.amber,
-                        ),
-                      ),
-                      DropdownButton<String>(
-                        value: value,
-                        onChanged: (String? newVal) {
-                          state(() {
-                            value = newVal;
-                          });
-                        },
-                        items: l,
-                      ),
-                    ],
-                  ).toList(),
-                )),
+                      children: ListTile.divideTiles(
+                        context: context,
+                        tiles: [
+                          Text(OpenIoTHubCommonLocalizations.of(context)
+                              .manually_create_a_gateway_description1),
+                          Text(OpenIoTHubCommonLocalizations.of(context)
+                              .manually_create_a_gateway_description2),
+                          Text(
+                            OpenIoTHubCommonLocalizations.of(context)
+                                .manually_create_a_gateway_description3,
+                            style: TextStyle(
+                              color: Colors.amber,
+                            ),
+                          ),
+                          DropdownButton<String>(
+                            value: value,
+                            onChanged: (String? newVal) {
+                              state(() {
+                                value = newVal;
+                              });
+                            },
+                            items: l,
+                          ),
+                        ],
+                      ).toList(),
+                    )),
                 actions: <Widget>[
                   TextButton(
                     child:
@@ -411,7 +413,8 @@ loginwithtokenmap:
 ''';
                       Clipboard.setData(ClipboardData(text: data));
                       show_success(
-                          OpenIoTHubCommonLocalizations.of(context).paste_info, context);
+                          OpenIoTHubCommonLocalizations.of(context).paste_info,
+                          context);
                       Navigator.of(context).pop();
                     },
                   )
