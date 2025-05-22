@@ -1,6 +1,6 @@
 name: openiothub_common_pages
 description: openiothub_common_pages
-version: 1.0.5+82
+version: 1.0.5+83
 homepage: https://github.com/OpenIoTHub
 
 environment:
@@ -17,7 +17,7 @@ dependencies:
   openiothub_constants: ^1.0.0
   openiothub_api: ^1.0.2+1
   openiothub_grpc_api: ^1.0.2+1
-  openiothub_plugin: ^1.0.0+8
+  openiothub_plugin: ^1.0.2
 #  iot_manager_grpc_api: ^1.0.0
   #  配网start
   #  esp配网
@@ -51,7 +51,7 @@ dependencies:
   qr_flutter: ^4.1.0
   webview_flutter: ^4.8.0
 #  tencent_kit: ^6.0.1
-  tdesign_flutter: ^0.1.6
+  tdesign_flutter: ^0.2.0
   dio: ^5.5.0+1
   bonsoir: ^5.1.11
   sign_in_with_apple: ^7.0.1
